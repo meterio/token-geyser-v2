@@ -65,6 +65,7 @@ export const getFutureUnlockedRewards = async (
   timestamp: number,
   signerOrProvider: Signer | providers.Provider,
 ) => {
+
   return _execGeyserFunction<BigNumber>(geyserAddress, signerOrProvider, 'getFutureUnlockedRewards', [timestamp])
 }
 

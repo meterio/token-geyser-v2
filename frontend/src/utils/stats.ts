@@ -70,7 +70,9 @@ export const getCalcPeriod = (geyser: Geyser) => {
 const getGeyserTotalDeposit = (geyser: Geyser, stakingTokenInfo: StakingTokenInfo) => {
   const { totalStake } = geyser
   const { decimals } = stakingTokenInfo
+ 
   const stakingTokenAmount = parseFloat(formatUnits(totalStake, decimals))
+
   return stakingTokenAmount * stakingTokenInfo.price
 }
 

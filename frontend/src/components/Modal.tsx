@@ -97,6 +97,7 @@ export const Modal: React.FC<Props> & ModalSubComponents = Object.assign(ModalRo
 
 const Container = styled.div`
   ${tw`min-h-screen px-4 text-center`}
+  color:#000;
 `
 
 const ContentContainer = styled.div`

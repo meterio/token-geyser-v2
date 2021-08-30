@@ -26,7 +26,7 @@ export const getStakingTokenInfo = async (
 ): Promise<StakingTokenInfo> => {
   switch (token) {
     case StakingToken.MOCK:
-      return getMockLPToken(tokenAddress)
+      return getUniswapV2(tokenAddress, signerOrProvider)
     case StakingToken.UNISWAP_V2:
       return getUniswapV2(tokenAddress, signerOrProvider)
     case StakingToken.SUSHISWAP:
@@ -216,16 +216,17 @@ const getBalancerSmartPoolV1 = async (
   }
 }
 
-const getMockLPToken = async (tokenAddress: string): Promise<StakingTokenInfo> => {
-  const price = ((await getCurrentPrice('AMPL')) + (await getCurrentPrice('BAL'))) / 2
-  return {
-    address: toChecksumAddress(tokenAddress),
-    name: `MOCK-AMPL-BAL Liquidity Token`,
-    symbol: `MOCK-AMPL-BAL`,
-    decimals: 18,
-    price,
-    totalSupply: 100000,
-    marketCap: 100000 * price,
-    composition: [],
-  }
-}
+// const getMockLPToken = async (tokenAddress: string): Promise<StakingTokenInfo> => {
+//   const price = ((await getCurrentPrice('AMPL')) + (await getCurrentPrice('BAL'))) / 2
+  
+//   return {
+//     address: toChecksumAddress(tokenAddress),
+//     name: `MOCK-AMPL-BAL Liquidity Token`,
+//     symbol: `MOCK-AMPL-BAL`,
+//     decimals: 18,
+//     price,
+//     totalSupply: 100000,
+//     marketCap: 100000 * price,
+//     composition: [],
+//   }
+// }

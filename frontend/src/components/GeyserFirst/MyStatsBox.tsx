@@ -42,23 +42,47 @@ export const MyStatsBox: React.FC<Props> = ({ classNames, name, units, delim, va
 }
 
 const MyStatContainer = styled.div`
-  ${tw`h-40px mt-4`}
-  ${tw`sm:my-5 sm:col-span-1 sm:h-fit sm:h-72px`}
+  ${tw`mt-4`}
+  ${tw`sm:my-5 sm:col-span-1 sm:h-fit sm:h-72px`};
+ 
 `
 
 const MyStatName = styled.span`
   ${ResponsiveText}
   ${tw`mb-1 flex font-light`}
   ${tw`sm:mb-2 sm:mr-8 sm:block sm:ml-3`}
+  
 `
 
+
 const MyStatValueContainer = styled.div`
-  ${tw`flex`}
-  ${tw`sm:rounded-full sm:bg-mediumGray sm:text-white sm:mt-2 sm:py-7 sm:items-center sm:justify-center sm:h-80px sm:w-80px`}
+  ${tw`flex`};
+  
+  border: 2px solid #e6007e;
+
+  border-radius: 9999px;
+  
+ 
+  
+  --tw-text-opacity: 1;
+  color: rgba(255,255,255,var(--tw-text-opacity));
+  margin-top: 0.5rem;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 80px;
+  width: 80px;
 `
 
 const MyStatValue = styled.span`
-  ${tw`w-full text-left sm:text-center`}
+  ${tw`w-full text-center sm:text-center`}
   ${ResponsiveText}
 `
 

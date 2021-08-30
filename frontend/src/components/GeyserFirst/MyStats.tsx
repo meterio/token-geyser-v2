@@ -21,10 +21,11 @@ export const MyStats = () => {
     vaultStats: { currentStake },
     geyserStats: { calcPeriodInDays},
   } = useContext(StatsContext)
+
+
   const {
     selectedGeyserInfo: {
-      rewardTokenInfo: { symbol: rewardTokenSymbol },
-      stakingTokenInfo: { price: stakingTokenPrice },
+      rewardTokenInfo: { symbol: rewardTokenSymbol }
     },
   } = useContext(GeyserContext)
 
@@ -53,9 +54,9 @@ export const MyStats = () => {
       </Header>
       <MyStatsWrapper>
         <MyStatsBox
-          classNames="sm:my-6"
+          
           name="APY"
-          value={Math.min(apy, 10000)}
+          value={Number(Number(Math.min(apy, 10000)).toFixed(2))}
           units="%"
           interpolate={(val) => safeNumeral(val, '0.00%').slice(0, val > 100 ? -4 : -1)}
         />
@@ -73,15 +74,45 @@ export const MyStats = () => {
           interpolate={(val) => safeNumeral(val, '0,0.00')}
         />
       </MyStatsWrapper>
-      <GeyserStatsContainer>
+      {/* <GeyserStatsContainer>
         <GeyserStatsBox
           name="Total Staked"
           value={currentStake * stakingTokenPrice}
           units="USD"
           interpolate={(val) => safeNumeral(val, '0,0.00')}
         />
-      </GeyserStatsContainer>
+      </GeyserStatsContainer> */}
     </MyStatsContainer>
+  )
+}
+
+
+export const MyTotalStaked = () => {
+  const {
+  
+    vaultStats: { currentStake }
+  } = useContext(StatsContext)
+
+
+  const {
+    selectedGeyserInfo: {
+      stakingTokenInfo: { price: stakingTokenPrice },
+    },
+  } = useContext(GeyserContext)
+
+ 
+  return (
+    
+    
+      
+        <GeyserStatsBox
+          name="Total Staked"
+          value={currentStake * stakingTokenPrice}
+          units="USD"
+          interpolate={(val) => safeNumeral(val, '0,0.00')}
+        />
+
+   
   )
 }
 
@@ -98,7 +129,3 @@ const Header = styled.h3`
   ${tw`uppercase flex text-radicalRed font-medium sm:pl-3`}
 `
 
-const GeyserStatsContainer = styled.div`
-  ${tw`mt-4`}
-  ${tw`sm:mt-0`}
-`

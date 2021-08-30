@@ -61,6 +61,7 @@ const Input = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
+  color:#000;
   ::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
@@ -71,4 +72,5 @@ const Input = styled.input`
 
 const Button = styled.button`
   ${tw`uppercase focus:outline-none p-1 text-sm w-2/12 text-link bg-0D23EE bg-opacity-5`}
+  color:#fff;
 `

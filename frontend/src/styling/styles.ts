@@ -10,6 +10,7 @@ export const Paragraph = styled.p`
 export const Overlay = styled.div`
   ${tw`shadow-all w-full rounded-lg my-2`}
   ${tw`sm:my-4`}
+  box-shadow: #e6007e 0px 4px 16px, #e6007e 0px 8px 32px;
 `
 
 export const ResponsiveHeader = css`

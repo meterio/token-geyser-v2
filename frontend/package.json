@@ -19,6 +19,7 @@
     "graphql": "^15.5.0",
     "numeral-es6": "^1.0.0",
     "react": "^17.0.2",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "react-spring": "^9.2.3",
@@ -50,16 +51,7 @@
       "last 1 safari version"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx,json,md}": [
-      "prettier --write"
-    ]
-  },
+ 
   "babelMacros": {
     "twin": {
       "config": "./tailwind.config.js",

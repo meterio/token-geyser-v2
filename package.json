@@ -14,10 +14,7 @@
     "lint": "yarn solhint 'contracts/**/*.sol'",
     "build": "yarn tsc --project tsconfig.build.json"
   },
-  "pre-commit": [
-    "format",
-    "lint"
-  ],
+
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-etherscan": "^2.1.1",

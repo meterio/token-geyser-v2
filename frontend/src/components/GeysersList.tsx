@@ -22,11 +22,11 @@ export const GeysersList = () => {
 
     return [
       {
-        group: 'Active Geysers',
+        group: 'Active Farms',
         options: activeGeysers,
       },
       {
-        group: 'Inactive Geysers',
+        group: 'Inactive Farms',
         options: inactiveGeysers,
       },
     ]
@@ -37,7 +37,7 @@ export const GeysersList = () => {
       {geysers.length > 0 && (
         <GeysersListContainer>
           <Heading>
-            <Label>Geyser</Label>
+            <Label>Farm</Label>
           </Heading>
           <Dropdown
             optgroups={optgroups}

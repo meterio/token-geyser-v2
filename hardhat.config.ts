@@ -213,18 +213,25 @@ task('create-geyser', 'deploy an instance of Geyser')
       const geyserRegistry = await ethers.getContractAt('GeyserRegistry', GeyserRegistry.address, signer)
 
       await geyserRegistry.register(geyser.address)
+      
 
-      await geyser.initialize(
+
+      const t = await geyser.initialize(
         signer.address,
         RewardPoolFactory.address,
         PowerSwitchFactory.address,
         stakingToken,
         rewardToken,
-        [floor, ceiling, time],
+        [floor, ceiling, time],{
+          gasLimit:'4700000'
+        }
       )
+      console.log(t)
       console.log('Register Vault Factory')
 
-      await geyser.registerVaultFactory(VaultFactory.address)
+      await geyser.registerVaultFactory(VaultFactory.address, {
+        gasLimit:'4700000'
+      })
     },
   )
 
@@ -275,24 +282,12 @@ export default {
       allowUnlimitedContractSize: true,
       chainId: 1337,
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: {
-        mnemonic: process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
-      },
-    },
-    kovan: {
-      url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: {
-        mnemonic: process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
-      },
-    },
-    mainnet: {
-      url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: {
-        mnemonic: process.env.PROD_MNEMONIC,
-      },
-    },
+    metertest:{
+      url:'https://rpctest.meter.io/',
+      accounts:['0xcd526bd2aa0ea8af55d272cf066ffd6144800d8cebbfcf8ceb3d8286039be154']
+
+    }
+   
   },
   solidity: {
     compilers: [

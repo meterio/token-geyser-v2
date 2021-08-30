@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 import tw from 'twin.macro'
-import rewardSymbol from 'assets/rewardSymbol.svg'
+
 import { useContext, useEffect, useState } from 'react'
 import { StatsContext } from 'context/StatsContext'
 import { formatWithDecimals } from 'utils/numeral'
@@ -30,9 +30,9 @@ export const EstimatedRewards: React.FC<Props> = ({ parsedUserInput }) => {
   return (
     <EstimatedRewardsContainer>
       <ColoredDiv />
-      <Icon src={rewardSymbol} alt="Rewards Symbol" />
+      
       <RewardsTextContainer>
-        <CardLabel>
+        <CardLabel style={{color:"#fff"}}>
           Your Estimated Rewards
           <Tooltip
             classNames="my-auto ml-2 normal-case tracking-wide"
@@ -52,16 +52,11 @@ export const EstimatedRewards: React.FC<Props> = ({ parsedUserInput }) => {
 }
 
 const EstimatedRewardsContainer = styled.div`
-  ${tw`h-120px shadow-all-xs my-6 border border-lightGray rounded flex flex-row tracking-wide`}
+  ${tw`h-80px shadow-all-xs my-6 border border-lightGray rounded flex flex-row tracking-wide`}
 `
 
 const ColoredDiv = styled.div`
   ${tw`rounded-l-sm h-full bg-radicalRed w-4`}
-`
-
-const Icon = styled.img`
-  ${tw`mx-4 w-0`}
-  ${tw`sm:w-auto`}
 `
 
 const RewardsTextContainer = styled.div`

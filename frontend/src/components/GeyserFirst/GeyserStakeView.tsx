@@ -151,11 +151,15 @@ export const GeyserStakeView = () => {
         <UnstakeSummary userInput={userInput} parsedUserInput={parsedUserInput} />
       )}
       {!address && <ConnectWalletWarning onClick={selectWallet} />}
+     
       <GeyserInteractionButton
         disabled={!address || parsedUserInput.isZero()}
         onClick={handleGeyserInteraction}
         displayText={isStakingAction ? `Stake` : `Unstake`}
       />
+    
+  
+     
       {!isStakingAction && (
         <UnstakeConfirmModal
           parsedUserInput={parsedUserInput}
@@ -189,4 +193,9 @@ export const GeyserStakeView = () => {
 
 const GeyserStakeViewContainer = styled.div`
   ${tw`m-6 mb-7 min-h-300px flex flex-col`}
+   
 `
+
+
+
+

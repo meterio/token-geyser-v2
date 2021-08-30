@@ -15,9 +15,13 @@ export const DropdownsContainer = () => (
 const Center = styled.div`
   ${tw`header-wrap:flex-row`}
   ${tw`text-center m-auto my-4 flex flex-col`}
+  
+  
 `
 
 const Container = styled.div`
   ${tw`text-center m-auto my-4 flex flex-row w-full justify-center items-center`}
   ${tw`sm:w-sm`}
+  
+  
 `

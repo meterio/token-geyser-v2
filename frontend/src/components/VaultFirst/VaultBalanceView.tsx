@@ -15,6 +15,9 @@ export const VaultBalanceView = () => {
   const { vaultStats: { vaultTokenBalances }, refreshVaultStats } = useContext(StatsContext)
   const { withdrawFromVault } = useContext(VaultContext)
 
+ 
+  
+
   // state of the token about to be withdrawn
   const [tokenBalance, setTokenBalance] = useState<VaultTokenBalance>()
   const [modalOpen, setModalOpen] = useState<boolean>(false)

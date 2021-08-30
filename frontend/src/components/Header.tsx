@@ -5,16 +5,17 @@ import tw from 'twin.macro'
 import { Mode } from '../constants'
 import { HeaderWalletButton } from './HeaderWalletButton'
 import { HeaderToggle } from './HeaderToggle'
+import voltswap_logo from '../assets/voltswap_logo.png'
 
 export const Header = () => {
   const { mode, toggleMode } = useContext(AppContext)
   return (
     <Container>
       <LeftContainer>
-        <LogoSpan><a href="https://www.ampleforth.org/dapps">Λ</a></LogoSpan>
+        <LogoSpan><img src={voltswap_logo} width="40px" alt="V"/></LogoSpan>
       </LeftContainer>
       <MiddleContainer>
-        <HeaderToggle enabled={mode === Mode.VAULTS} toggle={toggleMode} options={['Geyser View', 'Vault View']} />
+        <HeaderToggle enabled={mode === Mode.VAULTS} toggle={toggleMode} options={['Farm View', 'Vault View']} />
       </MiddleContainer>
       <RightContainer>
         <HeaderWalletButton />

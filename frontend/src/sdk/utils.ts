@@ -7,22 +7,9 @@ import localhostConfig from './deployments/localhost/factories-latest.json'
 import { TransactionReceipt } from '@ethersproject/providers'
 
 export const loadNetworkConfig = async (signerOrProvider: Signer | providers.Provider) => {
-  const network = await (Signer.isSigner(signerOrProvider)
-    ? signerOrProvider.provider?.getNetwork()
-    : signerOrProvider.getNetwork())
 
-  switch (network?.name) {
-    case 'mainnet':
-      return mainnetConfig
-    case 'homestead':
-      return mainnetConfig
-    case 'goerli':
-      return goerliConfig
-    case 'localhost':
       return localhostConfig
-    default:
-      throw new Error(`no network config for ${network?.name}`)
-  }
+  
 }
 
 export const isPermitable = async (tokenAddress: string) => {
@@ -44,6 +31,7 @@ export const signPermission = async (
   vaultNonce = vaultNonce || (await vault.getNonce())
   // get chainId
   chainId = chainId || (await vault.provider.getNetwork()).chainId
+  
   // craft permission
   const domain = {
     name: 'UniversalVault',

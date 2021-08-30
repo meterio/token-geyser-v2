@@ -133,7 +133,8 @@ export const approveCreateDepositStake = async (geyserAddress: string, amount: B
   const vault = new Contract(vaultAddress, config.VaultTemplate.abi, signer)
   const lockPermission = await signPermission('Lock', vault, signer, geyserAddress, token.address, amount, '0')
   const args = [geyserAddress, config.VaultFactory.address, await signer.getAddress(), amount, salt, lockPermission]
-
+  
+  
   const allowance = await token.allowance(signer.getAddress(), router.address)
   if (allowance.lt(amount)) {
     await (await token.approve(router.address, amount)).wait()

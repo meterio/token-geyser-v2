@@ -23,7 +23,7 @@ export const CONST_CACHE_TIME_MS = YEAR_IN_MS
 // geyser stats cache time
 export const GEYSER_STATS_CACHE_TIME_MS = MIN_IN_MS
 
-export const MOCK_ERC_20_ADDRESS = '0x0165878A594ca255338adfa4d48449f69242Eb8F'
+export const MOCK_ERC_20_ADDRESS = '0xad2B4188C301eE417F145A95c4CEa8618e2aB5a1'
 
 // app mode
 export enum Mode {
@@ -40,7 +40,7 @@ export enum TxState {
 }
 
 export const EXTERNAL_LINKS: Record<string, string> = {
-  etherscan: 'https://etherscan.io/tx',
+  etherscan: 'https://scan.meter.io/tx',
 }
 
 // Staking tokens
@@ -66,8 +66,8 @@ export enum RewardToken {
 }
 
 // subgraph endpoint
-const GEYSER_SUBGRAPH_NAME = 'aalavandhan/amplgeyserv2beta'
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://api.thegraph.com/subgraphs/name/${GEYSER_SUBGRAPH_NAME}`
+
+export const GEYSER_SUBGRAPH_ENDPOINT = `http://13.250.45.177:8000/subgraphs/name/meter/geyser-V2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823

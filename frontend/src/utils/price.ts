@@ -16,6 +16,9 @@ const DEFAULT_PRICES: Record<string, number> = {
   YFI: 17000,
   NMR: 25,
   USDC: 1,
+  MTRG:2.37,
+  MTR:2.91,
+  'UNI-V2':2.91,
   'yDAI+yUSDC+yUSDT+yTUSD': 1.1,
 }
 
@@ -33,10 +36,14 @@ const SYMBOL_TO_QUERY: Record<string, string> = {
   YFI: 'yearn-finance',
   NMR: 'numeraire',
   USDC: 'usd-coin',
+  MTRG: 'meter-governance-mapped-by-meter-io',
+  MTR: 'meter-stable',
+ 'UNI-V2':'meter-stable',
   'yDAI+yUSDC+yUSDT+yTUSD': 'curve-fi-ydai-yusdc-yusdt-ytusd',
 }
 
 export const getCurrentPrice = async (symbol: string) => {
+ 
   const cacheKey = `geyser|${symbol}|spot`
   const TTL = HOUR_IN_MS
 
@@ -57,6 +64,7 @@ export const getCurrentPrice = async (symbol: string) => {
           }),
           new Promise((_, reject) => setTimeout(() => reject(new Error('request timeout')), reqTimeoutSec * 1000)),
         ])
+        
         const price = p.data[query].usd
         return price as number
       },

@@ -24,6 +24,7 @@ module.exports = {
       darkGray: '#1D1D1D',
       lightBlack: '#363636',
       black: '#000000',
+      deepBlack: '#212429',
       white: '#FFFFFF',
       amaranth: '#EE2A4F',
       link: '#0D23EE',
