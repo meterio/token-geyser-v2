@@ -75,6 +75,12 @@ export const GeyserStats = () => {
 const MyStatsWrapper = styled.div`
   ${tw`sm:grid sm:grid-cols-4 sm:h-80px`};
 
+  @media (max-width:1500px){
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    height: 180px;
+
+  }
+
   @media (max-width:960px){
     grid-template-columns: repeat(2,minmax(0,1fr));
     height: 180px;

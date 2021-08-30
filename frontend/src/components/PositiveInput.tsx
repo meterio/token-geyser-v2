@@ -53,7 +53,8 @@ export const PositiveInput: React.FC<Props> = (props) => {
 }
 
 const Container = styled.div`
-  ${tw`flex flex-row border border-gray h-fit mb-3 mt-1 rounded-md`}
+  ${tw`flex flex-row border border-gray h-fit mb-3 mt-1 `};
+  border-radius:20px;
 `
 
 const Input = styled.input`
@@ -66,8 +67,9 @@ const Input = styled.input`
     -webkit-appearance: none;
     margin: 0;
   }
-  ${tw`w-10/12 font-semibold tracking-wider rounded-lg p-3 text-base`}
-  ${tw`focus:outline-none`}
+  ${tw`w-10/12 font-semibold tracking-wider p-3 text-base`}
+  ${tw`focus:outline-none`};
+  border-radius:20px;
 `
 
 const Button = styled.button`
