@@ -206,15 +206,13 @@ task('create-geyser', 'deploy an instance of Geyser')
       console.log('  reward token', rewardToken)
       console.log('  reward floor', floor)
       console.log('  reward ceiling', ceiling)
-      console.log('  reward time', stakingToken)
+      console.log('  reward time', time)
 
       console.log('Register Geyser Instance')
 
       const geyserRegistry = await ethers.getContractAt('GeyserRegistry', GeyserRegistry.address, signer)
 
       await geyserRegistry.register(geyser.address)
-      
-
 
       const t = await geyser.initialize(
         signer.address,
@@ -222,15 +220,16 @@ task('create-geyser', 'deploy an instance of Geyser')
         PowerSwitchFactory.address,
         stakingToken,
         rewardToken,
-        [floor, ceiling, time],{
-          gasLimit:'4700000'
-        }
+        [floor, ceiling, time],
+        {
+          gasLimit: '4700000',
+        },
       )
       console.log(t)
       console.log('Register Vault Factory')
 
       await geyser.registerVaultFactory(VaultFactory.address, {
-        gasLimit:'4700000'
+        gasLimit: '4700000',
       })
     },
   )
@@ -238,16 +237,33 @@ task('create-geyser', 'deploy an instance of Geyser')
 task('fund-geyser', 'fund an instance of Geyser')
   .addParam('geyser', 'address of geyser')
   .addParam('amount', 'amount')
+  .addParam('duration', 'program duration in seconds')
+  .addParam('decimals', 'decimals for reward token')
   .addOptionalParam('factoryVersion', 'the factory version', 'latest')
-  .setAction(async ({ geyser, amount }, { ethers }) => {
+  .setAction(async ({ geyser, amount, duration, decimals }, { ethers }) => {
     const signer = (await ethers.getSigners())[0]
     const geyserContract = await ethers.getContractAt('Geyser', geyser, signer)
     const data = await geyserContract.getGeyserData()
     const { rewardToken: rewardTokenAddress } = data
     const rewardToken = await ethers.getContractAt('MockAmpl', rewardTokenAddress, signer)
-    const amt = parseUnits(amount, 9)
+    let decimalNum = Number(decimals)
+    if (isNaN(decimalNum) || decimalNum <= 0) {
+      console.log('invalid decimals, must be larger than 0')
+      return
+    }
+    let durationNum = Number(duration)
+    if (isNaN(durationNum) || durationNum < 30 * 24 * 3600) {
+      console.log('invalid duration, must be longer than 1 month')
+      return
+    }
+
+    const amt = parseUnits(amount, decimalNum)
+    console.log('reward token:', rewardTokenAddress)
+    console.log('decimals:', decimalNum)
+    console.log('amount in wei:', amt.toString())
+    console.log('duration:', durationNum, 'seconds')
     await rewardToken.approve(geyser, amt)
-    await geyserContract.connect(signer).fundGeyser(amt, 10000)
+    await geyserContract.connect(signer).fundGeyser(amt, duration)
   })
 
 // currently need to manually run verify command
@@ -282,12 +298,32 @@ export default {
       allowUnlimitedContractSize: true,
       chainId: 1337,
     },
-    metertest:{
-      url:'https://rpctest.meter.io/',
-      accounts:['0xcd526bd2aa0ea8af55d272cf066ffd6144800d8cebbfcf8ceb3d8286039be154']
-
-    }
-   
+    goerli: {
+      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: {
+        mnemonic: process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
+      },
+    },
+    kovan: {
+      url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: {
+        mnemonic: process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
+      },
+    },
+    mainnet: {
+      url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID,
+      accounts: {
+        mnemonic: process.env.PROD_MNEMONIC,
+      },
+    },
+    metertest: {
+      url: 'https://rpctest.meter.io',
+      accounts: [process.env.TESTNET_CONTRACT_ADMIN_PRIVKEY],
+    },
+    metermain: {
+      url: 'https://rpc.meter.io',
+      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+    },
   },
   solidity: {
     compilers: [
