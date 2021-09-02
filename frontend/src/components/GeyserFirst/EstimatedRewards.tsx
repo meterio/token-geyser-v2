@@ -1,14 +1,11 @@
 import styled from 'styled-components/macro'
-import tw from 'twin.macro'
 
 import { useContext, useEffect, useState } from 'react'
 import { StatsContext } from 'context/StatsContext'
 import { formatWithDecimals } from 'utils/numeral'
 import { BigNumber } from 'ethers'
-import { Tooltip } from 'components/Tooltip'
-import { CardValue, CardLabel } from 'styling/styles'
+
 import { GeyserContext } from 'context/GeyserContext'
-import { GET_ESTIMATED_REWARDS_MSG } from '../../constants'
 
 interface Props {
   parsedUserInput: BigNumber
@@ -29,36 +26,49 @@ export const EstimatedRewards: React.FC<Props> = ({ parsedUserInput }) => {
 
   return (
     <EstimatedRewardsContainer>
-      <ColoredDiv />
+    
+    <RewardsTextContainer>
       
-      <RewardsTextContainer>
-        <CardLabel style={{color:"#fff"}}>
-          Your Estimated Rewards
-          <Tooltip
-            classNames="my-auto ml-2 normal-case tracking-wide"
-            panelClassnames="-translate-x-3/4 xs:left-1/2 xs:-translate-x-1/2"
-            messages={[{ title: 'Estimated Rewards', body: GET_ESTIMATED_REWARDS_MSG() }]}
-          />
-        </CardLabel>
-        <CardValue>
-          {rewards} {symbol}{' '}
-          <span>
-            {parsedUserInput.gt(0) && calcPeriodInDays > 0 ? `in ${calcPeriodInDays} day${calcPeriodInDays > 1 ? 's' : ''}` : ''}
-          </span>
-        </CardValue>
-      </RewardsTextContainer>
-    </EstimatedRewardsContainer>
+        Your Estimated Rewards : {Number(rewards).toFixed(10)} {symbol}{' '}
+        <span>
+          {parsedUserInput.gt(0) && calcPeriodInDays > 0 ? `in ${Number(calcPeriodInDays).toFixed(1)} day${calcPeriodInDays > 1 ? 's' : ''}` : ''}
+        </span>
+       
+     
+     
+    </RewardsTextContainer>
+  </EstimatedRewardsContainer>
   )
 }
 
 const EstimatedRewardsContainer = styled.div`
-  ${tw`h-80px shadow-all-xs my-6 border border-lightGray rounded flex flex-row tracking-wide`}
+
+   
+    max-height:150px;
+    --tw-shadow: 0 0px 8px rgba(0,0,0,0.3);
+    box-shadow: var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-width: 1px;
+    --tw-border-opacity: 1;
+    border-color: rgba(221,221,221,var(--tw-border-opacity));
+    border-radius: 50px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-letter-spacing: 0.025em;
+    -moz-letter-spacing: 0.025em;
+    -ms-letter-spacing: 0.025em;
+    letter-spacing: 0.025em; 
 `
 
-const ColoredDiv = styled.div`
-  ${tw`rounded-l-sm h-full bg-radicalRed w-4`}
-`
+
 
 const RewardsTextContainer = styled.div`
-  ${tw`flex flex-col my-auto`}
+margin:10px;
+ 
 `

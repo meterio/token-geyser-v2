@@ -6,6 +6,9 @@ import styled from 'styled-components/macro'
 import { useContext, useEffect, useState } from 'react'
 import { GeyserContext } from 'context/GeyserContext'
 import { VaultContext } from 'context/VaultContext'
+import {
+  isBrowser
+} from "react-device-detect"
 import { WalletContext } from 'context/WalletContext'
 import { StatsContext } from 'context/StatsContext'
 import Web3Context from 'context/Web3Context'
@@ -16,6 +19,7 @@ import { SingleTxModal } from 'components/SingleTxModal'
 import { GeyserInteractionButton } from './GeyserInteractionButton'
 import { UserBalance } from './UserBalance'
 import { EstimatedRewards } from './EstimatedRewards'
+
 import { ConnectWalletWarning } from './ConnectWalletWarning'
 import { UnstakeSummary } from './UnstakeSummary'
 import { UnstakeConfirmModal } from './UnstakeConfirmModal'
@@ -151,15 +155,11 @@ export const GeyserStakeView = () => {
         <UnstakeSummary userInput={userInput} parsedUserInput={parsedUserInput} />
       )}
       {!address && <ConnectWalletWarning onClick={selectWallet} />}
-     
       <GeyserInteractionButton
         disabled={!address || parsedUserInput.isZero()}
         onClick={handleGeyserInteraction}
         displayText={isStakingAction ? `Stake` : `Unstake`}
       />
-    
-  
-     
       {!isStakingAction && (
         <UnstakeConfirmModal
           parsedUserInput={parsedUserInput}
@@ -187,15 +187,17 @@ export const GeyserStakeView = () => {
           withdrawRewardTxMessage={withdrawRewardTxMessage}
         />
       )}
+      {
+        isBrowser ? <div/>:<br/>
+      }
     </GeyserStakeViewContainer>
   )
 }
 
 const GeyserStakeViewContainer = styled.div`
-  ${tw`m-6 mb-7 min-h-300px flex flex-col`}
-   
+  ${tw` min-h-300px flex flex-col`};
+  margin:${isBrowser ? '0px':'7px'};
+  width:95%;
+  
+  
 `
-
-
-
-

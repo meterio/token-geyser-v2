@@ -65,7 +65,12 @@ export const GeyserStats = () => {
           
        
       <GeyserStakeView/>
+     
+      <b >TOGGLE STAKE / UNSTAKE</b>
+    
+    
       <ToggleView enabled={isStakingAction} toggle={toggleStakingAction} options={['Stake', 'Unstake']} />
+   
       </GeyserStatsBoxContainer>
       </BrowserView>
     </GeyserStatsContainer>

@@ -24,6 +24,7 @@ export const GeyserFirstContainer = () => {
       
       <MobileView>
       <Overlay>
+        <br/>
         <ToggleContainer>
           <ToggleView enabled={isStakingAction} toggle={toggleStakingAction} options={['Stake', 'Unstake']} />
         </ToggleContainer>

@@ -7,8 +7,25 @@ import { GeyserStatus } from 'types'
 import { Dropdown } from './Dropdown'
 
 export const GeysersList = () => {
+ 
+
   const { geysers, selectGeyserByName, selectedGeyserInfo: { geyser: selectedGeyser }, getGeyserName } = useContext(GeyserContext)
   const handleGeyserChange = (geyserName: string) => selectGeyserByName(geyserName)
+ 
+  let queryGeyserId = ""
+  let geyserid = ""
+
+ 
+  const queryString = window.location.href.split('?')[1]
+  if(queryString){
+  const splitQueryString = queryString.split('=')[0]
+  if(splitQueryString && splitQueryString === 'farm_id'){
+    [, queryGeyserId] = queryString.split('=')
+
+  }
+
+
+  }
 
   const optgroups = (() => {
     // NOTE: active inactive logic is wrong
@@ -32,6 +49,20 @@ export const GeysersList = () => {
     ]
   })()
 
+
+
+
+  if(queryGeyserId){
+    geyserid = queryGeyserId
+  }else if(geysers && geysers.length){
+    
+    geyserid = geysers[0].id
+    
+  }
+
+
+
+
   return (
     <>
       {geysers.length > 0 && (
@@ -41,7 +72,7 @@ export const GeysersList = () => {
           </Heading>
           <Dropdown
             optgroups={optgroups}
-            selectedOption={getGeyserName(selectedGeyser ? selectedGeyser.id : geysers[0].id)}
+            selectedOption={getGeyserName(selectedGeyser ? selectedGeyser.id : geyserid)}
             onChange={handleGeyserChange}
           />
         </GeysersListContainer>

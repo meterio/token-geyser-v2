@@ -1,4 +1,5 @@
 import { BigNumber } from 'ethers'
+
 import { formatUnits, parseUnits } from 'ethers/lib/utils'
 import styled from 'styled-components/macro'
 import tw from 'twin.macro'
@@ -55,24 +56,30 @@ export const PositiveInput: React.FC<Props> = (props) => {
 const Container = styled.div`
   ${tw`flex flex-row border border-gray h-fit mb-3 mt-1 `};
   border-radius:20px;
+  width:98%
+
+
 `
 
 const Input = styled.input`
+ background:transparent;
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  color:#000;
+  color:#fff;
   ::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  ${tw`w-10/12 font-semibold tracking-wider p-3 text-base`}
+  padding:10px;
+  ${tw`w-10/12 font-semibold tracking-wider text-base`}
   ${tw`focus:outline-none`};
   border-radius:20px;
 `
 
 const Button = styled.button`
+
   ${tw`uppercase focus:outline-none p-1 text-sm w-2/12 text-link bg-0D23EE bg-opacity-5`}
   color:#fff;
 `
