@@ -108,8 +108,10 @@ const ButtonText = styled.span`
 
 const ActionButton = styled.button`
   ${tw`flex m-auto text-link bg-0D23EE bg-opacity-5 uppercase`}
-  ${tw`disabled:bg-lightGray disabled:bg-opacity-50 disabled:cursor-not-allowed disabled:border-none disabled:text-gray`}
-  ${tw`focus:outline-none`}
+  ${tw`disabled:bg-lightGray disabled:bg-opacity-50 disabled:cursor-not-allowed disabled:border-none`}
+  ${tw`focus:outline-none`};
+  color:#fff;
+
 `
 
 const TextEllipsis = styled.div`

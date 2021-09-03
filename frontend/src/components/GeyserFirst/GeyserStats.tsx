@@ -19,6 +19,7 @@ import {MyTotalStaked} from './MyStats'
 export const GeyserStats = () => {
  
   const { geyserStats: { duration, totalDeposit, totalRewards }} = useContext(StatsContext)
+
   
 
   const { isStakingAction, toggleStakingAction, selectedGeyserInfo: { rewardTokenInfo: { symbol } } } = useContext(GeyserContext)

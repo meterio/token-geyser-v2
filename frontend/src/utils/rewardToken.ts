@@ -34,6 +34,8 @@ const getMockToken = async (tokenAddress: string, signerOrProvider: SignerOrProv
       (acc, schedule) => acc + parseFloat(formatUnits(schedule.rewardAmount, tokenInfo.decimals)),
       0,
     )
+
+ 
   return {
     ...tokenInfo,
     getTotalRewards,

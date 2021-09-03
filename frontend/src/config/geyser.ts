@@ -8,8 +8,14 @@ import { GeyserConfig } from '../types'
  */
 const mockGeyserConfigs: GeyserConfig[] = [
   {
-    name: 'UNI-MTRG-MTR-V2',
-    address: '0x87189970Bb34A487624D532E840d5431BfcDf1d8',
+    name: 'MTRG-MTR',
+    address: '0xD8C4E1091397d108791aEFad536e906Cc6940acb',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
+    name: 'MTRG-USDC.eth',
+    address: '0x3375ebc33bbb038623829a2f75461d8ce752a9cb',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
   },
