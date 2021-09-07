@@ -22,6 +22,8 @@ export const MyStats = () => {
     geyserStats: { calcPeriodInDays},
   } = useContext(StatsContext)
 
+ 
+ 
 
   const {
     selectedGeyserInfo: {
@@ -33,11 +35,11 @@ export const MyStats = () => {
     () => [
       {
         title: 'APY',
-        body: currentStake > 0 ? GET_APY_STAKE_MSG() : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays||30, '0.0') }),
+        body: currentStake > 0 ? GET_APY_STAKE_MSG() : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays, '0.0') }),
       },
       {
         title: 'Reward Multiplier',
-        body: GET_REWARD_MULTIPLIER_MSG({ days: safeNumeral(calcPeriodInDays||30, '0.0'), multiplier: safeNumeral(maxMultiplier||3, '0.0') }),
+        body: GET_REWARD_MULTIPLIER_MSG({ days: safeNumeral(calcPeriodInDays, '0.0'), multiplier: safeNumeral(maxMultiplier||3, '0.0') }),
       },
       {
         title: 'Current Rewards',

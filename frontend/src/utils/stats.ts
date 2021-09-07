@@ -134,9 +134,10 @@ export const getUserDrip = async (
   const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromAdditionalStake)
   const lockStakeUnitsAfterDuration = getLockStakeUnits(lock, afterDuration).add(stakeUnitsFromAdditionalStake)
   if (totalStakeUnitsAfterDuration.isZero()) return 0
+
+  
   return (
-    parseInt(poolDrip.mul(lockStakeUnitsAfterDuration).toString(), 10) /
-    parseInt(totalStakeUnitsAfterDuration.toString(), 10)
+    parseInt(poolDrip.mul(lockStakeUnitsAfterDuration).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(), 10) 
   )
 }
 
@@ -199,7 +200,7 @@ export const getUserAPY = async (
     .toString()
 
   const inflow = (parseFloat(stakedAmount) / 10 ** stakingTokenDecimals) * stakingTokenPrice
-  const outflow = (Math.round(drip) / 10 ** rewardTokenDecimals) * rewardTokenPrice
+  const outflow = (Math.round(drip * 1e9) / 10 ** rewardTokenDecimals) * rewardTokenPrice
   const periods = YEAR_IN_SEC / calcPeriod
   return calculateAPY(inflow, outflow, periods)
 }
@@ -235,7 +236,7 @@ const getPoolAPY = async (
       const outflow = parseFloat(formatUnits(Math.round(stakeDripAfterPeriod), rewardTokenDecimals)) * rewardTokenPrice
       const periods = YEAR_IN_SEC / calcPeriod
 
-      return calculateAPY(inflow, outflow, periods)
+      return calculateAPY(inflow, outflow * 1e9, periods)
     },
     `${toChecksumAddress(geyser.id)}|poolAPY`,
     GEYSER_STATS_CACHE_TIME_MS,
