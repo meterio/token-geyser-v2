@@ -46,7 +46,7 @@ export const PositiveInput: React.FC<Props> = (props) => {
   }
 
   return (
-    <Container>
+    <Container className="amountInput">
       <Input {...props} onChange={positiveOnChange} />
       <Button onClick={setMax}>max</Button>
     </Container>
@@ -75,11 +75,18 @@ const Input = styled.input`
   padding:10px;
   ${tw`w-10/12 font-semibold tracking-wider text-base`}
   ${tw`focus:outline-none`};
-  border-radius:20px;
+  border-radius:15px;
 `
 
 const Button = styled.button`
 
-  ${tw`uppercase focus:outline-none p-1 text-sm w-2/12 text-link bg-0D23EE bg-opacity-5`}
+text-transform: uppercase;
+padding: 0.25rem;
+font-size: 0.875rem;
+line-height: 1.25rem;
+border-radius: 20px;
+height: 45px; 
+background-color: darkgray;
+width: 20%;
   color:#fff;
 `

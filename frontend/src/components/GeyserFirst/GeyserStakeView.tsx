@@ -89,7 +89,7 @@ export const GeyserStakeView = () => {
         const tx = await withdrawUnlockedFromVault(stakingTokenAddress)
         if (tx) {
           const { response, amount } = tx
-          console.log(amount.toString())
+         
           setActualStakingTokensFromUnstake(amount)
           return response
         }
@@ -142,21 +142,21 @@ export const GeyserStakeView = () => {
         isStakingAction={isStakingAction}
       />
       <PositiveInput
-        placeholder="Enter amount"
-        value={userInput}
-        onChange={handleOnChange}
-        precision={stakingTokenDecimals}
-        maxValue={isStakingAction ? stakableAmount : currentStakeAmount}
-        skipMaxEnforcement={isStakingAction}
+         placeholder="Enter amount"
+         value={userInput}
+         onChange={handleOnChange}
+         precision={stakingTokenDecimals}
+         maxValue={isStakingAction ? stakableAmount : currentStakeAmount}
+         skipMaxEnforcement={isStakingAction}
       />
       {isStakingAction ? (
         <EstimatedRewards parsedUserInput={parsedUserInput} />
       ) : (
-        <UnstakeSummary userInput={userInput} parsedUserInput={parsedUserInput} />
+        <UnstakeSummary userInput={userInput} parsedUserInput={ parsedUserInput} />
       )}
       {!address && <ConnectWalletWarning onClick={selectWallet} />}
       <GeyserInteractionButton
-        disabled={!address || parsedUserInput.isZero()}
+        disabled={!address || parsedUserInput.isZero() }
         onClick={handleGeyserInteraction}
         displayText={isStakingAction ? `Stake` : `Unstake`}
       />

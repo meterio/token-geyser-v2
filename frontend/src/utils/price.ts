@@ -18,7 +18,9 @@ const DEFAULT_PRICES: Record<string, number> = {
   USDC: 1,
   MTRG:2.37,
   MTR:2.91,
-  VOLT_AIR:2.91,
+  VOLT_AIR:2.37,
+  'BNB.bsc':2.9,
+  'BUSD.bsc':1,
   'USDC.eth':1,
   'UNI-V2':2.91,
   'yDAI+yUSDC+yUSDT+yTUSD': 1.1,
@@ -41,7 +43,8 @@ const SYMBOL_TO_QUERY: Record<string, string> = {
   MTRG: 'meter-governance-mapped-by-meter-io',
   MTR: 'meter-stable',
   VOLT_AIR:'meter-governance-mapped-by-meter-io',
-  'USDC.eth':'meter-governance-mapped-by-meter-io',
+  'BNB.bsc':'meter-governance-mapped-by-meter-io',
+  'BUSD.bsc':'meter-governance-mapped-by-meter-io',
  'UNI-V2':'meter-stable',
   'yDAI+yUSDC+yUSDT+yTUSD': 'curve-fi-ydai-yusdc-yusdt-ytusd',
 }
@@ -77,7 +80,7 @@ export const getCurrentPrice = async (symbol: string) => {
       TTL,
     )
   } catch (e) {
-    console.error(e)
+    // console.error(e)
     return DEFAULT_PRICES[symbol] || 0
   }
 }

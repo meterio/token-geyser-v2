@@ -54,19 +54,22 @@ export const MyStats = () => {
       </Header>
       <MyStatsWrapper>
         <MyStatsBox
-          
+        
+          marginLeftValue = '25px'
           name="APY"
           value={Number(Number(Math.min(apy, 10000)).toFixed(2))}
           units="%"
           interpolate={(val) => safeNumeral(val, '0.00%').slice(0, val > 100 ? -4 : -1)}
         />
         <MyStatsBox
+          marginLeftValue = '-5px'
           name="Reward Multiplier"
           value={currentMultiplier}
           units="x"
           interpolate={(val) => safeNumeral(val, '0.0')}
         />
         <MyStatsBox
+          marginLeftValue = '-5px'
           name="Current Rewards"
           value={currentReward}
           delim=" "
@@ -122,6 +125,40 @@ const MyStatsContainer = styled.div`
 
 const MyStatsWrapper = styled.div`
   ${tw`sm:grid sm:grid-cols-3 sm:h-180px`}
+  @media (max-width:1500px){
+    grid-template-columns: repeat(3,minmax(0,1fr));
+    
+   
+
+  }
+ 
+
+  @media (max-width:960px){
+    grid-template-columns: repeat(2,minmax(0,1fr));
+    margin-top:10px;
+    
+
+  }
+  @media (max-width:660px){
+    grid-template-columns: repeat(1,minmax(0,1fr));
+    
+
+  }
+
+@media only screen and (max-width: 600px) {
+ 
+ 
+}
+
+
+@media only screen and (min-width: 600px) {
+ 
+}
+
+
+@media only screen and (min-width: 768px) {
+  
+}
 `
 
 const Header = styled.h3`

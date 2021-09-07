@@ -18,7 +18,7 @@ const Button = styled.button`
   ${tw`hover:border-primary hover:bg-primary hover:text-secondary`}
   ${tw`disabled:cursor-not-allowed disabled:text-white`}
   height: 50px;
-  border-radius:50px;
+  border-radius:15px;
   
   color: rgba(255,255,255,var(--tw-text-opacity));
   text-transform: uppercase;

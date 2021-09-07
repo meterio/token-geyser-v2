@@ -12,9 +12,10 @@ interface Props {
   units: string
   delim?: string
   classNames?: string
+  marginLeftValue?:string
 }
 
-export const MyStatsBox: React.FC<Props> = ({ classNames, name, units, delim, value: targetValue, from, interpolate }) => {
+export const MyStatsBox: React.FC<Props> = ({ classNames, name, units, delim, marginLeftValue, value: targetValue, from, interpolate }) => {
   const [statsValue, setStatsValue] = useState<string>(interpolate(targetValue))
 
   useSpring({
@@ -27,7 +28,7 @@ export const MyStatsBox: React.FC<Props> = ({ classNames, name, units, delim, va
 
   return (
     <MyStatContainer>
-      <MyStatName className={classNames}>
+      <MyStatName style={{marginLeft:marginLeftValue }} className={classNames}>
         {name}
       </MyStatName>
       <MyStatValueContainer>
@@ -44,19 +45,21 @@ export const MyStatsBox: React.FC<Props> = ({ classNames, name, units, delim, va
 const MyStatContainer = styled.div`
   ${tw`mt-4`}
   ${tw`sm:my-5 sm:col-span-1 sm:h-fit sm:h-72px`};
+  
  
 `
 
 const MyStatName = styled.span`
   ${ResponsiveText}
   ${tw`mb-1 flex font-light`}
-  ${tw`sm:mb-2 sm:mr-8 sm:block sm:ml-3`}
+  ${tw` sm:ml-3`}
   
 `
 
 
 const MyStatValueContainer = styled.div`
   ${tw`flex`};
+  
   
   border: 2px solid #e6007e;
 

@@ -52,7 +52,7 @@ const EstimatedRewardsContainer = styled.div`
     border-width: 1px;
     --tw-border-opacity: 1;
     border-color: rgba(221,221,221,var(--tw-border-opacity));
-    border-radius: 50px;
+    border-radius: 15px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
