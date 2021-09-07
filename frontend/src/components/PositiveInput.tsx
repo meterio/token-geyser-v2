@@ -7,8 +7,8 @@ import tw from 'twin.macro'
 interface Props extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   precision: number
   maxValue: BigNumber
-  onChange?: (value: string) => void,
-  skipMaxEnforcement?: boolean,
+  onChange?: (value: string) => void
+  skipMaxEnforcement?: boolean
 }
 
 export const PositiveInput: React.FC<Props> = (props) => {
@@ -23,7 +23,7 @@ export const PositiveInput: React.FC<Props> = (props) => {
   }
 
   const respectsMax = (value: string) => {
-    if(skipMaxEnforcement){
+    if (skipMaxEnforcement) {
       return true
     }
     if (value) {
@@ -41,8 +41,7 @@ export const PositiveInput: React.FC<Props> = (props) => {
   }
 
   const setMax = () => {
-    if (onChange)
-      onChange(formatUnits(maxValue, precision))
+    if (onChange) onChange(formatUnits(maxValue, precision))
   }
 
   return (
@@ -54,32 +53,28 @@ export const PositiveInput: React.FC<Props> = (props) => {
 }
 
 const Container = styled.div`
-  ${tw`flex flex-row border border-gray h-fit mb-3 mt-1 `};
-  border-radius:20px;
-  width:98%
-
-
+  ${tw`flex flex-row border border-white h-fit mb-3 mt-1 `};
+  border-radius: 15px;
 `
 
 const Input = styled.input`
- background:transparent;
+  background: transparent;
   ::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  color:#fff;
+  color: #fff;
   ::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-  padding:10px;
+  padding: 10px;
   ${tw`w-10/12 font-semibold tracking-wider text-base`}
   ${tw`focus:outline-none`};
-  border-radius:20px;
+  border-radius: 20px;
 `
 
 const Button = styled.button`
-
   ${tw`uppercase focus:outline-none p-1 text-sm w-2/12 text-link bg-0D23EE bg-opacity-5`}
   color:#fff;
 `

@@ -9,31 +9,20 @@ interface Props {
   toggle: () => void
 }
 
-export const ToggleView: React.FC<Props> = ({ enabled, toggle }) => 
-
-
- (
-<div style={{marginTop:"5px"}}>
- 
-  <label className="switch">
-    
-  <input type="checkbox" id="togBtn"  checked={!enabled} onChange={toggle}/>
-  <div className="slider round">
-  
-   <span className="on">STAKE</span>
-   <span className="off">UNSTAKE</span>
-   
+export const ToggleView: React.FC<Props> = ({ enabled, toggle }) => (
+  <div style={{ marginTop: '5px' }}>
+    <label className="switch">
+      <input type="checkbox" id="togBtn" checked={!enabled} onChange={toggle} />
+      <div className="slider round">
+        <span className="on">STAKE</span>
+        <span className="off">UNSTAKE</span>
+      </div>
+    </label>
   </div>
- </label>
- </div>
 )
 
-
-
-  
 //   <Switch className="w-full" >
 
-   
 //     <SwitchContainer className='h-14'>
 //       <SwitchOptionOne className={!enabled ? 'text-gray' : 'text-darkGray'}>{options[0]}</SwitchOptionOne>
 //       <span

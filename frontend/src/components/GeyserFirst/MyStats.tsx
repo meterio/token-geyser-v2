@@ -19,13 +19,12 @@ export const MyStats = () => {
   const {
     userStats: { apy, currentMultiplier, maxMultiplier, currentReward },
     vaultStats: { currentStake },
-    geyserStats: { calcPeriodInDays},
+    geyserStats: { calcPeriodInDays },
   } = useContext(StatsContext)
-
 
   const {
     selectedGeyserInfo: {
-      rewardTokenInfo: { symbol: rewardTokenSymbol }
+      rewardTokenInfo: { symbol: rewardTokenSymbol },
     },
   } = useContext(GeyserContext)
 
@@ -33,11 +32,17 @@ export const MyStats = () => {
     () => [
       {
         title: 'APY',
-        body: currentStake > 0 ? GET_APY_STAKE_MSG() : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays||30, '0.0') }),
+        body:
+          currentStake > 0
+            ? GET_APY_STAKE_MSG()
+            : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays || 30, '0.0') }),
       },
       {
         title: 'Reward Multiplier',
-        body: GET_REWARD_MULTIPLIER_MSG({ days: safeNumeral(calcPeriodInDays||30, '0.0'), multiplier: safeNumeral(maxMultiplier||3, '0.0') }),
+        body: GET_REWARD_MULTIPLIER_MSG({
+          days: safeNumeral(calcPeriodInDays || 30, '0.0'),
+          multiplier: safeNumeral(maxMultiplier || 3, '0.0'),
+        }),
       },
       {
         title: 'Current Rewards',
@@ -50,11 +55,14 @@ export const MyStats = () => {
   return (
     <MyStatsContainer>
       <Header>
-        My Stats <Tooltip classNames="my-auto ml-2 normal-case tracking-wide" panelClassnames='-translate-x-1/4' messages={getTooltipMessages()} />
+        <Tooltip
+          classNames="my-auto ml-2 normal-case tracking-wide"
+          panelClassnames="-translate-x-1/4"
+          messages={getTooltipMessages()}
+        />
       </Header>
       <MyStatsWrapper>
         <MyStatsBox
-          
           name="APY"
           value={Number(Number(Math.min(apy, 10000)).toFixed(2))}
           units="%"
@@ -86,13 +94,10 @@ export const MyStats = () => {
   )
 }
 
-
 export const MyTotalStaked = () => {
   const {
-  
-    vaultStats: { currentStake }
+    vaultStats: { currentStake },
   } = useContext(StatsContext)
-
 
   const {
     selectedGeyserInfo: {
@@ -100,32 +105,25 @@ export const MyTotalStaked = () => {
     },
   } = useContext(GeyserContext)
 
- 
   return (
-    
-    
-      
-        <GeyserStatsBox
-          name="Total Staked"
-          value={currentStake * stakingTokenPrice}
-          units="USD"
-          interpolate={(val) => safeNumeral(val, '0,0.00')}
-        />
-
-   
+    <GeyserStatsBox
+      name="Total Staked"
+      value={currentStake * stakingTokenPrice}
+      units="USD"
+      interpolate={(val) => safeNumeral(val, '0,0.00')}
+    />
   )
 }
 
 const MyStatsContainer = styled.div`
-  ${tw`px-5 my-5 pr-0 border-r-2 border-lightGray`}
+  ${tw`px-5 my-5 `}
 `
 
 const MyStatsWrapper = styled.div`
-  ${tw`sm:grid sm:grid-cols-3 sm:h-180px`}
+  ${tw`sm:grid sm:grid-cols-3 sm:pb-5`}
 `
 
 const Header = styled.h3`
   ${ResponsiveText}
-  ${tw`uppercase flex text-radicalRed font-medium sm:pl-3`}
+  ${tw`uppercase flex text-lightGray font-medium `}
 `
-

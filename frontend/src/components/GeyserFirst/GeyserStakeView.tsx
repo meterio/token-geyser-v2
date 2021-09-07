@@ -6,9 +6,7 @@ import styled from 'styled-components/macro'
 import { useContext, useEffect, useState } from 'react'
 import { GeyserContext } from 'context/GeyserContext'
 import { VaultContext } from 'context/VaultContext'
-import {
-  isBrowser
-} from "react-device-detect"
+import { isBrowser } from 'react-device-detect'
 import { WalletContext } from 'context/WalletContext'
 import { StatsContext } from 'context/StatsContext'
 import Web3Context from 'context/Web3Context'
@@ -33,13 +31,21 @@ import {
 export const GeyserStakeView = () => {
   const [userInput, setUserInput] = useState('')
   const [parsedUserInput, setParsedUserInput] = useState(BigNumber.from('0'))
-  const { selectedGeyserInfo: { geyser: selectedGeyser, stakingTokenInfo, rewardTokenInfo }, handleGeyserAction, isStakingAction } = useContext(GeyserContext)
+  const {
+    selectedGeyserInfo: { geyser: selectedGeyser, stakingTokenInfo, rewardTokenInfo },
+    handleGeyserAction,
+    isStakingAction,
+  } = useContext(GeyserContext)
   const { decimals: stakingTokenDecimals, symbol: stakingTokenSymbol, address: stakingTokenAddress } = stakingTokenInfo
   const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol, address: rewardTokenAddress } = rewardTokenInfo
   const { signer } = useContext(Web3Context)
-  const { selectedVault, currentLock, withdrawFromVault, withdrawRewardsFromVault, withdrawUnlockedFromVault } = useContext(VaultContext)
+  const { selectedVault, currentLock, withdrawFromVault, withdrawRewardsFromVault, withdrawUnlockedFromVault } =
+    useContext(VaultContext)
   const { walletAmount, refreshWalletAmount } = useContext(WalletContext)
-  const { refreshVaultStats, vaultStats: {currentStakable} } = useContext(StatsContext)
+  const {
+    refreshVaultStats,
+    vaultStats: { currentStakable },
+  } = useContext(StatsContext)
   const { selectWallet, address } = useContext(Web3Context)
   const currentStakeAmount = BigNumber.from(currentLock ? currentLock.amount : '0')
   const [unstakeConfirmModalOpen, setUnstakeConfirmModalOpen] = useState<boolean>(false)
@@ -58,7 +64,7 @@ export const GeyserStakeView = () => {
   }, [isStakingAction])
 
   const handleGeyserInteraction = () => {
-    (isStakingAction ? setTxModalOpen : setUnstakeConfirmModalOpen)(true)
+    ;(isStakingAction ? setTxModalOpen : setUnstakeConfirmModalOpen)(true)
   }
 
   const handleConfirmUnstake = () => {
@@ -123,11 +129,19 @@ export const GeyserStakeView = () => {
   }
 
   const withdrawStakingTxMessage = (txStateMachine: TxStateMachine) => (
-    <WithdrawTxMessage txStateMachine={txStateMachine} symbol={stakingTokenSymbol} amount={formatUnits(actualStakingTokensFromUnstake, stakingTokenDecimals)} />
+    <WithdrawTxMessage
+      txStateMachine={txStateMachine}
+      symbol={stakingTokenSymbol}
+      amount={formatUnits(actualStakingTokensFromUnstake, stakingTokenDecimals)}
+    />
   )
 
   const withdrawRewardTxMessage = (txStateMachine: TxStateMachine) => (
-    <WithdrawTxMessage txStateMachine={txStateMachine} symbol={rewardTokenSymbol} amount={formatUnits(actualRewardsFromUnstake, rewardTokenDecimals)} />
+    <WithdrawTxMessage
+      txStateMachine={txStateMachine}
+      symbol={rewardTokenSymbol}
+      amount={formatUnits(actualRewardsFromUnstake, rewardTokenDecimals)}
+    />
   )
 
   const stakableAmount = walletAmount.add(currentStakable)
@@ -171,7 +185,15 @@ export const GeyserStakeView = () => {
       {isStakingAction ? (
         <SingleTxModal
           submit={() => handleGeyserAction(selectedVault, parsedUserInput)}
-          txSuccessMessage={<span>Successfully staked <b>{userInput} {stakingTokenSymbol}</b>.</span>}
+          txSuccessMessage={
+            <span>
+              Successfully staked{' '}
+              <b>
+                {userInput} {stakingTokenSymbol}
+              </b>
+              .
+            </span>
+          }
           open={txModalOpen}
           onClose={onCloseTxModal}
         />
@@ -179,7 +201,15 @@ export const GeyserStakeView = () => {
         <UnstakeTxModal
           open={txModalOpen}
           unstake={() => handleGeyserAction(selectedVault, parsedUserInput)}
-          unstakeSuccessMessage={<span>Successfully unstaked <b>{userInput} {stakingTokenSymbol}</b>.</span>}
+          unstakeSuccessMessage={
+            <span>
+              Successfully unstaked{' '}
+              <b>
+                {userInput} {stakingTokenSymbol}
+              </b>
+              .
+            </span>
+          }
           onClose={onCloseTxModal}
           withdrawStaking={withdrawStaking}
           withdrawStakingTxMessage={withdrawStakingTxMessage}
@@ -187,17 +217,12 @@ export const GeyserStakeView = () => {
           withdrawRewardTxMessage={withdrawRewardTxMessage}
         />
       )}
-      {
-        isBrowser ? <div/>:<br/>
-      }
+      {isBrowser ? <div /> : <br />}
     </GeyserStakeViewContainer>
   )
 }
 
 const GeyserStakeViewContainer = styled.div`
-  ${tw` min-h-300px flex flex-col`};
-  margin:${isBrowser ? '0px':'7px'};
-  width:95%;
-  
-  
+  ${tw`  flex flex-col p-6 pt-0 pb-10`};
+  margin: ${isBrowser ? '0px' : '7px'};
 `

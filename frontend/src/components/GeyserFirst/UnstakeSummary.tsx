@@ -25,17 +25,25 @@ export const UnstakeSummary: React.FC<Props> = ({ userInput, parsedUserInput }) 
   const [rewardAmount, setRewardAmount] = useState<string>('0.00')
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       setRewardAmount(formatWithDecimals(`${await computeRewardsFromUnstake(parsedUserInput)}`, 2))
-    })();
+    })()
   }, [parsedUserInput])
 
   return (
     <Container>
+      <div>
+        Amount to Unstake: <Amount>{`${formatWithDecimals(amountOrZero(userInput).toString(), 2)} `}</Amount>
+        <span>{stakingTokenSymbol}</span>
+      </div>
+      <div>
+        Rewards to Claim: <Amount>{`${rewardAmount} `}</Amount>
+        <span>{rewardTokenSymbol}</span>
+      </div>
+      {/*
       <SummaryCard>
         <Content>
           <Label>
-            Amount to Unstake
           </Label>
           <Value>
             <Amount>{`${formatWithDecimals(amountOrZero(userInput).toString(), 2)} `}</Amount>
@@ -54,12 +62,17 @@ export const UnstakeSummary: React.FC<Props> = ({ userInput, parsedUserInput }) 
           </Value>
         </Content>
       </SummaryCard>
+      */}
     </Container>
   )
 }
 
 const Container = styled.div`
-  ${tw`grid grid-cols-2 gap-x-4 my-6`}
+  ${tw`gap-x-4 my-6`}
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: bold;
+  line-height: 1.8rem;
 `
 
 const SummaryCard = styled.div`
