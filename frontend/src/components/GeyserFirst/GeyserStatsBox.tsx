@@ -28,10 +28,7 @@ export const GeyserStatsBox: React.FC<Props> = ({ name, value: targetValue, unit
       <GeyserStatsBoxLabel>{name}</GeyserStatsBoxLabel>
       <GeyserStatsBoxValueContainer>
         <GeyserStatsBoxValue>
-          <animated.span>
-            {statsValue}
-          </animated.span>
-          {' '}
+          <animated.span>{statsValue}</animated.span>{' '}
           <GeyserStatsBoxUnits>
             {units}
             {children}
@@ -43,32 +40,30 @@ export const GeyserStatsBox: React.FC<Props> = ({ name, value: targetValue, unit
 }
 
 const GeyserStatsBoxContainer = styled.div`
-
-  color:#fff;
-
+  color: #fff;
 `
 
 const GeyserStatsBoxLabel = styled.span`
   ${ResponsiveText}
   ${tw`mb-1 flex font-light`}
+  justify-content: center;
 `
 
 const GeyserStatsBoxValueContainer = styled.div`
   ${tw`flex flex-row`}
+  justify-content: center;
 `
 
 const GeyserStatsBoxValue = styled.span`
   ${ResponsiveText}
-   ${ResponsiveText}
-  border:1px solid #e6007e;
-  border-radius: 15px;
+  ${ResponsiveText}
+  // border:1px solid #e6007e;
+  // border-radius: 15px;
+  font-weight:bold;
   padding: 5px;
-  width:120px;
-  font-weight: 500;
+  // width: 120px;
 `
 
 const GeyserStatsBoxUnits = styled.span`
   ${ResponsiveSubText}
-
-  
 `

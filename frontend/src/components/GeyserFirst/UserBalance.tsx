@@ -16,9 +16,14 @@ export const UserBalance: React.FC<Props> = ({ parsedAmount, currentAmount, deci
   return (
     <FlexDiv>
       {parsedAmount.isZero() ? (
-        <Text>{isStakingAction ? 'Stakable' : 'Staked'} balance: {formatDisplayAmount(currentAmount)} ({symbol})</Text>
+        <Text>
+          {isStakingAction ? 'Wallet' : 'Staked'} balance: {formatDisplayAmount(currentAmount)} ({symbol})
+        </Text>
       ) : (
-        <Text>New {isStakingAction ? 'stakable' : 'stake'} balance: { parsedAmount.lte(currentAmount) ? formatDisplayAmount(currentAmount.sub(parsedAmount)) :formatDisplayAmount(currentAmount)} ({symbol})</Text>
+        <Text>
+          New {isStakingAction ? 'wallet' : 'stake'} balance: {currentAmount.gt(parsedAmount) ? formatDisplayAmount(currentAmount.sub(parsedAmount)) :formatDisplayAmount(currentAmount)} (
+          {symbol})
+        </Text>
       )}
     </FlexDiv>
   )

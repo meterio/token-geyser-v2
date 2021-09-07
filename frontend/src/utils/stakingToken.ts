@@ -95,10 +95,12 @@ const uniswapV2Pair = async (
 
   const totalSupplyNumber = parseFloat(formatUnits(totalSupply, decimals))
 
-  const tokenCompositions = await getTokenCompositions([token0Address, token1Address], address, signerOrProvider, [
-    0.5,
-    0.5,
-  ])
+  const tokenCompositions = await getTokenCompositions(
+    [token0Address, token1Address],
+    address,
+    signerOrProvider,
+    [0.5, 0.5],
+  )
   const [token0Symbol, token1Symbol] = tokenCompositions.map((c) => c.symbol)
   const marketCap = getMarketCap(tokenCompositions)
 
@@ -131,10 +133,12 @@ const getMooniswap = async (tokenAddress: string, signerOrProvider: SignerOrProv
 
   const totalSupplyNumber = parseFloat(formatUnits(totalSupply, decimals))
 
-  const tokenCompositions = await getTokenCompositions([token0Address, token1Address], address, signerOrProvider, [
-    0.5,
-    0.5,
-  ])
+  const tokenCompositions = await getTokenCompositions(
+    [token0Address, token1Address],
+    address,
+    signerOrProvider,
+    [0.5, 0.5],
+  )
   const marketCap = getMarketCap(tokenCompositions)
 
   return {
@@ -218,7 +222,7 @@ const getBalancerSmartPoolV1 = async (
 
 // const getMockLPToken = async (tokenAddress: string): Promise<StakingTokenInfo> => {
 //   const price = ((await getCurrentPrice('AMPL')) + (await getCurrentPrice('BAL'))) / 2
-  
+
 //   return {
 //     address: toChecksumAddress(tokenAddress),
 //     name: `MOCK-AMPL-BAL Liquidity Token`,

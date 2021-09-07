@@ -16,8 +16,8 @@ module.exports = {
       times: ['Times\\ New\\ Roman'],
     },
     colors: {
-      primary: '#912DFF',
-      secondary: '#FFFFFF',
+      primary: '#e6007e',
+      secondary: '#01B1F7',
       lightGray: '#DDDDDD',
       gray: '#979797',
       mediumGray: '#4A4A4A',

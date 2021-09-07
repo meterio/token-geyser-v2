@@ -83,8 +83,7 @@ export const getGeyserStats = async (
     async () => ({
       duration: getGeyserDuration(geyser),
       totalDeposit: getGeyserTotalDeposit(geyser, stakingTokenInfo),
-      totalRewards:
-        (await rewardTokenInfo.getTotalRewards(geyser.rewardSchedules)) / 10 ** (rewardTokenInfo.decimals || 1),
+      totalRewards: await rewardTokenInfo.getTotalRewards(geyser.rewardSchedules),
       calcPeriodInDays: getCalcPeriod(geyser) / DAY_IN_SEC,
     }),
     `${toChecksumAddress(geyser.id)}|stats`,
@@ -130,14 +129,15 @@ export const getUserDrip = async (
   const now = nowInSeconds()
   const afterDuration = now + duration
   const poolDrip = await getPoolDrip(geyser, afterDuration, signerOrProvider)
+
   const stakeUnitsFromAdditionalStake = BigNumber.from(additionalStakes).mul(duration)
   const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromAdditionalStake)
   const lockStakeUnitsAfterDuration = getLockStakeUnits(lock, afterDuration).add(stakeUnitsFromAdditionalStake)
   if (totalStakeUnitsAfterDuration.isZero()) return 0
 
-  
-  return (
-    parseInt(poolDrip.mul(lockStakeUnitsAfterDuration).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(), 10) 
+  return parseInt(
+    poolDrip.mul(lockStakeUnitsAfterDuration).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(),
+    10,
   )
 }
 
@@ -163,11 +163,15 @@ export const getStakeDrip = async (
   if (totalStakeUnitsAfterDuration.isZero()) return 0
 
   return (
-    parseInt(poolDrip.mul(stakeUnitsFromStake).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(), 10) 
+    // ParseInt on very big numbers could cause integer overflow so the need to compensate with a division by 1e9 and add my multiplying later.
+    parseInt(
+      poolDrip.mul(stakeUnitsFromStake).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(),
+      10,
+    )
   )
 }
 
-const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + outflow / inflow) ** periods - 1
+const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + (outflow / inflow)) ** periods - 1
 
 /**
  * APY = (1 + (outflow / inflow)) ** periods - 1

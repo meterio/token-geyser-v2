@@ -8,21 +8,22 @@ interface Props {
 }
 
 export const GeyserInteractionButton: React.FC<Props> = ({ onClick, displayText, disabled }) => (
-    <Button style={{border:displayText === 'Stake' ? '2px solid #e6007e' :'2px solid #125A85'}} disabled={disabled} onClick={onClick}>
-      {displayText}
-    </Button>
-  )
+  <Button
+    style={{ border: displayText === 'Stake' ? '2px solid #e6007e' : '2px solid #01B1F7' }}
+    disabled={disabled}
+    onClick={onClick}
+  >
+    {displayText}
+  </Button>
+)
 
 const Button = styled.button`
- 
-  ${tw`hover:border-primary hover:bg-primary hover:text-secondary`}
-  ${tw`disabled:cursor-not-allowed disabled:text-white`}
+  ${tw`mt-3 hover:border-primary hover:bg-primary hover:text-white`}
+  ${tw`disabled:cursor-not-allowed disabled:text-white disabled:bg-mediumGray`}
   height: 50px;
-  border-radius:15px;
-  
-  color: rgba(255,255,255,var(--tw-text-opacity));
+  border-radius: 50px;
+
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
   text-transform: uppercase;
   font-weight: 600;
-  
- 
 `

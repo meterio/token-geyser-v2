@@ -83,7 +83,7 @@ export const StatsContextProvider: React.FC = ({ children }) => {
       if (currentLock) {
         const normalGains = await getUserDrip(selectedGeyser, currentLock, '0', MONTH_IN_SEC, signer || defaultProvider)
         const gainsAfterUnstake = await getUserDripAfterWithdraw(selectedGeyser, currentLock, unstakeAmount, MONTH_IN_SEC, signer || defaultProvider)
-        return parseFloat(formatUnits(Math.round((normalGains - gainsAfterUnstake) * 1e9), decimals))
+        return parseFloat(formatUnits(Math.round(((normalGains * 1e9) - (gainsAfterUnstake * 1e9))), decimals))
       }
     }
     return 0

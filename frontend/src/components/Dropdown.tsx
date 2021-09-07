@@ -8,7 +8,7 @@ import { Fragment } from 'react'
 // needs one of options or optgroups
 interface Props {
   options?: string[]
-  optgroups?: { group: string, options: string[] }[]
+  optgroups?: { group: string; options: string[] }[]
   selectedOption: string
   onChange: (arg0: string) => void
 }
@@ -40,7 +40,7 @@ export const Dropdown: React.FC<Props> = ({ options, optgroups, selectedOption, 
     </>
   )
 
-  const renderOptgroups = (groups: { group: string, options: string[] }[]) => (
+  const renderOptgroups = (groups: { group: string; options: string[] }[]) => (
     <>
       {groups.map(({ group, options: opts }) => (
         <>
@@ -55,14 +55,20 @@ export const Dropdown: React.FC<Props> = ({ options, optgroups, selectedOption, 
   return (
     <Listbox value={selectedOption} onChange={onChange}>
       <OptionsWrapper>
-        <Listbox.Button style={{backgroundColor: '#212429'}} className="relative w-full py-2 pl-3 pr-10 text-left bg-paleBlue rounded-lg shadow-all-xs cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white sm:text-sm">
+        <Listbox.Button
+          style={{ backgroundColor: '#212429' }}
+          className="relative w-full py-2 pl-3 pr-10 text-left bg-paleBlue rounded-lg shadow-all-xs cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white sm:text-sm"
+        >
           <span className="block truncate">{selectedOption}</span>
           <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
             <Img src={caretDown} alt="Down arrow" />
           </span>
         </Listbox.Button>
         <Transition as={Fragment} leave="transition ease-in duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-          <Listbox.Options style={{backgroundColor: '#212429', boxShadow: '#e6007e 0px 4px 16px, #e6007e 0px 8px 32px'}} className="z-10 absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-all-xs max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options
+            style={{ backgroundColor: '#212429', boxShadow: '#e6007e 0px 4px 16px, #e6007e 0px 8px 32px' }}
+            className="z-10 absolute w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-all-xs max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+          >
             {optgroups ? renderOptgroups(optgroups) : renderOptions(options || [])}
           </Listbox.Options>
         </Transition>
@@ -77,8 +83,5 @@ const Img = styled.img`
 
 const OptionsWrapper = styled.div`
   ${tw`relative mt-1 w-336px`}
-  box-shadow: #e6007e 0px 4px 16px, #e6007e 0px 8px 32px;
-  
-  
-  
+  box-shadow: 0 0 5px 5px #e6007e;
 `
