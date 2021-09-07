@@ -5,12 +5,11 @@ import { StatsContext } from 'context/StatsContext'
 import { GeyserContext } from 'context/GeyserContext'
 import { safeNumeral } from 'utils/numeral'
 import { ToggleView } from 'components/ToggleView2'
-
+// import { ResponsiveText } from 'styling/styles'
 import { BrowserView } from 'react-device-detect'
 import { GeyserStatsBox } from './GeyserStatsBox'
 import { GeyserStakeView } from './GeyserStakeView'
 import { DAY_IN_SEC } from '../../constants'
-
 
 export const GeyserStats = () => {
   const {
@@ -103,7 +102,10 @@ const GeyserStatsContainer = styled.div`
   ${tw`px-5 my-5`};
 `
 
-
+// const Header = styled.h3`
+//   ${ResponsiveText}
+//   ${tw`uppercase flex font-medium text-lightGray mt-8`}
+// `
 
 const GeyserStatsBoxContainer = styled.div`
   ${tw`mt-4`}

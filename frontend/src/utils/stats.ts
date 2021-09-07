@@ -129,7 +129,6 @@ export const getUserDrip = async (
   const now = nowInSeconds()
   const afterDuration = now + duration
   const poolDrip = await getPoolDrip(geyser, afterDuration, signerOrProvider)
-
   const stakeUnitsFromAdditionalStake = BigNumber.from(additionalStakes).mul(duration)
   const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromAdditionalStake)
   const lockStakeUnitsAfterDuration = getLockStakeUnits(lock, afterDuration).add(stakeUnitsFromAdditionalStake)
@@ -204,9 +203,9 @@ export const getUserAPY = async (
     .toString()
 
   const inflow = (parseFloat(stakedAmount) / 10 ** stakingTokenDecimals) * stakingTokenPrice
-  const outflow = (Math.round(drip * 1e9) / 10 ** rewardTokenDecimals) * rewardTokenPrice
+  const outflow = (Math.round(drip) / 10 ** rewardTokenDecimals) * rewardTokenPrice
   const periods = YEAR_IN_SEC / calcPeriod
-  return calculateAPY(inflow, outflow, periods)
+  return calculateAPY(inflow, outflow * 1e9, periods)
 }
 
 /**
