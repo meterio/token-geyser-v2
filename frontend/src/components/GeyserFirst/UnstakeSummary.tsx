@@ -4,7 +4,7 @@ import tw from 'twin.macro'
 import { BigNumber } from 'ethers'
 import { GeyserContext } from 'context/GeyserContext'
 import { StatsContext } from 'context/StatsContext'
-import { CardValue, CardLabel } from 'styling/styles'
+// import { CardValue, CardLabel } from 'styling/styles'
 import { amountOrZero } from 'utils/amount'
 import { formatWithDecimals } from 'utils/numeral'
 
@@ -75,22 +75,22 @@ const Container = styled.div`
   line-height: 1.8rem;
 `
 
-const SummaryCard = styled.div`
-  ${tw`h-120px shadow-all-xs border border-lightGray rounded flex flex-col my-auto tracking-wide`}
-`
+// const SummaryCard = styled.div`
+//   ${tw`h-120px shadow-all-xs border border-lightGray rounded flex flex-col my-auto tracking-wide`}
+// `
 
-const Label = styled(CardLabel)`
-  ${tw`text-sm sm:text-base text-left`}
-`
+// const Label = styled(CardLabel)`
+//   ${tw`text-sm sm:text-base text-left`}
+// `
 
-const Value = styled(CardValue)`
-  ${tw`text-sm sm:text-base flex-wrap text-left`}
-`
+// const Value = styled(CardValue)`
+//   ${tw`text-sm sm:text-base flex-wrap text-left`}
+// `
 
 const Amount = styled.span`
   ${tw`whitespace-pre-wrap`}
 `
 
-const Content = styled.div`
-  ${tw`flex flex-col my-auto ml-4`}
-`
+// const Content = styled.div`
+//   ${tw`flex flex-col my-auto ml-4`}
+// `

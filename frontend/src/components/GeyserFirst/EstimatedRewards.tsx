@@ -62,6 +62,6 @@ const EstimatedRewardsContainer = styled.div`
   letter-spacing: 0.025em;
 `
 
-const RewardsTextContainer = styled.div`
-  margin: 10px;
-`
+// const RewardsTextContainer = styled.div`
+//   margin: 10px;
+// `

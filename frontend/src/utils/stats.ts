@@ -132,7 +132,6 @@ export const getUserDrip = async (
   const now = nowInSeconds()
   const afterDuration = now + duration
   const poolDrip = await getPoolDrip(geyser, afterDuration, signerOrProvider)
-  const p = await getPoolDrip(geyser, afterDuration, signerOrProvider)
   const stakeUnitsFromAdditionalStake = BigNumber.from(additionalStakes).mul(duration)
   const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromAdditionalStake)
   const lockStakeUnitsAfterDuration = getLockStakeUnits(lock, afterDuration).add(stakeUnitsFromAdditionalStake)
