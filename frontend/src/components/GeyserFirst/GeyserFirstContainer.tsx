@@ -12,7 +12,7 @@ export const GeyserFirstContainer = () => {
   const { isStakingAction, toggleStakingAction } = useContext(GeyserContext)
 
   return (
-    <Container style={{ width: isBrowser ? '700px' : 'fit-content' }}>
+    <Container style={{ width: isBrowser ? '600px' : 'fit-content' }}>
       <Overlay>
         <GeyserStatsView />
       </Overlay>

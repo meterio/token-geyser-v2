@@ -129,9 +129,13 @@ export const getUserDrip = async (
   const now = nowInSeconds()
   const afterDuration = now + duration
   const poolDrip = await getPoolDrip(geyser, afterDuration, signerOrProvider)
+  // console.log('pool drip after', afterDuration, 'is', poolDrip)
   const stakeUnitsFromAdditionalStake = BigNumber.from(additionalStakes).mul(duration)
+  // console.log('stake units from additional stake: ', stakeUnitsFromAdditionalStake.toString())
   const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromAdditionalStake)
+  // console.log('total stake units after duration: ', totalStakeUnitsAfterDuration.toString())
   const lockStakeUnitsAfterDuration = getLockStakeUnits(lock, afterDuration).add(stakeUnitsFromAdditionalStake)
+  // console.log('lock stake units after duration: ', lockStakeUnitsAfterDuration.toString())
   if (totalStakeUnitsAfterDuration.isZero()) return 0
 
   return parseInt(
@@ -157,8 +161,14 @@ export const getStakeDrip = async (
   const now = nowInSeconds()
   const afterDuration = now + duration
   const poolDrip = await getPoolDrip(geyser, afterDuration, signerOrProvider)
+
+  // console.log('pool drip after', afterDuration, 'is', poolDrip.toString())
   const stakeUnitsFromStake = BigNumber.from(stake).mul(duration)
-  const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromStake)
+  // console.log('stake units from stake: ', stakeUnitsFromStake.toString())
+  const totalStakeUnits = getTotalStakeUnits(geyser, afterDuration)
+  // console.log('total stake units:', totalStakeUnits.toString())
+  const totalStakeUnitsAfterDuration = totalStakeUnits.add(stakeUnitsFromStake)
+  // console.log('total stake units after duration: ', totalStakeUnitsAfterDuration.toString())
   if (totalStakeUnitsAfterDuration.isZero()) return 0
 
   return (
@@ -170,7 +180,7 @@ export const getStakeDrip = async (
   )
 }
 
-const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + (outflow / inflow)) ** periods - 1
+const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + outflow / inflow) ** periods - 1
 
 /**
  * APY = (1 + (outflow / inflow)) ** periods - 1
@@ -220,21 +230,26 @@ const getPoolAPY = async (
   ls.computeAndCache<number>(
     async () => {
       const { scalingTime } = geyser
-      const { price: stakingTokenPrice, decimals: stakingTokenDecimals } = stakingTokenInfo
+      const { price: stakingTokenPrice, decimals: stakingTokenDecimals, symbol: stakingTokenSymbol } = stakingTokenInfo
       const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol } = rewardTokenInfo
       if (!rewardTokenSymbol) return 0
       const rewardTokenPrice = await getCurrentPrice(rewardTokenInfo.symbol)
+
+      // console.log(`Geyser: ${stakingTokenSymbol} - ${rewardTokenSymbol}`)
 
       const inflow = 20000.0 // avg_deposit: 20,000 USD
       const inflowDecimals = BigNumber.from((10 ** stakingTokenDecimals).toString())
       const inflowFixedPt = BigNumber.from(inflow).mul(inflowDecimals)
       const stakeTokenPriceBigNum = BigNumber.from(Math.round(stakingTokenPrice))
+      // console.log('stake token price: ', stakeTokenPriceBigNum.toString())
       const stake = inflowFixedPt.div(stakeTokenPriceBigNum)
+      // console.log('stake:', stake.toString())
 
       const calcPeriod = getCalcPeriod(geyser)
 
       const stakeDripAfterPeriod = await getStakeDrip(geyser, stake, parseInt(scalingTime, 10), signerOrProvider)
       if (stakeDripAfterPeriod === 0) return 0
+      // console.log('stake drip after period:', stakeDripAfterPeriod)
 
       const outflow = parseFloat(formatUnits(Math.round(stakeDripAfterPeriod), rewardTokenDecimals)) * rewardTokenPrice
       const periods = YEAR_IN_SEC / calcPeriod

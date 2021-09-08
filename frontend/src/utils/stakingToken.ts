@@ -24,6 +24,7 @@ export const getStakingTokenInfo = async (
   token: StakingToken,
   signerOrProvider: SignerOrProvider,
 ): Promise<StakingTokenInfo> => {
+  console.log('GET STAKING TOKEN INFO: ', tokenAddress, token)
   switch (token) {
     case StakingToken.MOCK:
       return getUniswapV2(tokenAddress, signerOrProvider)
@@ -108,6 +109,10 @@ const uniswapV2Pair = async (
   
   const [token0Symbol, token1Symbol] = tokenCompositions.map((c) => c.symbol)
   const marketCap = getMarketCap(tokenCompositions)
+  console.log('GET UNI V2')
+  console.log('token composition: ', tokenCompositions)
+  console.log('market cap: ', marketCap, ', total supply:', totalSupply.toString(), ', num:', totalSupplyNumber)
+  console.log('price:', marketCap / totalSupplyNumber)
 
   return {
     address: toChecksumAddress(tokenAddress),
