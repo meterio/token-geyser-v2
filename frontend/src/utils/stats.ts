@@ -230,7 +230,7 @@ const getPoolAPY = async (
   ls.computeAndCache<number>(
     async () => {
       const { scalingTime } = geyser
-      const { price: stakingTokenPrice, decimals: stakingTokenDecimals, symbol: stakingTokenSymbol } = stakingTokenInfo
+      const { price: stakingTokenPrice, decimals: stakingTokenDecimals } = stakingTokenInfo
       const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol } = rewardTokenInfo
       if (!rewardTokenSymbol) return 0
       const rewardTokenPrice = await getCurrentPrice(rewardTokenInfo.symbol)
