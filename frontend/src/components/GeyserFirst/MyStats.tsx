@@ -69,14 +69,12 @@ export const MyStats = () => {
           interpolate={(val) => safeNumeral(val, '0.00%').slice(0, val > 100 ? -4 : -1)}
         />
         <MyStatsBox
-          marginLeftValue = '-5px'
           name="Reward Multiplier"
           value={currentMultiplier}
           units="x"
           interpolate={(val) => safeNumeral(val, '0.0')}
         />
         <MyStatsBox
-          marginLeftValue = '-5px'
           name="Current Rewards"
           value={currentReward}
           delim=" "

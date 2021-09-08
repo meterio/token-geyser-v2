@@ -129,10 +129,19 @@ export const getUserDrip = async (
   const now = nowInSeconds()
   const afterDuration = now + duration
   const poolDrip = await getPoolDrip(geyser, afterDuration, signerOrProvider)
+  console.log('pool drip after', afterDuration, 'is', poolDrip)
   const stakeUnitsFromAdditionalStake = BigNumber.from(additionalStakes).mul(duration)
+  console.log('stake units from additional stake: ', stakeUnitsFromAdditionalStake.toString())
   const totalStakeUnitsAfterDuration = getTotalStakeUnits(geyser, afterDuration).add(stakeUnitsFromAdditionalStake)
+  console.log('total stake units after duration: ', totalStakeUnitsAfterDuration.toString())
   const lockStakeUnitsAfterDuration = getLockStakeUnits(lock, afterDuration).add(stakeUnitsFromAdditionalStake)
+  console.log('lock stake units after duration: ', lockStakeUnitsAfterDuration.toString())
   if (totalStakeUnitsAfterDuration.isZero()) return 0
+  const r = parseInt(
+    poolDrip.mul(lockStakeUnitsAfterDuration).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(),
+    10,
+  )
+  console.log('user drop after duration:', r)
 
   return parseInt(
     poolDrip.mul(lockStakeUnitsAfterDuration).div(totalStakeUnitsAfterDuration).div(BigNumber.from(1e9)).toString(),
@@ -170,7 +179,7 @@ export const getStakeDrip = async (
   )
 }
 
-const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + (outflow / inflow)) ** periods - 1
+const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + outflow / inflow) ** periods - 1
 
 /**
  * APY = (1 + (outflow / inflow)) ** periods - 1

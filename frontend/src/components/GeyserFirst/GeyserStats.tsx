@@ -1,11 +1,12 @@
 import styled from 'styled-components/macro'
 import tw from 'twin.macro'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { StatsContext } from 'context/StatsContext'
 import { GeyserContext } from 'context/GeyserContext'
 import { safeNumeral } from 'utils/numeral'
 import { ToggleView } from 'components/ToggleView2'
 // import { ResponsiveText } from 'styling/styles'
+import { utils } from 'ethers'
 import { BrowserView } from 'react-device-detect'
 import { GeyserStatsBox } from './GeyserStatsBox'
 import { GeyserStakeView } from './GeyserStakeView'
@@ -14,15 +15,25 @@ import { DAY_IN_SEC } from '../../constants'
 export const GeyserStats = () => {
   const {
     geyserStats: { duration, totalDeposit, totalRewards },
+    vaultStats: { currentStake },
   } = useContext(StatsContext)
 
   const {
     isStakingAction,
     toggleStakingAction,
     selectedGeyserInfo: {
+      geyser,
       rewardTokenInfo: { symbol },
+      stakingTokenInfo: { price: stakingTokenPrice, decimals: stakingTokenDecimals },
     },
   } = useContext(GeyserContext)
+
+  const totalStake = useMemo(() => {
+    if (geyser) {
+      return Number(utils.formatUnits(geyser.totalStake, stakingTokenDecimals))
+    }
+    return 0
+  }, [geyser])
 
   return (
     <GeyserStatsContainer>
@@ -35,7 +46,6 @@ export const GeyserStats = () => {
           {/* <GeyserStatsBoxContainer> */}
           {/* <MyTotalStaked /> */}
           {/* </GeyserStatsBoxContainer> */}
-
           <GeyserStatsBoxContainer>
             <GeyserStatsBox
               name="Program Duration"
@@ -60,6 +70,36 @@ export const GeyserStats = () => {
               interpolate={(val) => safeNumeral(val, '0,0.00')}
             />
           </GeyserStatsBoxContainer>
+          {currentStake > 0 && (
+            <GeyserStatsBoxContainer>
+              <GeyserStatsBox
+                name="Staked LP"
+                value={currentStake}
+                units=""
+                interpolate={(val) => safeNumeral(val, '0,0.00')}
+              />
+            </GeyserStatsBoxContainer>
+          )}
+          {currentStake > 0 && (
+            <GeyserStatsBoxContainer>
+              <GeyserStatsBox
+                name="Staked Value"
+                value={currentStake * stakingTokenPrice}
+                units="USD"
+                interpolate={(val) => safeNumeral(val, '0,0.00')}
+              />
+            </GeyserStatsBoxContainer>
+          )}
+          {currentStake > 0 && (
+            <GeyserStatsBoxContainer>
+              <GeyserStatsBox
+                name="Pool Share"
+                value={totalStake > 0 ? currentStake / totalStake : 0}
+                units=""
+                interpolate={(val) => safeNumeral(val, '0,0.00%')}
+              />
+            </GeyserStatsBoxContainer>
+          )}
         </MyStatsWrapper>
         <GeyserStatsBoxContainer>
           <GeyserStakeView />
@@ -85,7 +125,7 @@ const MyStatsWrapper = styled.div`
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   @media (max-width: 660px) {
-    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   @media only screen and (max-width: 600px) {
