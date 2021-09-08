@@ -26,6 +26,7 @@ export const GeyserContext = createContext<{
   handleGeyserAction: (arg0: Vault |  null, arg1: BigNumber) => Promise<TransactionResponse | undefined>
   allTokensInfos: TokenInfo[]
   getGeyserName: (id: string) => string
+  getGeyserAddress:(name:string) => string
   selectedGeyserConfig: GeyserConfig | null
 }>({
   geysers: [],
@@ -38,6 +39,7 @@ export const GeyserContext = createContext<{
   handleGeyserAction: async () => undefined,
   allTokensInfos: [],
   getGeyserName: () => '',
+  getGeyserAddress:() => '',
   selectedGeyserConfig: null,
 })
 
@@ -87,6 +89,7 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
   }
 
   const selectGeyser = async (geyser: Geyser) => {
+   
     const geyserAddress = toChecksumAddress(geyser.id)
     const geyserConfig = geyserConfigs.find(config => toChecksumAddress(config.address) === geyserAddress)
     if (!geyserConfig) {
@@ -110,6 +113,7 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
     if (geyserId) await selectGeyserById(geyserId)
   }
   const getGeyserName = (id: string) => geyserAddressToName.get(toChecksumAddress(id)) || ''
+  const getGeyserAddress = (name: string) => geyserNameToAddress.get(name) || ''
 
   useEffect(() => {
     const ids = geyserConfigs.map(geyser => geyser.address.toLowerCase())
@@ -159,9 +163,40 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
     }
   }, [geyserData])
 
+  let queryGeyserName = ""
+  let queryGeyserId = ""
+  let geyserInit : any
+
+  // extracts query from url query string
+  const queryString = window.location.href.split('?')[1]
+  if(queryString){
+  const [splitQueryString, ] = queryString.split('=')
+  if(splitQueryString && splitQueryString === 'farm'){
+    [, queryGeyserName] = queryString.split('=')
+
+  }
+}
+
+if(queryGeyserName && geysers.length){
+  queryGeyserId = getGeyserAddress(queryGeyserName)
+
+  if(queryGeyserId){
+    // sets initial geyser to the url query's geyser pool 
+  geyserInit = geysers.find(geyser => toChecksumAddress(geyser.id) === toChecksumAddress(queryGeyserId))
+  }else{
+    [geyserInit,] = geysers
+  }
+  
+  }else{
+    
+    [geyserInit,] = geysers
+    
+  }
+
+ 
   useEffect(() => {
     if (geysers.length > 0) {
-      selectGeyser(geysers.find(geyser => geyser.id === selectedGeyserInfo.geyser?.id) || geysers[0])
+      selectGeyser(geysers.find(geyser => geyser.id === selectedGeyserInfo.geyser?.id) || geyserInit)
     }
   }, [geysers])
 
@@ -180,6 +215,7 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
         handleGeyserAction,
         allTokensInfos,
         getGeyserName,
+        getGeyserAddress,
         selectedGeyserConfig,
       }}
     >

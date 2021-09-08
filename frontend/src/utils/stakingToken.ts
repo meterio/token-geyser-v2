@@ -85,10 +85,13 @@ const uniswapV2Pair = async (
   namePrefix: string,
   symbolPrefix: string,
 ): Promise<StakingTokenInfo> => {
+  
   const address = toChecksumAddress(tokenAddress)
+  
   const contract = new Contract(address, UNISWAP_V2_PAIR_ABI, signerOrProvider)
   const token0Address: string = await contract.token0()
   const token1Address: string = await contract.token1()
+  
   const decimals: number = await contract.decimals()
 
   const totalSupply: BigNumber = await contract.totalSupply()
@@ -101,6 +104,8 @@ const uniswapV2Pair = async (
     signerOrProvider,
     [0.5, 0.5],
   )
+ 
+  
   const [token0Symbol, token1Symbol] = tokenCompositions.map((c) => c.symbol)
   const marketCap = getMarketCap(tokenCompositions)
 

@@ -77,16 +77,16 @@ export const INITIAL_SUPPLY = 50000000
 
 // tooltip messages
 export const GET_APY_STAKE_MSG = () =>
-  'APY is estimated for your current deposits till the end of this program. The APY metric does not account for gains or losses from holding liquidity tokens, or gains from liquidity mining rewards distributed by the underlying platform for holding liquidity tokens.'
+  'APY is estimated for your current deposits based on staking to reach the maximum reward multiplier. The APY metric does not account for gains or losses from holding liquidity tokens, or gains from liquidity mining rewards distributed by the underlying platform for holding liquidity tokens.'
 
 export const GET_APY_NO_STAKE_MSG = ({ days = '1' }) =>
   `APY is estimated for an avg deposit (20,000 USD) over the next ${days} days. The APY metric does not account for gains or losses from holding liquidity tokens, or gains from liquidity mining rewards distributed by the underlying platform for holding liquidity tokens.`
 
-export const GET_REWARD_MULTIPLIER_MSG = ({ days = '1', multiplier = '1.0' }) =>
-  `Deposit liquidity tokens for ${days} days to achieve a ${multiplier}x reward multiplier.`
+export const GET_REWARD_MULTIPLIER_MSG = ({ days = '1', multiplier = '1.0' }) =>    
+  `It takes ${days} days of continuous staking for the reward multiplier to go from 1x to  ${multiplier}x gradually.  The multiplier applies to the all rewards you earned during the staking period starting from day 1. Deposit liquidity tokens for ${days} days to achieve your full rewards potential.`
 
 export const GET_CURRENT_REWARDS_MSG = () =>
-  'Your share of the total unlocked reward pool. Larger your deposit and for longer, higher your share.'
+  'Your share of the total unlocked reward pool. The larger your deposit and for longer, the higher your share.'
 
 export const GET_ESTIMATED_REWARDS_MSG = () =>
   'Estimated rewards assume you have achieved the maximum reward multiplier.'

@@ -9,7 +9,7 @@ import { Fragment } from 'react'
 interface Props {
   options?: string[]
   optgroups?: { group: string; options: string[] }[]
-  selectedOption: string
+  selectedOption?: string
   onChange: (arg0: string) => void
 }
 

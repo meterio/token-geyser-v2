@@ -16,15 +16,11 @@ const DEFAULT_PRICES: Record<string, number> = {
   YFI: 17000,
   NMR: 25,
   USDC: 1,
-  MTRG:2.37,
-  MTR:2.91,
-  VOLT_AIR:2.37,
-  'BNB.bsc':2.9,
-  'BUSD.bsc':1,
-  'USDC.eth':1,
-  'UNI-V2':2.91,
-  'yDAI+yUSDC+yUSDT+yTUSD': 1.1,
-}
+  MTRG: 2.37,
+  MTR: 2.91,
+  'UNI-V2': 2.91,
+  'yDAI+yUSDC+yUSDT+yTUSD': 1.1
+};
 
 const SYMBOL_TO_QUERY: Record<string, string> = {
   WBTC: 'wrapped-bitcoin',
@@ -42,45 +38,42 @@ const SYMBOL_TO_QUERY: Record<string, string> = {
   USDC: 'usd-coin',
   MTRG: 'meter-governance-mapped-by-meter-io',
   MTR: 'meter-stable',
-  VOLT_AIR:'meter-governance-mapped-by-meter-io',
-  'BNB.bsc':'meter-governance-mapped-by-meter-io',
-  'BUSD.bsc':'meter-governance-mapped-by-meter-io',
- 'UNI-V2':'meter-stable',
-  'yDAI+yUSDC+yUSDT+yTUSD': 'curve-fi-ydai-yusdc-yusdt-ytusd',
-}
+  VOLT_AIR: 'meter', // FIXME: change this when volt got listed on coingecko
+  VOLT: 'meter',
+  'yDAI+yUSDC+yUSDT+yTUSD': 'curve-fi-ydai-yusdc-yusdt-ytusd'
+};
 
 export const getCurrentPrice = async (symbol: string) => {
-
- 
-  const cacheKey = `geyser|${symbol}|spot`
-  const TTL = HOUR_IN_MS
+  const cacheKey = `geyser|${symbol}|spot`;
+  const TTL = HOUR_IN_MS;
 
   try {
-    const query = SYMBOL_TO_QUERY[symbol]
+    const query = SYMBOL_TO_QUERY[symbol];
+
     if (!query) {
-      throw new Error(`Can't fetch price for ${symbol}`)
+      throw new Error(`Can't fetch price for ${symbol}`);
     }
 
     return await ls.computeAndCache<number>(
       async () => {
-        const client = new CGApi()
-        const reqTimeoutSec = 10
+        const client = new CGApi();
+        const reqTimeoutSec = 10;
         const p: any = await Promise.race([
           client.simple.price({
             ids: [query],
-            vs_currencies: ['usd'],
+            vs_currencies: ['usd']
           }),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('request timeout')), reqTimeoutSec * 1000)),
-        ])
-        
-        const price = p.data[query].usd
-        return price as number
+          new Promise((_, reject) => setTimeout(() => reject(new Error('request timeout')), reqTimeoutSec * 1000))
+        ]);
+
+        const price = p.data[query].usd;
+        return price as number;
       },
       cacheKey,
-      TTL,
-    )
+      TTL
+    );
   } catch (e) {
-    // console.error(e)
-    return DEFAULT_PRICES[symbol] || 0
+    // console.error(e);
+    return DEFAULT_PRICES[symbol] || 0;
   }
-}
+};
