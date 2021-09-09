@@ -35,12 +35,12 @@ export const MyStats = () => {
         body:
           currentStake > 0
             ? GET_APY_STAKE_MSG()
-            : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays || 30, '0.0') }),
+            : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays || 70, '0.0') }),
       },
       {
         title: 'Reward Multiplier',
         body: GET_REWARD_MULTIPLIER_MSG({
-          days: safeNumeral(calcPeriodInDays || 30, '0.0'),
+          days: safeNumeral(calcPeriodInDays || 70, '0.0'),
           multiplier: safeNumeral(maxMultiplier || 3, '0.0'),
         }),
       },
