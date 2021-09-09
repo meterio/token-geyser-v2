@@ -17,6 +17,18 @@ export const formatWithDecimals = (value: string, decimals = 2) => {
   return `${value}.${Array(decimals).fill('0').join('')}`
 }
 
+export const formatWithPrecision = (value: string, precision = 2) => {
+  const parts = value.split('.')
+  if (parts.length > 1) {
+    if (precision === 0) {
+      return parts[0]
+    }
+    if (parts[1].length > precision) return `${parts[0]}.${parts[1].slice(0, precision)}`
+    return value
+  }
+  return value
+}
+
 export const humanReadableDuration = (duration: number) => {
   const durationLabel = [
     {

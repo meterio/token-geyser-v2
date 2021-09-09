@@ -10,6 +10,7 @@ import { MOONISWAP_V1_PAIR_ABI } from './abis/MooniswapV1Pair'
 import { UNISWAP_V2_PAIR_ABI } from './abis/UniswapV2Pair'
 import { getCurrentPrice } from './price'
 import { defaultTokenInfo, getTokenInfo } from './token'
+import { estimateVoltPrice } from './voltPrice'
 
 export const defaultStakingTokenInfo = (): StakingTokenInfo => ({
   ...defaultTokenInfo(),
@@ -71,12 +72,20 @@ const getTokenCompositions = async (
   stakingTokenAddress: string,
   signerOrProvider: SignerOrProvider,
   weights: number[],
-): Promise<TokenComposition[]> =>
-  Promise.all(
+): Promise<TokenComposition[]> => {
+  let compositions = await Promise.all(
     tokenAddresses.map((token, index) =>
       getTokenComposition(token, stakingTokenAddress, signerOrProvider, weights[index]),
     ),
   )
+  for (let c of compositions) {
+    if (c.symbol === 'VOLT' || c.symbol === 'VOLT_AIR') {
+      const voltPrice = await estimateVoltPrice(signerOrProvider)
+      c.value = voltPrice * c.balance
+    }
+  }
+  return compositions
+}
 
 const getMarketCap = (composition: TokenComposition[]) => composition.reduce((m, c) => m + c.value, 0)
 
@@ -86,13 +95,12 @@ const uniswapV2Pair = async (
   namePrefix: string,
   symbolPrefix: string,
 ): Promise<StakingTokenInfo> => {
-  
   const address = toChecksumAddress(tokenAddress)
-  
+
   const contract = new Contract(address, UNISWAP_V2_PAIR_ABI, signerOrProvider)
   const token0Address: string = await contract.token0()
   const token1Address: string = await contract.token1()
-  
+
   const decimals: number = await contract.decimals()
 
   const totalSupply: BigNumber = await contract.totalSupply()
@@ -105,14 +113,20 @@ const uniswapV2Pair = async (
     signerOrProvider,
     [0.5, 0.5],
   )
- 
-  
+
   const [token0Symbol, token1Symbol] = tokenCompositions.map((c) => c.symbol)
   const marketCap = getMarketCap(tokenCompositions)
-  console.log('GET UNI V2')
+  const name = tokenCompositions.map((c) => c.symbol).join('-')
+  console.log(`Got Uniswap pair: ${name}`)
   console.log('token composition: ', tokenCompositions)
-  console.log('market cap: ', marketCap, ', total supply:', totalSupply.toString(), ', num:', totalSupplyNumber)
-  console.log('price:', marketCap / totalSupplyNumber)
+  console.log(
+    'market cap: ',
+    marketCap,
+    ', total supply:',
+    totalSupplyNumber,
+    'lp price:',
+    marketCap / totalSupplyNumber,
+  )
 
   return {
     address: toChecksumAddress(tokenAddress),

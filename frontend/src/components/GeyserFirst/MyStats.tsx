@@ -64,7 +64,7 @@ export const MyStats = () => {
       <MyStatsWrapper>
         <MyStatsBox
           name="APY"
-          value={Number(Number(Math.min(apy, 10000)).toFixed(2))}
+          value={Number((apy ?? 100).toFixed(2))}
           units="%"
           interpolate={(val) => safeNumeral(val, '0.00%').slice(0, val > 100 ? -4 : -1)}
         />

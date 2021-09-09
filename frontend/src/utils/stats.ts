@@ -1,4 +1,4 @@
-import { BigNumber, BigNumberish } from 'ethers'
+import { BigNumber, BigNumberish, ethers } from 'ethers'
 import { toChecksumAddress } from 'web3-utils'
 import { formatUnits } from 'ethers/lib/utils'
 import {
@@ -25,6 +25,7 @@ import { ERC20Balance } from '../sdk'
 import { DAY_IN_SEC, GEYSER_STATS_CACHE_TIME_MS, YEAR_IN_SEC } from '../constants'
 import { getCurrentPrice } from './price'
 import * as ls from './cache'
+import { estimateVoltPrice } from './voltPrice'
 
 const nowInSeconds = () => Math.round(Date.now() / 1000)
 
@@ -202,7 +203,13 @@ export const getUserAPY = async (
   const { scalingTime } = geyser
   const { decimals: stakingTokenDecimals, price: stakingTokenPrice } = stakingTokenInfo
   const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol } = rewardTokenInfo
-  const rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
+  let rewardTokenPrice = 0
+  if (rewardTokenSymbol === 'VOLT' || rewardTokenSymbol === 'VOLT_AIR') {
+    rewardTokenPrice = await estimateVoltPrice(signerOrProvider)
+  } else {
+    rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
+  }
+  console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
   const calcPeriod = getCalcPeriod(geyser)
   const drip = await (lock
     ? getUserDrip(geyser, lock, additionalStakes, parseInt(scalingTime, 10), signerOrProvider)
@@ -233,8 +240,13 @@ const getPoolAPY = async (
       const { price: stakingTokenPrice, decimals: stakingTokenDecimals } = stakingTokenInfo
       const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol } = rewardTokenInfo
       if (!rewardTokenSymbol) return 0
-      const rewardTokenPrice = await getCurrentPrice(rewardTokenInfo.symbol)
-
+      let rewardTokenPrice = 0
+      if (rewardTokenSymbol === 'VOLT' || rewardTokenSymbol === 'VOLT_AIR') {
+        rewardTokenPrice = await estimateVoltPrice(signerOrProvider)
+      } else {
+        rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
+      }
+      console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
       // console.log(`Geyser: ${stakingTokenSymbol} - ${rewardTokenSymbol}`)
 
       const inflow = 20000.0 // avg_deposit: 20,000 USD

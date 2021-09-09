@@ -16,5 +16,5 @@ const GeyserStatsContainer = styled.div`
 
   background: rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  box-shadow: 0 0 10px 8px #e6007e;
+  box-shadow: 0 0 15px 8px #e6007e;
 `
