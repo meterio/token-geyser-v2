@@ -10,15 +10,15 @@ interface Props {
 }
 
 export const ToggleView: React.FC<Props> = ({ enabled, toggle, options }) => (
-  <Switch className="w-full" checked={!enabled} onChange={toggle}>
+  <Switch className="w-full my-3" checked={!enabled} onChange={toggle}>
     <SwitchContainer className="h-11">
-      <SwitchOptionOne className={!enabled ? 'text-gray' : 'text-darkGray'}>{options[0]}</SwitchOptionOne>
+      <SwitchOptionOne className={!enabled ? 'text-gray' : 'text-white'}>{options[0]}</SwitchOptionOne>
       <span
         className={`block h-full w-1/2 rounded transition duration-300 ease-in-out transform ${
           !enabled ? 'bg-secondary translate-x-full' : 'bg-primary'
         }`}
       />
-      <SwitchOptionTwo className={!enabled ? 'text-darkGray' : 'text-gray'}>{options[1]}</SwitchOptionTwo>
+      <SwitchOptionTwo className={!enabled ? 'text-white' : 'text-gray'}>{options[1]}</SwitchOptionTwo>
     </SwitchContainer>
   </Switch>
 )

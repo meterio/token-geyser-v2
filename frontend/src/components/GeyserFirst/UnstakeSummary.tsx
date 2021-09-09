@@ -6,7 +6,7 @@ import { GeyserContext } from 'context/GeyserContext'
 import { StatsContext } from 'context/StatsContext'
 // import { CardValue, CardLabel } from 'styling/styles'
 import { amountOrZero } from 'utils/amount'
-import { formatWithDecimals } from 'utils/numeral'
+import { formatWithDecimals, formatWithPrecision } from 'utils/numeral'
 
 interface Props {
   userInput: string
@@ -30,15 +30,21 @@ export const UnstakeSummary: React.FC<Props> = ({ userInput, parsedUserInput }) 
     })()
   }, [parsedUserInput])
 
-  return (
+  return amountOrZero(userInput) > 0 ? (
     <Container>
       <div>
-        Amount to Unstake: <Amount>{`${formatWithDecimals(amountOrZero(userInput).toString(), 2)} `}</Amount>
-        <span>{stakingTokenSymbol}</span>
+        Amount to Unstake:
+        <EmphasisContainer>
+          <Amount>{`${formatWithPrecision(amountOrZero(userInput).toString(), 6)} `}</Amount>
+          <span>{stakingTokenSymbol}</span>
+        </EmphasisContainer>
       </div>
       <div>
-        Rewards to Claim: <Amount>{`${rewardAmount} `}</Amount>
-        <span>{rewardTokenSymbol}</span>
+        Rewards to Claim:
+        <EmphasisContainer>
+          <Amount>{`${formatWithPrecision(rewardAmount, 8)} `}</Amount>
+          <span>{rewardTokenSymbol}</span>
+        </EmphasisContainer>
       </div>
       {/*
       <SummaryCard>
@@ -64,15 +70,21 @@ export const UnstakeSummary: React.FC<Props> = ({ userInput, parsedUserInput }) 
       </SummaryCard>
       */}
     </Container>
+  ) : (
+    <Container />
   )
 }
 
 const Container = styled.div`
-  ${tw`gap-x-4 my-6`}
+  ${tw`gap-x-4 my-4`}
   text-align: left;
   font-size: 1.1rem;
-  font-weight: bold;
   line-height: 1.8rem;
+`
+
+const EmphasisContainer = styled.span`
+  ${tw`pl-2`}
+  font-weight: bold;
 `
 
 // const SummaryCard = styled.div`

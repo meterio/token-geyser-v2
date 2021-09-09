@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro'
+import tw from 'twin.macro'
 
 import { useContext, useEffect, useState } from 'react'
 import { StatsContext } from 'context/StatsContext'
-import { formatWithDecimals } from 'utils/numeral'
+import { formatWithPrecision } from 'utils/numeral'
 import { BigNumber } from 'ethers'
 
 import { GeyserContext } from 'context/GeyserContext'
@@ -28,30 +29,37 @@ export const EstimatedRewards: React.FC<Props> = ({ parsedUserInput }) => {
       setRewards(
         parsedUserInput.isZero()
           ? '0.00'
-          : formatWithDecimals(`${(await computeRewardsFromAdditionalStakes(parsedUserInput)) * 1e9}`, 2),
+          : formatWithPrecision(`${(await computeRewardsFromAdditionalStakes(parsedUserInput)) * 1e9}`, 4),
       )
     })()
   }, [parsedUserInput])
 
-  return (
+  return parsedUserInput.gt(0) ? (
     <EstimatedRewardsContainer>
-      Your Estimated Rewards : {rewards} {symbol}{' '}
-      <span>
+      Estimated Rewards :{' '}
+      <b>
+        {rewards} {symbol}
+      </b>
+      {'   '}
+      <EstimatedDuration>
         {parsedUserInput.gt(0) && calcPeriodInDays > 0
           ? `in ${Number(calcPeriodInDays).toFixed(1)} day${calcPeriodInDays > 1 ? 's' : ''}`
           : ''}
-      </span>
+      </EstimatedDuration>
     </EstimatedRewardsContainer>
+  ) : (
+    <EstimatedRewardsContainer />
   )
 }
 
+const EstimatedDuration = styled.span`
+  ${tw`pl-1`}
+`
 const EstimatedRewardsContainer = styled.div`
+  ${tw`my-4`}
   font-size: 1.1rem;
-  font-weight: bold;
+  // font-weight: bold;
   max-height: 150px;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding: 10px;
   display: flex;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;

@@ -83,5 +83,5 @@ const Img = styled.img`
 
 const OptionsWrapper = styled.div`
   ${tw`relative mt-1 w-336px`}
-  box-shadow: 0 0 5px 5px #e6007e;
+  box-shadow: 0 0 15px 5px #e6007e;
 `
