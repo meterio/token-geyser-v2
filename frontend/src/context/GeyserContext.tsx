@@ -179,18 +179,28 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
 
 if(queryGeyserName && geysers.length){
   queryGeyserId = getGeyserAddress(queryGeyserName)
-
+  const revString = queryGeyserName.split('-').reverse().join('-')
+  let queryGeyserIdReverse = ""
+  if(revString){
+   queryGeyserIdReverse = getGeyserAddress(revString)
+  }
   if(queryGeyserId){
     // sets initial geyser to the url query's geyser pool 
   geyserInit = geysers.find(geyser => toChecksumAddress(geyser.id) === toChecksumAddress(queryGeyserId))
+  }else if(queryGeyserIdReverse){
+    // reverse the query string
+  
+    geyserInit = geysers.find(geyser => toChecksumAddress(geyser.id) === toChecksumAddress(queryGeyserIdReverse))
+    
+  
   }else{
     [geyserInit,] = geysers
   }
   
   }else{
-    
-    [geyserInit,] = geysers
-    
+   
+      [geyserInit,] = geysers
+  
   }
 
  
