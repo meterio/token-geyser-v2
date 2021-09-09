@@ -3,7 +3,7 @@ import tw from 'twin.macro'
 
 import { useContext, useEffect, useState } from 'react'
 import { StatsContext } from 'context/StatsContext'
-import { formatWithDecimals, formatWithPrecision } from 'utils/numeral'
+import { formatWithPrecision } from 'utils/numeral'
 import { BigNumber } from 'ethers'
 
 import { GeyserContext } from 'context/GeyserContext'

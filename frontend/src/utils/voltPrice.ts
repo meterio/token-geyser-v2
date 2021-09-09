@@ -1,6 +1,6 @@
-import { getCurrentPrice } from './price'
 import { Contract } from 'ethers'
 import BigNumber from 'bignumber.js'
+import { getCurrentPrice } from './price'
 import { SignerOrProvider } from '../types'
 import { abi as IUniswapV2Pair } from '../sdk/IUniswapV2Pair.json'
 

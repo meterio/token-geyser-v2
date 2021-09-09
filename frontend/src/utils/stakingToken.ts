@@ -73,16 +73,15 @@ const getTokenCompositions = async (
   signerOrProvider: SignerOrProvider,
   weights: number[],
 ): Promise<TokenComposition[]> => {
-  let compositions = await Promise.all(
+  const compositions = await Promise.all(
     tokenAddresses.map((token, index) =>
       getTokenComposition(token, stakingTokenAddress, signerOrProvider, weights[index]),
     ),
   )
-  for (let c of compositions) {
-    if (c.symbol === 'VOLT' || c.symbol === 'VOLT_AIR') {
-      const voltPrice = await estimateVoltPrice(signerOrProvider)
-      c.value = voltPrice * c.balance
-    }
+  const voltTokens = compositions.filter((c) => c.symbol === 'VOLT' || c.symbol === 'VOLT_AIR')
+  if (voltTokens.length > 0) {
+    const voltPrice = await estimateVoltPrice(signerOrProvider)
+    voltTokens[0].value = voltPrice * voltTokens[0].balance
   }
   return compositions
 }

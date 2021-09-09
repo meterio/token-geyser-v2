@@ -25,7 +25,7 @@ export async function computeAndCache<T>(
   useCache: (cached: T) => boolean = () => true,
 ): Promise<T> {
   const cachedValue = get(key)
-  if (cachedValue) {
+  if (cachedValue && useCache(cachedValue)) {
     // console.log('use cached price: ', 'key:', key, cachedValue);
     return cachedValue
   }
