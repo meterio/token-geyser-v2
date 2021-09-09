@@ -8,7 +8,6 @@ import { GeyserConfig } from '../types'
  */
 
 
-
  
  
  
@@ -16,6 +15,22 @@ import { GeyserConfig } from '../types'
  
 
 const mockGeyserConfigs: GeyserConfig[] = [
+  
+  {
+    name:'MTRG-MTR',
+    address: '0xa8D58E0DCa52Cf095D16041cc07Ef5FD65Bf9B49',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+
+  },
+
+  {
+    name:'MTRG-BUSD.bsc',
+    address: '0xb5e1220427CdFa60E7Ffa108E79d9acDAc329212',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+
+  },
   
   {
     name:'WETH.eth-BUSD.bsc',
@@ -86,13 +101,7 @@ const mockGeyserConfigs: GeyserConfig[] = [
 
   },
 
-  {
-    name:'MTRG-MTR',
-    address: '0xa8D58E0DCa52Cf095D16041cc07Ef5FD65Bf9B49',
-    stakingToken: StakingToken.MOCK,
-    rewardToken: RewardToken.MOCK,
-
-  },
+  
 
   {
     name:'MTRG-BNB.bsc',
