@@ -209,7 +209,7 @@ export const getUserAPY = async (
   } else {
     rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
   }
-  console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
+ // console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
   const calcPeriod = getCalcPeriod(geyser)
   const drip = await (lock
     ? getUserDrip(geyser, lock, additionalStakes, parseInt(scalingTime, 10), signerOrProvider)
@@ -246,7 +246,7 @@ const getPoolAPY = async (
       } else {
         rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
       }
-      console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
+      // console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
       // console.log(`Geyser: ${stakingTokenSymbol} - ${rewardTokenSymbol}`)
 
       const inflow = 20000.0 // avg_deposit: 20,000 USD

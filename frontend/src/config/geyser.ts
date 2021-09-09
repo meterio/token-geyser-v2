@@ -9,13 +9,17 @@ import { GeyserConfig } from '../types'
 
 
  
- 
- 
- 
+
  
 
 const mockGeyserConfigs: GeyserConfig[] = [
-  
+  {
+    name:'WBTC.eth-WETH.eth',
+    address: '0x97b68ce711dd5912ffe52779a739fb3cb82ef05f',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+
+  },
   {
     name:'MTRG-MTR',
     address: '0xa8D58E0DCa52Cf095D16041cc07Ef5FD65Bf9B49',
@@ -46,13 +50,7 @@ const mockGeyserConfigs: GeyserConfig[] = [
     rewardToken: RewardToken.MOCK,
 
   },
-  {
-    name:'WBTC.eth-WETH.eth',
-    address: '0x3d0ca02704d45ba2966c0be7a4f3c6cd4163569e',
-    stakingToken: StakingToken.MOCK,
-    rewardToken: RewardToken.MOCK,
-
-  },
+ 
   {
     name:'VOLT-WETH.eth',
     address: '0x82df620865aBcA1C1B6Ae6d7C5334163982E6e5a',
