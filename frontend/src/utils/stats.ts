@@ -26,7 +26,6 @@ import { DAY_IN_SEC, GEYSER_STATS_CACHE_TIME_MS, YEAR_IN_SEC } from '../constant
 import { getCurrentPrice } from './price'
 import * as ls from './cache'
 import { estimateVoltPrice } from './voltPrice'
-import { createBuilderStatusReporter } from 'typescript'
 
 const nowInSeconds = () => Math.round(Date.now() / 1000)
 
