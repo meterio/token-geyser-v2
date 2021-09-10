@@ -90,7 +90,7 @@ const mockGeyserConfigs: GeyserConfig[] = [
   },
   {
     name: 'MTRG-BUSD.bsc',
-    address: '0x9fb600ecB8D10Be60fB7A4C32A2cD88585083D43 ',
+    address: '0x9fb600ecB8D10Be60fB7A4C32A2cD88585083D43',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
   },
