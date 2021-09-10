@@ -181,7 +181,7 @@ export const getStakeDrip = async (
   )
 }
 
-const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + outflow / inflow) ** periods - 1
+const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + outflow / inflow) * periods - 1
 
 /**
  * APY = (1 + (outflow / inflow)) ** periods - 1
