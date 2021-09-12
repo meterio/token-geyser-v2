@@ -6,7 +6,7 @@ dataSources:
     name: GeyserRegistry
     network: meter
     source:
-      address: '0x599ce6b21384B9489105D4420b596A3b3d160267'
+      address: '0xEB5D1AF3957ECE90bD9345DC746a2DEB03108c17'
       abi: InstanceRegistry
     mapping:
       kind: ethereum/events
@@ -25,7 +25,7 @@ dataSources:
     name: VaultFactory
     network: meter
     source:
-      address: '0x7d03E3e29A4fa3D41d9Eb60707C884b38738720D'
+      address: '0xc3a1cF832A77fcAe51cEa2E1B03EF85492F531Ac'
       abi: InstanceRegistry
     mapping:
       kind: ethereum/events
@@ -46,7 +46,7 @@ dataSources:
     name: CrucibleFactory
     network: meter
     source:
-      address: '0x7d03E3e29A4fa3D41d9Eb60707C884b38738720D'
+      address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: InstanceRegistry
     mapping:
       kind: ethereum/events
@@ -67,7 +67,7 @@ dataSources:
     name: CrucibleNFT
     network: meter
     source:
-      address: '0x55483639e9F9ef759558A7498F3a8A49CFC60a6B'
+      address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: ERC721
     mapping:
       kind: ethereum/events
@@ -88,7 +88,7 @@ dataSources:
     name: UniversalVaultNFT
     network: meter
     source:
-      address: '0x55483639e9F9ef759558A7498F3a8A49CFC60a6B'
+      address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: ERC721
     mapping:
       kind: ethereum/events
