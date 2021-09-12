@@ -67,7 +67,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://farm-graph.voltswap.finance/subgraphs/name/meter/geyser-V2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `https://graph.voltswap.finance/subgraphs/name/meter/geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823
@@ -82,7 +82,7 @@ export const GET_APY_STAKE_MSG = () =>
 export const GET_APY_NO_STAKE_MSG = ({ days = '1' }) =>
   `APY is estimated for an avg deposit (20,000 USD) over the next ${days} days. The APY metric does not account for gains or losses from holding liquidity tokens, or gains from liquidity mining rewards distributed by the underlying platform for holding liquidity tokens.`
 
-export const GET_REWARD_MULTIPLIER_MSG = ({ days = '1', multiplier = '1.0' }) =>    
+export const GET_REWARD_MULTIPLIER_MSG = ({ days = '1', multiplier = '1.0' }) =>
   `It takes ${days} days of continuous staking for the reward multiplier to go from 1x to  ${multiplier}x gradually.  The multiplier applies to the all rewards you earned during the staking period starting from day 1. Deposit liquidity tokens for ${days} days to achieve your full rewards potential.`
 
 export const GET_CURRENT_REWARDS_MSG = () =>
