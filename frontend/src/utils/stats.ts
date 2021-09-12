@@ -181,7 +181,7 @@ export const getStakeDrip = async (
   )
 }
 
-const calculateAPY = (inflow: number, outflow: number, periods: number) => (1 + outflow / inflow) * periods - 1
+const calculateAPY = (inflow: number, outflow: number, periods: number) => (outflow * YEAR_IN_SEC) / inflow / periods
 
 /**
  * APY = (1 + (outflow / inflow)) ** periods - 1
@@ -209,7 +209,7 @@ export const getUserAPY = async (
   } else {
     rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
   }
- // console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
+  // console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
   const calcPeriod = getCalcPeriod(geyser)
   const drip = await (lock
     ? getUserDrip(geyser, lock, additionalStakes, parseInt(scalingTime, 10), signerOrProvider)
@@ -221,8 +221,7 @@ export const getUserAPY = async (
 
   const inflow = (parseFloat(stakedAmount) / 10 ** stakingTokenDecimals) * stakingTokenPrice
   const outflow = (Math.round(drip) / 10 ** rewardTokenDecimals) * rewardTokenPrice
-  const periods = YEAR_IN_SEC / calcPeriod
-  return calculateAPY(inflow, outflow * 1e9, periods)
+  return calculateAPY(inflow, outflow * 1e9, calcPeriod)
 }
 
 /**
@@ -264,9 +263,8 @@ const getPoolAPY = async (
       // console.log('stake drip after period:', stakeDripAfterPeriod)
 
       const outflow = parseFloat(formatUnits(Math.round(stakeDripAfterPeriod), rewardTokenDecimals)) * rewardTokenPrice
-      const periods = YEAR_IN_SEC / calcPeriod
 
-      return calculateAPY(inflow, outflow * 1e9, periods)
+      return calculateAPY(inflow, outflow * 1e9, calcPeriod)
     },
     `${toChecksumAddress(geyser.id)}|poolAPY`,
     GEYSER_STATS_CACHE_TIME_MS,
