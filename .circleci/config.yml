@@ -16,13 +16,13 @@ jobs:
           command: sudo ./aws/install
       - run:
           name: install yarn dependencies
-          command: yarn
+          command: cd frontend && yarn
       - run:
           name: production build
-          command: NODE_ENV=production yarn build
+          command: cd frontend && NODE_ENV=production SKIP_PREFLIGHT_CHECK=true ESLINT_NO_DEV_ERRORS=true yarn build
       - run:
           name: s3 sync
-          command: aws s3 sync ./build/ s3://voltswap-farm-main/ --delete --acl public-read
+          command: aws s3 sync ./frontend/build/ s3://voltswap-farm-main/ --delete --acl public-read
       - run:
           name: invalidation
           command: aws cloudfront create-invalidation --distribution-id E206N8M1OFV7ZA --paths "/*"
