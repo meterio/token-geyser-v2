@@ -21,6 +21,8 @@ jobs:
       - run:
           name: production build
           command: cd frontend && CI=false NODE_ENV=production SKIP_PREFLIGHT_CHECK=true ESLINT_NO_DEV_ERRORS=true yarn build
+          environment:
+            NODE_OPTIONS: --max_old_space_size=16384
       - run:
           name: s3 sync
           command: aws s3 sync ./frontend/build/ s3://farm.voltswap.finance/ --delete --acl public-read
