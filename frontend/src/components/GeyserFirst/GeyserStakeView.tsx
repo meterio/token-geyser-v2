@@ -170,7 +170,7 @@ export const GeyserStakeView = () => {
       )}
       {!address && <ConnectWalletWarning onClick={selectWallet} />}
       {
-        isMobile ?
+        isMobile ? 
         <GeyserInteractionButton
         disabled={ parsedUserInput.isZero() }
         onClick={handleGeyserInteraction}
