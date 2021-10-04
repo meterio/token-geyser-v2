@@ -6,7 +6,7 @@ import styled from 'styled-components/macro'
 import { useContext, useEffect, useState } from 'react'
 import { GeyserContext } from 'context/GeyserContext'
 import { VaultContext } from 'context/VaultContext'
-import { isBrowser, isAndroid, isIOS } from 'react-device-detect'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { WalletContext } from 'context/WalletContext'
 import { StatsContext } from 'context/StatsContext'
 import Web3Context from 'context/Web3Context'
@@ -170,7 +170,7 @@ export const GeyserStakeView = () => {
       )}
       {!address && <ConnectWalletWarning onClick={selectWallet} />}
       {
-        isAndroid || isIOS ?
+        isMobile ? 
         <GeyserInteractionButton
         disabled={ parsedUserInput.isZero() }
         onClick={handleGeyserInteraction}

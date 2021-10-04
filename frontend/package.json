@@ -52,6 +52,11 @@
       "last 1 safari version"
     ]
   },
+  "fork-ts-checker": {
+    "typescript": {
+      "memoryLimit": 6144 
+    }
+   },
   "babelMacros": {
     "twin": {
       "config": "./tailwind.config.js",
