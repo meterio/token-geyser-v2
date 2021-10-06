@@ -23,6 +23,7 @@ import { UnstakeSummary } from './UnstakeSummary'
 import { UnstakeConfirmModal } from './UnstakeConfirmModal'
 import { UnstakeTxModal } from './UnstakeTxModal'
 import { WithdrawTxMessage } from './WithdrawTxMessage'
+ import { getVaultTokenBalanceVariant} from '../../utils/stats'
 import {
   WITHDRAW_UNLOCKED_STAKING_TOKENS_WHEN_UNSTAKING,
   WITHDRAW_UNLOCKED_REWARD_TOKENS_WHEN_UNSTAKING,
@@ -38,20 +39,22 @@ export const GeyserStakeView = () => {
   } = useContext(GeyserContext)
   const { decimals: stakingTokenDecimals, symbol: stakingTokenSymbol, address: stakingTokenAddress } = stakingTokenInfo
   const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol, address: rewardTokenAddress } = rewardTokenInfo
-  const { signer } = useContext(Web3Context)
-  const { selectedVault, currentLock, withdrawFromVault, withdrawRewardsFromVault, withdrawUnlockedFromVault } =
+  const { signer, defaultProvider } = useContext(Web3Context)
+  const { selectedVault, withdrawFromVault, withdrawRewardsFromVault, withdrawUnlockedFromVault } =
     useContext(VaultContext)
+
+    
   const { walletAmount, refreshWalletAmount } = useContext(WalletContext)
   const {
     refreshVaultStats,
     vaultStats: { currentStakable },
   } = useContext(StatsContext)
   const { selectWallet, address } = useContext(Web3Context)
-  const currentStakeAmount = BigNumber.from(currentLock ? currentLock.amount : '0')
+
   const [unstakeConfirmModalOpen, setUnstakeConfirmModalOpen] = useState<boolean>(false)
   const [actualRewardsFromUnstake, setActualRewardsFromUnstake] = useState<BigNumber>(BigNumber.from('0'))
   const [actualStakingTokensFromUnstake, setActualStakingTokensFromUnstake] = useState<BigNumber>(BigNumber.from('0'))
-
+  const [currentStakeAmount, setCurrentStakeAmount] = useState(0)
   const [txModalOpen, setTxModalOpen] = useState<boolean>(false)
 
   const refreshInputAmount = () => {
@@ -61,6 +64,15 @@ export const GeyserStakeView = () => {
 
   useEffect(() => {
     refreshInputAmount()
+
+    async function getBalanceFromVault(){
+      if(selectedVault && address){
+      const vaultBalance = await getVaultTokenBalanceVariant(stakingTokenInfo, selectedVault.id, signer||defaultProvider)
+      
+      setCurrentStakeAmount(vaultBalance.balance)
+      }
+    }
+    getBalanceFromVault()
   }, [isStakingAction])
 
   const handleGeyserInteraction = () => {
@@ -150,7 +162,7 @@ export const GeyserStakeView = () => {
     <GeyserStakeViewContainer>
       <UserBalance
         parsedAmount={parsedUserInput}
-        currentAmount={isStakingAction ? stakableAmount : currentStakeAmount}
+        currentAmount={isStakingAction ? stakableAmount : BigNumber.from(currentStakeAmount)}
         decimals={stakingTokenDecimals}
         symbol={stakingTokenSymbol}
         isStakingAction={isStakingAction}
@@ -160,7 +172,7 @@ export const GeyserStakeView = () => {
          value={userInput}
          onChange={handleOnChange}
          precision={stakingTokenDecimals}
-         maxValue={isStakingAction ? stakableAmount : currentStakeAmount}
+         maxValue={isStakingAction ? stakableAmount : BigNumber.from(currentStakeAmount)}
          skipMaxEnforcement={isStakingAction}
       />
       {isStakingAction ? (
