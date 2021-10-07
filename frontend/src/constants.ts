@@ -67,7 +67,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://graph.voltswap.finance/subgraphs/name/meter/geyser-v2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `https://newgraph.voltswap.finance/subgraphs/name/meter/geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823
