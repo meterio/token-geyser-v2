@@ -56,6 +56,7 @@ export const VaultContextProvider: React.FC = ({ children }) => {
     : null
 
   useEffect(() => {
+    
     if (address) getVaults({ variables: { id: address.toLowerCase() } })
   }, [address, getVaults])
 
@@ -78,6 +79,7 @@ export const VaultContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (selectedVault && selectedGeyser) {
+     
       const { stakingToken } = selectedGeyser
       const lockId = `${selectedVault.id}-${selectedGeyser.id}-${stakingToken}`
       setCurrentLock(selectedVault.locks.find((lock) => lock.id === lockId) || null)
