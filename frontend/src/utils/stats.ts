@@ -345,27 +345,6 @@ export const getUserStats = async (
 }
 
 
-export const getVaultTokenBalanceVariant = async (
-  tokenInfo: TokenInfo,
-  vaultAddress: string,
-  signerOrProvider: SignerOrProvider,
-): Promise<any> => {
-  const tokenAddress = toChecksumAddress(tokenInfo.address)
-  const parsedBalance = await ERC20Balance(tokenAddress, vaultAddress, signerOrProvider)
-  const lockedBalance = await getBalanceLocked(vaultAddress, tokenAddress, signerOrProvider)
-  const parsedUnlockedBalance = parsedBalance.sub(lockedBalance)
-  const balance =parsedBalance
-  const unlockedBalance = parseFloat(formatUnits(parsedUnlockedBalance, tokenInfo.decimals))
-
-  return {
-    ...tokenInfo,
-    address: tokenAddress,
-    parsedBalance,
-    balance,
-    unlockedBalance,
-    parsedUnlockedBalance,
-  }
-}
 export const getVaultTokenBalance = async (
   tokenInfo: TokenInfo,
   vaultAddress: string,
