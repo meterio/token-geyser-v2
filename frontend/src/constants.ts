@@ -49,6 +49,7 @@ export enum StakingToken {
   MOCK,
 
   // for mainnet
+  VOLT,
   UNISWAP_V2,
   SUSHISWAP,
   MOONISWAP_V1,

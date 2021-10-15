@@ -25,8 +25,10 @@ export const getStakingTokenInfo = async (
   token: StakingToken,
   signerOrProvider: SignerOrProvider,
 ): Promise<StakingTokenInfo> => {
-//  console.log('GET STAKING TOKEN INFO: ', tokenAddress, token)
+  //  console.log('GET STAKING TOKEN INFO: ', tokenAddress, token)
   switch (token) {
+    case StakingToken.VOLT:
+      return getVOLTToken(tokenAddress, signerOrProvider)
     case StakingToken.MOCK:
       return getUniswapV2(tokenAddress, signerOrProvider)
     case StakingToken.UNISWAP_V2:
@@ -257,3 +259,17 @@ const getBalancerSmartPoolV1 = async (
 //     composition: [],
 //   }
 // }
+const getVOLTToken = async (tokenAddress: string, signerOrProvider: SignerOrProvider): Promise<StakingTokenInfo> => {
+  const price = await estimateVoltPrice(signerOrProvider)
+
+  return {
+    address: toChecksumAddress(tokenAddress),
+    name: `VOLT Token`,
+    symbol: `VOLT`,
+    decimals: 18,
+    price,
+    totalSupply: 100000, // TODO: here it's a fake number, only used for AMPL
+    marketCap: 100000 * price, // TODO: herer it's a fake number only used for AMPL
+    composition: [],
+  }
+}

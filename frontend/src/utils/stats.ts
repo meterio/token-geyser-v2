@@ -251,9 +251,10 @@ const getPoolAPY = async (
       const inflow = 20000.0 // avg_deposit: 20,000 USD
       const inflowDecimals = BigNumber.from((10 ** stakingTokenDecimals).toString())
       const inflowFixedPt = BigNumber.from(inflow).mul(inflowDecimals)
-      const stakeTokenPriceBigNum = BigNumber.from(Math.round(stakingTokenPrice))
+      const stakeTokenPriceBigNum = BigNumber.from(Math.round(stakingTokenPrice * 1000))
       // console.log('stake token price: ', stakeTokenPriceBigNum.toString())
-      const stake = inflowFixedPt.div(stakeTokenPriceBigNum)
+      // fix for price amount less than 1
+      const stake = inflowFixedPt.mul(1000).div(stakeTokenPriceBigNum)
       // console.log('stake:', stake.toString())
 
       const calcPeriod = getCalcPeriod(geyser)
@@ -344,7 +345,6 @@ export const getUserStats = async (
   }
 }
 
-
 export const getVaultTokenBalance = async (
   tokenInfo: TokenInfo,
   vaultAddress: string,
@@ -383,7 +383,6 @@ export const getVaultStats = async (
   const stakingTokenBalanceInfo = await getVaultTokenBalance(stakingTokenInfo, vaultAddress, signerOrProvider)
   const rewardTokenBalanceInfo = await getVaultTokenBalance(rewardTokenInfo, vaultAddress, signerOrProvider)
 
- 
   const additionalTokenBalances: VaultTokenBalance[] = (
     await Promise.allSettled(
       allTokensInfos
