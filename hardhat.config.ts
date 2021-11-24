@@ -175,7 +175,7 @@ task('create-vault', 'deploy an instance of UniversalVault')
     await createInstance('UniversalVault', vaultFactory, ethers.getContractAt, signer)
   })
 
-task('create-geyser', 'deploy an instance of Geyser')
+  task('create-geyser', 'deploy an instance of Geyser')
   .addParam('stakingToken', 'the staking token')
   .addParam('rewardToken', 'the reward token')
   .addParam('floor', 'the floor of reward scaling')
@@ -206,7 +206,7 @@ task('create-geyser', 'deploy an instance of Geyser')
       console.log('  reward token', rewardToken)
       console.log('  reward floor', floor)
       console.log('  reward ceiling', ceiling)
-      console.log('  reward time', time)
+      console.log('  reward time', stakingToken)
 
       console.log('Register Geyser Instance')
 
@@ -214,23 +214,17 @@ task('create-geyser', 'deploy an instance of Geyser')
 
       await geyserRegistry.register(geyser.address)
 
-      const t = await geyser.initialize(
+      await geyser.initialize(
         signer.address,
         RewardPoolFactory.address,
         PowerSwitchFactory.address,
         stakingToken,
         rewardToken,
         [floor, ceiling, time],
-        {
-          gasLimit: '4700000',
-        },
       )
-      console.log(t)
       console.log('Register Vault Factory')
 
-      await geyser.registerVaultFactory(VaultFactory.address, {
-        gasLimit: '4700000',
-      })
+      await geyser.registerVaultFactory(VaultFactory.address)
     },
   )
 
@@ -262,7 +256,7 @@ task('fund-geyser', 'fund an instance of Geyser')
     console.log('decimals:', decimalNum)
     console.log('amount in wei:', amt.toString())
     console.log('duration:', durationNum, 'seconds')
-    await rewardToken.approve(geyser, amt)
+    await rewardToken.approve(geyser, amt.mul(9))
     await geyserContract.connect(signer).fundGeyser(amt, duration)
   })
 
@@ -296,34 +290,13 @@ export default {
   networks: {
     hardhat: {
       allowUnlimitedContractSize: true,
-      chainId: 1337,
+      chainId: 365,
     },
-    goerli: {
-      url: 'https://goerli.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: {
-        mnemonic: process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
-      },
-    },
-    kovan: {
-      url: 'https://kovan.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: {
-        mnemonic: process.env.DEV_MNEMONIC || Wallet.createRandom().mnemonic.phrase,
-      },
-    },
-    mainnet: {
-      url: 'https://mainnet.infura.io/v3/' + process.env.INFURA_ID,
-      accounts: {
-        mnemonic: process.env.PROD_MNEMONIC,
-      },
-    },
-    metertest: {
-      url: 'https://rpctest.meter.io',
-      accounts: [process.env.TESTNET_CONTRACT_ADMIN_PRIVKEY],
-    },
-    metermain: {
-      url: 'https://rpc.meter.io',
-      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
-    },
+   
+    thetatest:{
+      url:'http://54.177.202.208:18888/rpc',
+      accounts:['c3d502d2ecb54e224273488896cc284df0dc94a42ab85a50a9b049a2956ed6fe']
+    }
   },
   solidity: {
     compilers: [
@@ -349,7 +322,7 @@ export default {
   },
   gasReporter: {
     currency: 'USD',
-    enabled: process.env.REPORT_GAS ? true : false,
+    enabled:  false,
     excludeContracts: ['Mock/'],
   },
 } as HardhatUserConfig

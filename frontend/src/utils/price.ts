@@ -43,6 +43,8 @@ const symbolMap: { [key: string]: Coin } = {
   VOLT: { id: 'meter', price: 50 },
   AMPL: { id: 'ampleforth', price: 1 },
 
+  WTFUEL:{id:'tfuel', price:0.3204},
+
   // extended
   CRV: { id: 'curve-dao-token', price: 1 },
   YFI: { id: 'yearn-finance', price: 1 },
@@ -53,6 +55,10 @@ const symbolMap: { [key: string]: Coin } = {
 
 export const getCurrentPrice = async (symbol: string) => {
   const cacheKey = `geyser|${symbol}|spot`
+
+  if(symbol === 'WTFUEL'){
+    return 0.3204
+  }
 
   const coin = symbolMap[symbol]
   if (!coin) {

@@ -20,19 +20,12 @@ export const GeysersList = () => {
   const inactiveGeysers = geysers
     .filter(({ status }) => status === GeyserStatus.SHUTDOWN)
     .map(({ id }) => getGeyserName(id))
-    const testGeysers = geysers
-    .filter(({ status, rewardToken }) => status === GeyserStatus.SHUTDOWN || rewardToken === "0xcdd298d54bac61e4d2479f774732b0fef1ccb808")
-    .map(({ id }) => getGeyserName(id))
+   
 
     return [
       {
         group: 'Active Farms',
         options: activeGeysers,
-      },
-   
-      {
-        group: 'Test Farms',
-        options: testGeysers,
       },
       {
         group: 'Inactive Farms',

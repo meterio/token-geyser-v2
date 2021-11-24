@@ -8,7 +8,7 @@ import { INFURA_PROJECT_ID } from '../constants'
 const INFURA_ENDPOINT = `https://mainnet.infura.io/v3/${INFURA_PROJECT_ID}`
 
 const SUPPORTED_WALLETS = [
-  { walletName: 'metamask', preferred: true, rpcUrl: "https://rpc.meter.io" },
+  { walletName: 'metamask', preferred: true, rpcUrl: " https://eth-rpc-api-old.thetatoken.org/rpc" },
   {
     walletName: 'walletConnect',
     preferred: true,
@@ -48,7 +48,7 @@ interface Subscriptions {
 }
 
 const initOnboard = (subscriptions: Subscriptions): API => {
-  const network ={ networkId: 82, networkName: 'meter mainnet' }  // metertest
+  const network ={ networkId: 361, networkName: 'theta mainnet' }  // metertest
 
   return Onboard({
     ...network,
@@ -72,7 +72,7 @@ const Web3Provider: React.FC = ({ children }) => {
   const updateWallet = useCallback((newWallet: Wallet) => {
     setWallet(newWallet)
     if (newWallet && newWallet.name) localStorage.setItem('selectedWallet', newWallet.name)
-    const network =  { name: 'meter mainnet', chainId: 82 } 
+    const network =  { name: 'theta mainnet', chainId: 361 } 
     const ethersProvider = new Provider(newWallet.provider, network)
     const rpcSigner = ethersProvider.getSigner()
     setSigner(rpcSigner)

@@ -1,6 +1,6 @@
 {
   "PowerSwitchFactory": {
-    "address": "0x0E2D9A0668C41E7266Ea9fe2Bf6840aA482452D8",
+    "address": "0xE8161C4Aa08C98B08cfc7D99d2B001598dAa010a",
     "abi": [
       "event InstanceAdded(address instance)",
       "event InstanceRemoved(address instance)",
@@ -12,7 +12,7 @@
     ]
   },
   "RewardPoolFactory": {
-    "address": "0x7aF6096Ae89a75439554cC4fcDAEEa9770d05Ef3",
+    "address": "0x04907C9fD0728C81C6f05ac2B2671F302153CF65",
     "abi": [
       "event InstanceAdded(address instance)",
       "event InstanceRemoved(address instance)",
@@ -24,7 +24,7 @@
     ]
   },
   "VaultTemplate": {
-    "address": "0x6BAaDA030fD79993d0be29D38298B3c4Dea9afd6",
+    "address": "0x574fAe9d84b987079a6b55691c390A13732E806D",
     "abi": [
       "event Locked(address delegate, address token, uint256 amount)",
       "event RageQuit(address delegate, address token, bool notified, string reason)",
@@ -53,7 +53,7 @@
     ]
   },
   "VaultFactory": {
-    "address": "0x7A99721846601C43e9fB778B5362D5480474ef56",
+    "address": "0xc3a1cF832A77fcAe51cEa2E1B03EF85492F531Ac",
     "abi": [
       "constructor(address template)",
       "event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)",
@@ -92,7 +92,7 @@
     ]
   },
   "GeyserRegistry": {
-    "address": "0xfB8113724642806728e4A1fc5DEca7DD1789232d",
+    "address": "0xEB5D1AF3957ECE90bD9345DC746a2DEB03108c17",
     "abi": [
       "event InstanceAdded(address instance)",
       "event InstanceRemoved(address instance)",
@@ -164,7 +164,7 @@
     ]
   },
   "RouterV1": {
-    "address": "0x4c7E4BA05d1818D2386991215d86659EA97210D1",
+    "address": "0xE2d391fA71ee2D201a055177f2470D0eE05eC6a0",
     "abi": [
       "function create2Vault(address vaultFactory, bytes32 salt) returns (address vault)",
       "function create2VaultAndStake(address geyser, address vaultFactory, address vaultOwner, uint256 amount, bytes32 salt, bytes permission) returns (address vault)",

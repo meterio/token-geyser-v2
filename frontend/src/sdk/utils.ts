@@ -1,14 +1,20 @@
 import { TypedDataField } from '@ethersproject/abstract-signer'
 import { BigNumberish, Contract, providers, Signer, Wallet } from 'ethers'
 import { LogDescription, splitSignature } from 'ethers/lib/utils'
-import mainnetConfig from './deployments/mainnet/factories-latest.json'
-import goerliConfig from './deployments/goerli/factories-latest.json'
-import localhostConfig from './deployments/localhost/factories-latest.json'
+
+
+import meterConfig from './deployments/meter/factories-latest.json'
+import thetaConfig from './deployments/theta/factories-latest.json'
+
+
 import { TransactionReceipt } from '@ethersproject/providers'
 
 export const loadNetworkConfig = async (signerOrProvider: Signer | providers.Provider) => {
 
-      return localhostConfig
+    return thetaConfig
+  
+
+
   
 }
 

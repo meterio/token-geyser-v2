@@ -1,7 +1,7 @@
 import { Contract, ethers } from 'ethers'
 import {  UFRG_INIT_BLOCK } from '../constants'
 
-export const getDefaultProvider = () => new ethers.providers.JsonRpcProvider('https://rpc.meter.io', { name: 'meter mainnet', chainId: 82 })
+export const getDefaultProvider = () => new ethers.providers.JsonRpcProvider('https://eth-rpc-api.thetatoken.org/rpc', { name: 'theta mainnet', chainId: 361 })
   
 
  

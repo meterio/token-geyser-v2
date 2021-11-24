@@ -6,6 +6,7 @@
     "@apollo/client": "^3.3.16",
     "@craco/craco": "^6.1.2",
     "@headlessui/react": "^1.2.0",
+    "@metamask/detect-provider": "^1.2.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -54,9 +55,9 @@
   },
   "fork-ts-checker": {
     "typescript": {
-      "memoryLimit": 6144 
+      "memoryLimit": 6144
     }
-   },
+  },
   "babelMacros": {
     "twin": {
       "config": "./tailwind.config.js",

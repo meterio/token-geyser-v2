@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const EtherscanLink: React.FC<Props> = ({ txHash }) => (
-  <a rel="noreferrer" className="text-link" href={`${EXTERNAL_LINKS.etherscan}/${txHash}`} target="_blank">Meterscan</a>
+  <a rel="noreferrer" className="text-link" href={`${EXTERNAL_LINKS.etherscan}/${txHash}`} target="_blank">Theta scan</a>
 )

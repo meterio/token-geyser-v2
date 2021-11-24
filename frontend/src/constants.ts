@@ -40,7 +40,7 @@ export enum TxState {
 }
 
 export const EXTERNAL_LINKS: Record<string, string> = {
-  etherscan: 'https://scan.meter.io/tx',
+  etherscan: 'https://explorer.thetatoken.org/txs',
 }
 
 // Staking tokens
@@ -68,7 +68,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://newgraph.voltswap.finance/subgraphs/name/meter/geyser-v2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `http://13.229.153.186:8000/subgraphs/name/theta/geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823

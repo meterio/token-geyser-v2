@@ -31,7 +31,7 @@ export const VaultContext = createContext<{
 })
 
 export const VaultContextProvider: React.FC = ({ children }) => {
-  const { address, signer, ready } = useContext(Web3Context)
+  const { address, signer } = useContext(Web3Context)
   const { selectedGeyserInfo: { geyser: selectedGeyser } } = useContext(GeyserContext)
   const [getVaults, { loading: vaultLoading, data: vaultData }] = useLazyQuery(GET_USER_VAULTS, {
     pollInterval: POLL_INTERVAL,
@@ -86,7 +86,7 @@ export const VaultContextProvider: React.FC = ({ children }) => {
     }
   }, [selectedVault, selectedGeyser])
 
-  if (vaultLoading || (!address && ready)) return <Centered>Loading...</Centered>
+  if (vaultLoading ) return <Centered>Loading...</Centered>
 
   return (
     <VaultContext.Provider
