@@ -68,7 +68,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://geyser-graph-on-theta.voltswap.finance/subgraphs/name/theta/geyser-v2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `http://13.214.99.74:8000/subgraphs/name/theta/geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823
