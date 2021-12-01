@@ -22,19 +22,19 @@ const mockGeyserConfigs: GeyserConfig[] = [
     rewardToken: RewardToken.MOCK,
   },
   {
-    name: 'BUSD.bsc-USDC.eth',
+    name: 'BUSD.bsc-USDC',
     address: '0x02F7214305f8e4419d6B2Fe10A56E9566e6c388E',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
   },
   {
-    name: 'TFUEL-WETH.eth',
+    name: 'TFUEL-WETH',
     address: '0x139B2305dA9D000dde725203857d9CA90d58DB3b',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
   },
   {
-    name: 'TFUEL-USDC.eth',
+    name: 'TFUEL-USDC',
     address: '0x5EFE36Df7235E9BB49a52D147fdaFAe6298520A0',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
