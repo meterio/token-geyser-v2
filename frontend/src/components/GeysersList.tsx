@@ -15,10 +15,10 @@ export const GeysersList = () => {
     // NOTE: active inactive logic is wrong
     // FIX ME!
     const activeGeysers = geysers
-    .filter(({ status, rewardToken }) => status !== GeyserStatus.SHUTDOWN && rewardToken !== "0xcdd298d54bac61e4d2479f774732b0fef1ccb808" )
+    .filter(({ status, id }) => status !== GeyserStatus.SHUTDOWN &&  id !== "0xbd515e41df155112cc883f8981cb763a286261be" )
     .map(({ id }) => getGeyserName(id))
-  const inactiveGeysers = geysers
-    .filter(({ status }) => status === GeyserStatus.SHUTDOWN)
+  const testGeysers = geysers
+    .filter(({ status, id }) => status === GeyserStatus.SHUTDOWN || id === "0xbd515e41df155112cc883f8981cb763a286261be")
     .map(({ id }) => getGeyserName(id))
    
 
@@ -28,8 +28,8 @@ export const GeysersList = () => {
         options: activeGeysers,
       },
       {
-        group: 'Inactive Farms',
-        options: inactiveGeysers,
+        group: 'Test Farms',
+        options: testGeysers,
       },
     ]
   })()
