@@ -175,7 +175,7 @@ task('create-vault', 'deploy an instance of UniversalVault')
     await createInstance('UniversalVault', vaultFactory, ethers.getContractAt, signer)
   })
 
-  task('create-geyser', 'deploy an instance of Geyser')
+task('create-geyser', 'deploy an instance of Geyser')
   .addParam('stakingToken', 'the staking token')
   .addParam('rewardToken', 'the reward token')
   .addParam('floor', 'the floor of reward scaling')
@@ -292,11 +292,14 @@ export default {
       allowUnlimitedContractSize: true,
       chainId: 365,
     },
-   
-    thetatest:{
-      url:'http://54.177.202.208:18888/rpc',
-      accounts:['c3d502d2ecb54e224273488896cc284df0dc94a42ab85a50a9b049a2956ed6fe']
-    }
+    thetatest: {
+      url: 'http://54.177.202.208:18888/rpc', //'https://eth-rpc-api-testnet.thetatoken.org/rpc',
+      accounts: [process.env.TESTNET_CONTRACT_ADMIN_PRIVKEY],
+    },
+    thetamain: {
+      url: 'http://54.169.171.97:18888/rpc',
+      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+    },
   },
   solidity: {
     compilers: [
@@ -322,7 +325,7 @@ export default {
   },
   gasReporter: {
     currency: 'USD',
-    enabled:  false,
+    enabled: false,
     excludeContracts: ['Mock/'],
   },
 } as HardhatUserConfig
