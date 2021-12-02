@@ -9,6 +9,12 @@ import { GeyserConfig } from '../types'
 
 const mockGeyserConfigs: GeyserConfig[] = [
   {
+    name:'VOLT',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+    address:'0xCd872033f3Ed9227BC78F47fB0E0DFf7dbDBE5B4'
+  },
+  {
     name: 'TFUEL-VOLT (Test)',
     address: '0xbd515e41df155112cc883f8981cb763a286261be',
     stakingToken: StakingToken.MOCK,
