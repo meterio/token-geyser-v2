@@ -12,7 +12,7 @@ const mockGeyserConfigs: GeyserConfig[] = [
     name:'VOLT',
     stakingToken: StakingToken.VOLT,
     rewardToken: RewardToken.MOCK,
-    address:'0xCd872033f3Ed9227BC78F47fB0E0DFf7dbDBE5B4'
+    address:'0xcd872033f3ed9227bc78f47fb0e0dff7dbdbe5b4'
   },
   {
     name: 'TFUEL-VOLT (Test)',
