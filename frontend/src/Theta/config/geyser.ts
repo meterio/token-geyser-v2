@@ -10,6 +10,12 @@ import { GeyserConfig } from '../types'
 const mockGeyserConfigs: GeyserConfig[] = [
  
   {
+    name: 'TFUEL-VOLT',
+    address: '0xF0F5ef5aB3CBAf7A0cE4cecc1Ab0285123954f2E',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
     name: 'TFUEL-VOLT (Test)',
     address: '0xbd515e41df155112cc883f8981cb763a286261be',
     stakingToken: StakingToken.MOCK,
@@ -36,9 +42,9 @@ const mockGeyserConfigs: GeyserConfig[] = [
   },
   {
     name:'VOLT',
-    stakingToken: StakingToken.MOCK,
+    stakingToken: StakingToken.VOLT,
     rewardToken: RewardToken.MOCK,
-    address:'0xCd872033f3Ed9227BC78F47fB0E0DFf7dbDBE5B4'
+    address:'0xcd872033f3ed9227bc78f47fb0e0dff7dbdbe5b4'
   },
   {
     name: 'TFUEL-USDC',
@@ -52,12 +58,7 @@ const mockGeyserConfigs: GeyserConfig[] = [
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
   },
-  {
-    name: 'TFUEL-VOLT',
-    address: '0xF0F5ef5aB3CBAf7A0cE4cecc1Ab0285123954f2E',
-    stakingToken: StakingToken.MOCK,
-    rewardToken: RewardToken.MOCK,
-  },
+  
   {
     name: 'BUSD.bsc-VOLT',
     address: '0x0E346abF5A93fF41E9368009eE0A0a6d54fB47fa',
