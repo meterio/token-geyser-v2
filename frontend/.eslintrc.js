@@ -19,7 +19,9 @@ module.exports = {
   },
   ignorePatterns: ['src/sdk'],
   plugins: ['react', '@typescript-eslint'],
+  
   rules: {
+    
     '@typescript-eslint/no-use-before-define': 'off', // define helper components at bottom of file
     '@typescript-eslint/no-unused-expressions': ['warn', { allowShortCircuit: true }], // allow the f && f() pattern,
     'react/react-in-jsx-scope': 'off',

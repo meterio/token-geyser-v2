@@ -1,17 +1,17 @@
 import { ApolloProvider } from '@apollo/client'
-import { AppContextProvider } from 'context/AppContext'
-import { Body } from 'components/Body'
-import { Header } from 'components/Header'
-import { VaultContextProvider } from 'context/VaultContext'
-import { GeyserContextProvider } from 'context/GeyserContext'
-import { Web3Provider } from 'context/Web3Context'
-import { client } from 'queries/client'
+import { AppContextProvider } from './context/AppContext'
+import { Body } from './components/Body'
+import { Header } from './components/Header'
+import { VaultContextProvider } from './context/VaultContext'
+import { GeyserContextProvider } from './context/GeyserContext'
+import { Web3Provider } from './context/Web3Context'
+import { client } from './queries/client'
 
-import { WalletContextProvider } from 'context/WalletContext'
-import { StatsContextProvider } from 'context/StatsContext'
-import { DropdownsContainer } from 'components/DropdownsContainer'
+import { WalletContextProvider } from './context/WalletContext'
+import { StatsContextProvider } from './context/StatsContext'
+import { DropdownsContainer } from './components/DropdownsContainer'
 
-function App() {
+function ThetaFarm() {
 
   return (
     <ApolloProvider client={client}>
@@ -34,4 +34,4 @@ function App() {
   )
 }
 
-export default App
+export default ThetaFarm

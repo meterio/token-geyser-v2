@@ -1,20 +1,26 @@
 import { useContext, useEffect, useState } from 'react'
 import { BigNumber } from 'ethers'
+import { isBrowser, isMobile } from 'react-device-detect'
 import { formatUnits, parseUnits } from 'ethers/lib/utils'
 import { TransactionReceipt } from '@ethersproject/providers'
+
 import tw from 'twin.macro'
 import styled from 'styled-components/macro'
+import { TxStateMachine } from '../../hooks/useTxStateMachine'
 
-import { GeyserContext } from 'context/GeyserContext'
-import { VaultContext } from 'context/VaultContext'
-import { isBrowser, isMobile } from 'react-device-detect'
-import { WalletContext } from 'context/WalletContext'
-import { StatsContext } from 'context/StatsContext'
-import Web3Context from 'context/Web3Context'
-import { TxStateMachine } from 'hooks/useTxStateMachine'
-import { amountOrZero } from 'utils/amount'
-import { PositiveInput } from 'components/PositiveInput'
-import { SingleTxModal } from 'components/SingleTxModal'
+import { amountOrZero } from '../../utils/amount'
+import { PositiveInput } from '../PositiveInput'
+import { SingleTxModal } from '../SingleTxModal'
+
+import { GeyserContext } from '../../context/GeyserContext'
+import { VaultContext } from '../../context/VaultContext'
+
+import { WalletContext } from '../../context/WalletContext'
+import { StatsContext } from '../../context/StatsContext'
+import Web3Context from '../../context/Web3Context'
+
+
+
 import { GeyserInteractionButton } from './GeyserInteractionButton'
 import { UserBalance } from './UserBalance'
 import { EstimatedRewards } from './EstimatedRewards'

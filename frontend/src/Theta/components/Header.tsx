@@ -1,9 +1,11 @@
-import { AppContext } from 'context/AppContext'
 import { useContext } from 'react'
+
+
 import styled from 'styled-components/macro'
 import tw from 'twin.macro'
-import NetworkDropDown  from './DropdownSelect/networkDropDown'
+import { AppContext } from '../context/AppContext'
 import { Mode } from '../constants'
+import NetworkDropDown  from './DropdownSelect/networkDropDown'
 import { HeaderWalletButton } from './HeaderWalletButton'
 import { HeaderToggle } from './HeaderToggle'
 import voltswap_logo from '../assets/voltswap_logo.png'
@@ -14,7 +16,7 @@ export const Header = () => {
     <Container>
       <LeftContainer>
         <LogoSpan><img src={voltswap_logo} width="40px" alt="V"/></LogoSpan>
-        <NetworkDropDown/>
+        <NetworkDropDown />
       </LeftContainer>
       <MiddleContainer>
         <HeaderToggle enabled={mode === Mode.VAULTS} toggle={toggleMode} options={['Farm View', 'Vault View']} />

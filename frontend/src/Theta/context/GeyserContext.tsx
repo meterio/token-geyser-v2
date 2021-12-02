@@ -1,19 +1,20 @@
-import { useLazyQuery } from '@apollo/client'
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useLazyQuery } from '@apollo/client'
+
 import { toChecksumAddress } from 'web3-utils'
 import { TransactionResponse } from '@ethersproject/providers'
 import { BigNumber, Wallet } from 'ethers'
-import { Geyser, TokenInfo, GeyserConfig, Vault, GeyserInfo } from 'types'
-import { getTokenInfo } from 'utils/token'
+import { Geyser, TokenInfo, GeyserConfig, Vault, GeyserInfo } from '../types'
+import { getTokenInfo } from '../utils/token'
 
-import { defaultStakingTokenInfo, getStakingTokenInfo } from 'utils/stakingToken'
-import { approveCreateDepositStake, approveDepositStake, unstake } from 'sdk'
-import { GET_GEYSERS } from 'queries/geyser'
-import { Centered } from 'styling/styles'
-import { defaultRewardTokenInfo, getRewardTokenInfo } from 'utils/rewardToken'
-import { additionalTokens } from 'config/additionalTokens'
-import { geyserConfigs } from '../config/geyser'
+import { defaultStakingTokenInfo, getStakingTokenInfo } from '../utils/stakingToken'
+import { approveCreateDepositStake, approveDepositStake, unstake } from '../sdk'
+import { GET_GEYSERS } from '../queries/geyser'
+import { Centered } from '../styling/styles'
+import { defaultRewardTokenInfo, getRewardTokenInfo } from '../utils/rewardToken'
+import { additionalTokens } from '../config/additionalTokens'
 import Web3Context from './Web3Context'
+import { geyserConfigs } from '../config/geyser'
 import { POLL_INTERVAL } from '../constants'
 
 export const GeyserContext = createContext<{
@@ -55,6 +56,8 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
   const [getGeysers, { loading: geyserLoading, data: geyserData }] = useLazyQuery(GET_GEYSERS, {
     pollInterval: POLL_INTERVAL,
   })
+
+  
   const [geysers, setGeysers] = useState<Geyser[]>([])
   const [selectedGeyserInfo, setSelectedGeyserInfo] = useState<GeyserInfo>({
     geyser: null,
@@ -234,6 +237,7 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
   }, [geysers])
 
   if (geyserLoading) return <Centered>Loading...</Centered>
+
 
   return (
     <GeyserContext.Provider

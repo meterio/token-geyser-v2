@@ -38,11 +38,13 @@ const symbolMap: { [key: string]: Coin } = {
   BNB: { id: 'binancecoin', price: 400 },
   'BNB.bsc': { id: 'binancecoin', price: 400 },
   MOVR: {id: 'moonriver', price: 312.97},
+  WTFUEL: {id: 'tfuel', price: 0.3},
 
   // pending
   VOLT: { id: 'meter', price: 50 },
+  VOLT_AIR: { id: 'meter', price: 50 },
   AMPL: { id: 'ampleforth', price: 1 },
-  WTFUEL: {id: 'tfuel', price: 0.3},
+
   // extended
   CRV: { id: 'curve-dao-token', price: 1 },
   YFI: { id: 'yearn-finance', price: 1 },
@@ -53,10 +55,10 @@ const symbolMap: { [key: string]: Coin } = {
 
 export const getCurrentPrice = async (symbol: string) => {
   const cacheKey = `geyser|${symbol}|spot`
-
   if(symbol === 'WTFUEL'){
     return 0.3
   }
+
   const coin = symbolMap[symbol]
   if (!coin) {
     throw new Error(`Can't fetch price for ${symbol}`)
