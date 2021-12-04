@@ -82,7 +82,7 @@ export const GeyserStakeView = () => {
     }
   }
 
-  const onCloseTxModal = () => {
+  const onCloseTxModal = async () => {
     setTxModalOpen(false)
     refreshInputAmount()
     refreshWalletAmount()

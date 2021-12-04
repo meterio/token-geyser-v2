@@ -205,7 +205,7 @@ export const getUserAPY = async (
   const { decimals: rewardTokenDecimals, symbol: rewardTokenSymbol } = rewardTokenInfo
   let rewardTokenPrice = 0
   if (rewardTokenSymbol === 'VOLT' || rewardTokenSymbol === 'VOLT_AIR') {
-    rewardTokenPrice = await estimateVoltPrice(signerOrProvider)
+    rewardTokenPrice = await estimateVoltPrice()
   } else {
     rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
   }
@@ -241,7 +241,7 @@ const getPoolAPY = async (
       if (!rewardTokenSymbol) return 0
       let rewardTokenPrice = 0
       if (rewardTokenSymbol === 'VOLT' || rewardTokenSymbol === 'VOLT_AIR') {
-        rewardTokenPrice = await estimateVoltPrice(signerOrProvider)
+        rewardTokenPrice = await estimateVoltPrice()
       } else {
         rewardTokenPrice = await getCurrentPrice(rewardTokenSymbol)
       }
