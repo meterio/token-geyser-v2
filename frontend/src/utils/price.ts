@@ -30,7 +30,7 @@ const symbolMap: { [key: string]: Coin } = {
   USDT: { id: 'tether', price: 1 },
   'USDT.eth': { id: 'tether', price: 1 },
   MTRG: { id: 'meter', price: 3 },
-  TFUEL:{id:'theta-fuel', price:0.3204},
+  TFUEL: { id: 'theta-fuel', price: 0.3204 },
   MTR: { id: 'meter-stable', price: 2.5 },
   WETH: { id: 'ethereum', price: 3500 },
   'WETH.eth': { id: 'ethereum', price: 3500 },
@@ -38,13 +38,13 @@ const symbolMap: { [key: string]: Coin } = {
   'BUSD.bsc': { id: 'binance-usd', price: 1 },
   BNB: { id: 'binancecoin', price: 400 },
   'BNB.bsc': { id: 'binancecoin', price: 400 },
-  MOVR: {id: 'moonriver', price: 312.97},
+  MOVR: { id: 'moonriver', price: 312.97 },
 
   // pending
   VOLT: { id: 'meter', price: 50 },
   AMPL: { id: 'ampleforth', price: 1 },
 
-  WTFUEL:{id:'theta-fuel', price:0.3204},
+  WTFUEL: { id: 'theta-fuel', price: 0.3204 },
 
   // extended
   CRV: { id: 'curve-dao-token', price: 1 },
@@ -56,10 +56,6 @@ const symbolMap: { [key: string]: Coin } = {
 
 export const getCurrentPrice = async (symbol: string) => {
   const cacheKey = `geyser|${symbol}|spot`
-
-  if(symbol === 'WTFUEL'){
-    return 0.3204
-  }
 
   const coin = symbolMap[symbol]
   if (!coin) {
