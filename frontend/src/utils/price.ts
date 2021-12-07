@@ -30,6 +30,7 @@ const symbolMap: { [key: string]: Coin } = {
   USDT: { id: 'tether', price: 1 },
   'USDT.eth': { id: 'tether', price: 1 },
   MTRG: { id: 'meter', price: 3 },
+  TFUEL:{id:'theta-fuel', price:0.3204},
   MTR: { id: 'meter-stable', price: 2.5 },
   WETH: { id: 'ethereum', price: 3500 },
   'WETH.eth': { id: 'ethereum', price: 3500 },
@@ -43,7 +44,7 @@ const symbolMap: { [key: string]: Coin } = {
   VOLT: { id: 'meter', price: 50 },
   AMPL: { id: 'ampleforth', price: 1 },
 
-  WTFUEL:{id:'tfuel', price:0.3204},
+  WTFUEL:{id:'theta-fuel', price:0.3204},
 
   // extended
   CRV: { id: 'curve-dao-token', price: 1 },

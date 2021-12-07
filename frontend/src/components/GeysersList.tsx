@@ -17,14 +17,20 @@ export const GeysersList = () => {
     const activeGeysers = geysers
     .filter(({ status, id }) => status !== GeyserStatus.SHUTDOWN &&  id !== "0xbd515e41df155112cc883f8981cb763a286261be" )
     .map(({ id }) => getGeyserName(id))
- 
+  const testGeysers = geysers
+    .filter(({ status, id}) => status === GeyserStatus.SHUTDOWN || id === "0xbd515e41df155112cc883f8981cb763a286261be" )
+    .map(({ id }) => getGeyserName(id))
    
 
     return [
       {
         group: 'Active Farms',
         options: activeGeysers,
-      }
+      },
+      {
+        group: 'Test Farms',
+        options: testGeysers,
+      },
     ]
   })()
 
