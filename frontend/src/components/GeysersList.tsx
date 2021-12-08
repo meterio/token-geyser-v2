@@ -17,9 +17,7 @@ export const GeysersList = () => {
     const activeGeysers = geysers
     .filter(({ status, rewardToken }) => status !== GeyserStatus.SHUTDOWN && rewardToken !== "0xcdd298d54bac61e4d2479f774732b0fef1ccb808" )
     .map(({ id }) => getGeyserName(id))
-  const inactiveGeysers = geysers
-    .filter(({ status }) => status === GeyserStatus.SHUTDOWN)
-    .map(({ id }) => getGeyserName(id))
+ 
     const testGeysers = geysers
     .filter(({ status, rewardToken }) => status === GeyserStatus.SHUTDOWN || rewardToken === "0xcdd298d54bac61e4d2479f774732b0fef1ccb808")
     .map(({ id }) => getGeyserName(id))
@@ -33,11 +31,7 @@ export const GeysersList = () => {
       {
         group: 'Test Farms',
         options: testGeysers,
-      },
-      {
-        group: 'Inactive Farms',
-        options: inactiveGeysers,
-      },
+      }
     ]
   })()
 
