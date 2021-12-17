@@ -10,16 +10,24 @@ export const GeysersList = () => {
  
   const { geysers, selectGeyserByName, selectedGeyserInfo: { geyser: selectedGeyser }, getGeyserName } = useContext(GeyserContext)
   const handleGeyserChange = (geyserName: string) => selectGeyserByName(geyserName)
+  const inactiveGeysers = [
+    "0xc12e91e9822234a04506053a884ba1269dc97245",
+    "0x3375ebc33bbb038623829a2f75461d8ce752a9cb", 
+    "0xb3ec01640ecac33505797d2933589ae486c0ce9f", 
+    "0xacb3687d8c184d7c61223df304163fd493351796", 
+    "0xd8c4e1091397d108791aefad536e906cc6940acb", 
+    "0xfaf03cd86f88d9aa3254af4a057570c53cbdd576"
+  ]
 
   const optgroups = (() => {
     // NOTE: active inactive logic is wrong
     // FIX ME!
     const activeGeysers = geysers
-    .filter(({ status, rewardToken }) => status !== GeyserStatus.SHUTDOWN && rewardToken !== "0xcdd298d54bac61e4d2479f774732b0fef1ccb808" )
+    .filter(({ status, id }) => status !== GeyserStatus.SHUTDOWN && !inactiveGeysers.includes(id) )
     .map(({ id }) => getGeyserName(id))
  
-    const testGeysers = geysers
-    .filter(({ status, rewardToken }) => status === GeyserStatus.SHUTDOWN || rewardToken === "0xcdd298d54bac61e4d2479f774732b0fef1ccb808")
+    const retiredGeysers = geysers
+    .filter(({ status, id}) => status === GeyserStatus.SHUTDOWN || inactiveGeysers.includes(id))
     .map(({ id }) => getGeyserName(id))
 
     return [
@@ -29,8 +37,8 @@ export const GeysersList = () => {
       },
    
       {
-        group: 'Test Farms',
-        options: testGeysers,
+        group: 'Inactive Farms',
+        options: retiredGeysers
       }
     ]
   })()

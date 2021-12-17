@@ -26,6 +26,7 @@ export const Dropdown: React.FC<Props> = ({ options, optgroups, selectedOption, 
           value={option}
         >
           {({ selected }) => (
+          
             <>
               <span className={`${selected ? 'font-medium' : 'font-normal'} block truncate`}>{option}</span>
               {selected ? (
