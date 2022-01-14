@@ -28,7 +28,7 @@ export const getStakingTokenInfo = async (
   //  console.log('GET STAKING TOKEN INFO: ', tokenAddress, token)
   switch (token) {
     case StakingToken.VOLT:
-      return getVOLTToken(tokenAddress, signerOrProvider)
+      return getVOLTToken(tokenAddress)
     case StakingToken.MOCK:
       return getUniswapV2(tokenAddress, signerOrProvider)
     case StakingToken.UNISWAP_V2:
@@ -82,7 +82,7 @@ const getTokenCompositions = async (
   )
   const voltTokens = compositions.filter((c) => c.symbol === 'VOLT' || c.symbol === 'VOLT_AIR')
   if (voltTokens.length > 0) {
-    const voltPrice = await estimateVoltPrice(signerOrProvider)
+    const voltPrice = await estimateVoltPrice()
     voltTokens[0].value = voltPrice * voltTokens[0].balance
   }
   return compositions
@@ -259,8 +259,8 @@ const getBalancerSmartPoolV1 = async (
 //     composition: [],
 //   }
 // }
-const getVOLTToken = async (tokenAddress: string, signerOrProvider: SignerOrProvider): Promise<StakingTokenInfo> => {
-  const price = await estimateVoltPrice(signerOrProvider)
+const getVOLTToken = async (tokenAddress: string): Promise<StakingTokenInfo> => {
+  const price = await estimateVoltPrice()
 
   return {
     address: toChecksumAddress(tokenAddress),
