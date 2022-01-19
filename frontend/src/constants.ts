@@ -17,8 +17,6 @@ export const YEAR_IN_MS = YEAR_IN_SEC * MS_PER_SEC
 // polling interval for querying subgraph
 export const POLL_INTERVAL = 30 * MS_PER_SEC
 
-
-
 // pseudo permanent cache time
 export const CONST_CACHE_TIME_MS = YEAR_IN_MS
 
@@ -70,7 +68,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `http://54.254.214.134:8000/subgraphs/name/moonbeam/token-geyser-v2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `https://geyser-graph-on-moonbeam.voltswap.finance/subgraphs/name/moonbeam/token-geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823
