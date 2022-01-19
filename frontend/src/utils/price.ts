@@ -25,6 +25,7 @@ const symbolMap: { [key: string]: Coin } = {
   // voltswap supported
   WBTC: { id: 'wrapped-bitcoin', price: 50000 },
   'WBTC.eth': { id: 'wrapped-bitcoin', price: 50000 },
+  
   USDC: { id: 'usd-coin', price: 1 },
   'USDC.eth': { id: 'usd-coin', price: 1 },
   USDT: { id: 'tether', price: 1 },
@@ -42,6 +43,7 @@ const symbolMap: { [key: string]: Coin } = {
 
   // pending
   VOLT: { id: 'meter', price: 50 },
+  
   AMPL: { id: 'ampleforth', price: 1 },
 
   WTFUEL: { id: 'theta-fuel', price: 0.3204 },
@@ -52,16 +54,20 @@ const symbolMap: { [key: string]: Coin } = {
   LINK: { id: 'chainlink', price: 1 },
   BAL: { id: 'balancer', price: 1 },
   COMP: { id: 'compound-governance-token', price: 1 },
+
+  WGLMR: { id: 'moonbeam', price: 10 },
+  GLMR: { id: 'moonbeam', price: 10 }
 }
 
 export const getCurrentPrice = async (symbol: string) => {
+  
   const cacheKey = `geyser|${symbol}|spot`
 
   const coin = symbolMap[symbol]
   if (!coin) {
     throw new Error(`Can't fetch price for ${symbol}`)
   }
-
+  
   try {
     const query = coin.id
     return await ls.computeAndCache<number>(
@@ -75,9 +81,11 @@ export const getCurrentPrice = async (symbol: string) => {
           }),
           new Promise((_, reject) => setTimeout(() => reject(new Error('request timeout')), reqTimeoutSec * 1000)),
         ])
+        
 
         console.log('query:', query, ', data: ', p.data)
         const price = p.data[query].usd
+       
         return price as number
       },
       cacheKey,

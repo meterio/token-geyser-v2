@@ -248,10 +248,12 @@ const getPoolAPY = async (
       // console.log('reward token price: ', rewardTokenSymbol, rewardTokenPrice)
       // console.log(`Geyser: ${stakingTokenSymbol} - ${rewardTokenSymbol}`)
 
+      
       const inflow = 20000.0 // avg_deposit: 20,000 USD
       const inflowDecimals = BigNumber.from((10 ** stakingTokenDecimals).toString())
       const inflowFixedPt = BigNumber.from(inflow).mul(inflowDecimals)
       const stakeTokenPriceBigNum = BigNumber.from(Math.round(stakingTokenPrice * 1000))
+      
       // console.log('stake token price: ', stakeTokenPriceBigNum.toString())
       // fix for price amount less than 1
       const stake = inflowFixedPt.mul(1000).div(stakeTokenPriceBigNum)

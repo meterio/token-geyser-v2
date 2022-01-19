@@ -1,7 +1,7 @@
 import { Contract, ethers } from 'ethers'
 import {  UFRG_INIT_BLOCK } from '../constants'
 
-export const getDefaultProvider = () => new ethers.providers.JsonRpcProvider('https://eth-rpc-api.thetatoken.org/rpc', { name: 'theta mainnet', chainId: 361 })
+export const getDefaultProvider = () => new ethers.providers.JsonRpcProvider('https://moonbeam.api.onfinality.io/public', { name: 'Moonbeam ', chainId: 1284 })
   
 
  

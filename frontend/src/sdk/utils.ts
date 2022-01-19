@@ -3,15 +3,15 @@ import { BigNumberish, Contract, providers, Signer, Wallet } from 'ethers'
 import { LogDescription, splitSignature } from 'ethers/lib/utils'
 
 
-import meterConfig from './deployments/meter/factories-latest.json'
-import thetaConfig from './deployments/theta/factories-latest.json'
+
+import moonbeamConfig from './deployments/moonbeam/factories-latest.json'
 
 
 import { TransactionReceipt } from '@ethersproject/providers'
 
 export const loadNetworkConfig = async (signerOrProvider: Signer | providers.Provider) => {
 
-    return thetaConfig
+    return moonbeamConfig
   
 
 

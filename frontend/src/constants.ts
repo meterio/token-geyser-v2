@@ -42,7 +42,7 @@ export enum TxState {
 }
 
 export const EXTERNAL_LINKS: Record<string, string> = {
-  etherscan: 'https://explorer.thetatoken.org/txs',
+  etherscan: 'https://blockscout.moonbeam.network/txs',
 }
 
 // Staking tokens
@@ -70,7 +70,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://geyser-graph-on-theta.voltswap.finance/subgraphs/name/theta/geyser-v2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `http://54.254.214.134:8000/subgraphs/name/moonbeam/token-geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823

@@ -54,10 +54,13 @@ const getTokenComposition = async (
 ): Promise<TokenComposition> => {
   const { name, symbol, decimals } = await getTokenInfo(tokenAddress, signerOrProvider)
   const price = await getCurrentPrice(symbol)
+ 
   const balance = await ERC20Balance(tokenAddress, stakingTokenAddress, signerOrProvider)
 
-  const balanceNumber = parseInt(formatUnits(balance as BigNumber, decimals), 10)
-
+  // const balanceNumber = parseInt(formatUnits(balance as BigNumber, decimals))
+  const balanceNumber = Number(formatUnits(balance as BigNumber, decimals))
+  
+ 
   return {
     address: tokenAddress,
     name,
@@ -97,6 +100,7 @@ const uniswapV2Pair = async (
   symbolPrefix: string,
 ): Promise<StakingTokenInfo> => {
   const address = toChecksumAddress(tokenAddress)
+  
 
   const contract = new Contract(address, UNISWAP_V2_PAIR_ABI, signerOrProvider)
   const token0Address: string = await contract.token0()
@@ -105,9 +109,10 @@ const uniswapV2Pair = async (
   const decimals: number = await contract.decimals()
 
   const totalSupply: BigNumber = await contract.totalSupply()
+  
 
   const totalSupplyNumber = parseFloat(formatUnits(totalSupply, decimals))
-
+  
   const tokenCompositions = await getTokenCompositions(
     [token0Address, token1Address],
     address,
@@ -117,6 +122,7 @@ const uniswapV2Pair = async (
 
   const [token0Symbol, token1Symbol] = tokenCompositions.map((c) => c.symbol)
   const marketCap = getMarketCap(tokenCompositions)
+ 
   // const name = tokenCompositions.map((c) => c.symbol).join('-')
   // console.log(`Got Uniswap pair: ${name}`)
   // console.log('token composition: ', tokenCompositions)

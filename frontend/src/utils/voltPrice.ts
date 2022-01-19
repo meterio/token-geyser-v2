@@ -8,9 +8,9 @@ import { abi as IUniswapV2Pair } from '../sdk/IUniswapV2Pair.json'
 export const estimateVoltPrice = async () => {
  
 
-  const tfuelPrice = await getCurrentPrice('TFUEL')
+  const tfuelPrice = await getCurrentPrice('GLMR')
  
-  const tfuelVoltPair = new Contract('0x904a21bbce765c4771f7e139e19487b618c0da4d', IUniswapV2Pair, new ethers.providers.JsonRpcProvider('https://eth-rpc-api.thetatoken.org/rpc ', { name: 'theta mainnet', chainId: 361 }))
+  const tfuelVoltPair = new Contract('0x17507b7753b106369f6855c7a8cbddee19e8e464', IUniswapV2Pair, new ethers.providers.JsonRpcProvider('https://moonbeam.api.onfinality.io/public', { name: 'Moonbeam ', chainId: 1284 }))
   const { reserve0, reserve1 } = await tfuelVoltPair.getReserves()
  
   const price = new BigNumber(tfuelPrice).times(reserve0.toString()).div(reserve1.toString()).toNumber()
