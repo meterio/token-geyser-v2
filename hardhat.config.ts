@@ -240,6 +240,8 @@ task('fund-geyser', 'fund an instance of Geyser')
     const data = await geyserContract.getGeyserData()
     const { rewardToken: rewardTokenAddress } = data
     const rewardToken = await ethers.getContractAt('MockAmpl', rewardTokenAddress, signer)
+    console.log('duration', duration)
+    console.log('decimals', decimals)
     let decimalNum = Number(decimals)
     if (isNaN(decimalNum) || decimalNum <= 0) {
       console.log('invalid decimals, must be larger than 0')
@@ -256,7 +258,7 @@ task('fund-geyser', 'fund an instance of Geyser')
     console.log('decimals:', decimalNum)
     console.log('amount in wei:', amt.toString())
     console.log('duration:', durationNum, 'seconds')
-    await rewardToken.approve(geyser, amt.mul(9))
+    await rewardToken.approve(geyser, amt)
     await geyserContract.connect(signer).fundGeyser(amt, duration)
   })
 
@@ -298,6 +300,14 @@ export default {
     },
     thetamain: {
       url: 'http://54.169.171.97:18888/rpc',
+      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+    },
+    metertest: {
+      url: 'http://rpctest.meter.io',
+      accounts: [process.env.TESTNET_CONTRACT_ADMIN_PRIVKEY],
+    },
+    metermain: {
+      url: 'http://rpc.meter.io',
       accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
     },
   },
