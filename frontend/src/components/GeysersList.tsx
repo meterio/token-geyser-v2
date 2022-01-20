@@ -11,14 +11,17 @@ export const GeysersList = () => {
   const { geysers, selectGeyserByName, selectedGeyserInfo: { geyser: selectedGeyser }, getGeyserName } = useContext(GeyserContext)
   const handleGeyserChange = (geyserName: string) => selectGeyserByName(geyserName)
 
+ 
   const optgroups = (() => {
     // NOTE: active inactive logic is wrong
     // FIX ME!
+
+    
     const activeGeysers = geysers
     .filter(({ status, id}) => status !== GeyserStatus.SHUTDOWN && id.toLowerCase() !== '0x8E789b5393F5b4614b75698075c08e6a89A9fb74'.toLowerCase() )
     .map(({ id }) => getGeyserName(id))
   const testGeysers = geysers
-    .filter(({ status, id}) => status === GeyserStatus.SHUTDOWN || id.toLowerCase() !== '0x8E789b5393F5b4614b75698075c08e6a89A9fb74'.toLowerCase()  )
+    .filter(({ status, id}) => status === GeyserStatus.SHUTDOWN || id.toLowerCase() === '0x8E789b5393F5b4614b75698075c08e6a89A9fb74'.toLowerCase()  )
     .map(({ id }) => getGeyserName(id))
    
 
