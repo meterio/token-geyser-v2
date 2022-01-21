@@ -332,6 +332,10 @@ export default {
       url: 'http://54.169.171.97:18888/rpc',
       accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
     },
+    moonbeam: {
+      url: 'https://moonrpc.meter.io',
+      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+    },
   },
   solidity: {
     compilers: [
