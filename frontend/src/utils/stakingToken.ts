@@ -58,7 +58,7 @@ const getTokenComposition = async (
   const balance = await ERC20Balance(tokenAddress, stakingTokenAddress, signerOrProvider)
 
   // const balanceNumber = parseInt(formatUnits(balance as BigNumber, decimals))
-  const balanceNumber = Number(formatUnits(balance as BigNumber, decimals))
+  const balanceNumber = parseInt(formatUnits(balance as BigNumber, decimals), 10)
   
  
   return {
