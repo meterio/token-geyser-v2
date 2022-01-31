@@ -232,7 +232,7 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
     }
   }, [geysers])
 
-  console.log(selectedGeyserInfo)
+
   if (geyserLoading) return <Centered>Loading...</Centered>
 
   return (

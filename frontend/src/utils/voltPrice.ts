@@ -17,6 +17,6 @@ export const estimateVoltPrice = async (signerOrProvider: SignerOrProvider) => {
   //   new BigNumber(reserve1.toString()).div(1e18).toFixed(4),
   // )
   const price = new BigNumber(mtrgPrice).times(reserve0.toString()).div(reserve1.toString()).toNumber()
-  // console.log('est. VOLT price: ', price)
+  console.log('est. VOLT price: ', price)
   return price
 }

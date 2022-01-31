@@ -40,7 +40,7 @@ const symbolMap: { [key: string]: Coin } = {
   MOVR: {id: 'moonriver', price: 312.97},
 
   // pending
-  VOLT: { id: 'meter', price: 50 },
+  VOLT: { id: 'voltswap', price: 50 },
   AMPL: { id: 'ampleforth', price: 1 },
 
   // extended

@@ -58,7 +58,7 @@ export const MyStats = () => {
         body: GET_CURRENT_REWARDS_MSG(),
       },
     ],
-    [currentStake],
+    [calcPeriodInDays],
   )
 
   return (
