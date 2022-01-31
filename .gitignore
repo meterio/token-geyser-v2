@@ -88,3 +88,5 @@ frontend/.env
 
 # rough notes
 notes.txt
+
+.DS_Store

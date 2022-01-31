@@ -9,6 +9,12 @@ import { GeyserConfig } from '../types'
 
 const mockGeyserConfigs: GeyserConfig[] = [
   {
+    name: 'VOLT',
+    address: '0xBfC69a757Dd7DB8C59e10c63aB023dc8c8cc95Dc',
+    stakingToken: StakingToken.VOLT,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
     name: 'MTR-USDC.eth',
     address: '0xacb3687D8c184D7C61223Df304163fD493351796',
     stakingToken: StakingToken.UNISWAP_V2,
@@ -98,13 +104,21 @@ const mockGeyserConfigs: GeyserConfig[] = [
     stakingToken: StakingToken.UNISWAP_V2,
     rewardToken: RewardToken.MOCK,
   },
+  {
+    name:'BUSD.bsc-VOLT',
+    address:'0xFDcCB5DE574E43E77bABE4dE521484dF13269630',
+    stakingToken:StakingToken.UNISWAP_V2,
+    rewardToken:RewardToken.MOCK
+  },
 
   {
-    name: 'VOLT',
-    address: '0xBfC69a757Dd7DB8C59e10c63aB023dc8c8cc95Dc',
-    stakingToken: StakingToken.VOLT,
-    rewardToken: RewardToken.MOCK,
+    name:'BUSD.bsc-USDT.eth',
+    address:'0x5088E4DDD0641de157f70e5B7612fC3a41078dC4',
+    stakingToken:StakingToken.UNISWAP_V2,
+    rewardToken:RewardToken.MOCK
   },
+
+ 
 
   {
     name: 'MTRG-MTR-test',
