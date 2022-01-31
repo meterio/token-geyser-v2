@@ -22,12 +22,14 @@ export const MyStats = () => {
     geyserStats: { calcPeriodInDays },
   } = useContext(StatsContext)
 
+  
   const {
     selectedGeyserInfo: {
       rewardTokenInfo: { symbol: rewardTokenSymbol },
     },
   } = useContext(GeyserContext)
 
+ 
   const getTooltipMessages = useCallback(
     () => [
       {
@@ -49,7 +51,7 @@ export const MyStats = () => {
         body: GET_CURRENT_REWARDS_MSG(),
       },
     ],
-    [currentStake],
+    [calcPeriodInDays],
   )
 
   return (
