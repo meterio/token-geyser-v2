@@ -32,6 +32,7 @@ export const MyStats = () => {
   } = useContext(GeyserContext)
 
   let maxMultiplier = 1
+  
   if(selectedGeyser){
 
     maxMultiplier = parseInt(selectedGeyser?.scalingCeiling, 10) / parseInt(selectedGeyser?.scalingFloor, 10)
