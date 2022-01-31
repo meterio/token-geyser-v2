@@ -17,24 +17,16 @@ import {
 
 export const MyStats = () => {
   const {
-    userStats: { apy, currentMultiplier, currentReward },
+    userStats: { apy, currentMultiplier, maxMultiplier, currentReward },
     vaultStats: { currentStake },
     geyserStats: { calcPeriodInDays },
   } = useContext(StatsContext)
 
   const {
     selectedGeyserInfo: {
-      geyser: selectedGeyser,
       rewardTokenInfo: { symbol: rewardTokenSymbol },
     },
   } = useContext(GeyserContext)
-
-  let maxMultiplier = 1
-  
-  if(selectedGeyser){
-
-    maxMultiplier = parseInt(selectedGeyser?.scalingCeiling, 10) / parseInt(selectedGeyser?.scalingFloor, 10)
-  }
 
   const getTooltipMessages = useCallback(
     () => [
@@ -57,7 +49,7 @@ export const MyStats = () => {
         body: GET_CURRENT_REWARDS_MSG(),
       },
     ],
-    [calcPeriodInDays],
+    [currentStake],
   )
 
   return (
