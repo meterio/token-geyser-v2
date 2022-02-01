@@ -9,10 +9,10 @@ import { GeyserConfig } from '../types'
 
 const mockGeyserConfigs: GeyserConfig[] = [
   {
-    name:'VOLT',
+    name: 'VOLT',
     stakingToken: StakingToken.VOLT,
     rewardToken: RewardToken.MOCK,
-    address:'0xcd872033f3ed9227bc78f47fb0e0dff7dbdbe5b4'
+    address: '0xcd872033f3ed9227bc78f47fb0e0dff7dbdbe5b4',
   },
   {
     name: 'TFUEL-VOLT (Test)',
@@ -68,9 +68,25 @@ const mockGeyserConfigs: GeyserConfig[] = [
     address: '0x702dA5e934A4f1b1C1e8fD8b3190ddb537D1108D',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
-  }
-  
-  
+  },
+  {
+    name: 'TFUEL-TDROP : Earning TDROP',
+    address: '0x6ae05Db50e1D9343188b0758885c4dB4896aF4B2',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
+    name: 'TFUEL-TDROP : Earning VOLT',
+    address: '0xF8dCEA3c9bBf8c61d5a67B8BCD5787f0A99c3B03',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
+    name: 'TDROP-VOLT',
+    address: '0xdD2fcfc6b9E881AC0aBcea6E2ce6b668B9EA4566',
+    stakingToken: StakingToken.MOCK,
+    rewardToken: RewardToken.MOCK,
+  },
 ]
 
 export const geyserConfigs: GeyserConfig[] = mockGeyserConfigs
