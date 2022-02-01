@@ -1,8 +1,9 @@
 import CGApi from 'coingecko-api'
-
+import { Contract, ethers } from 'ethers'
+import BigNumber from 'bignumber.js'
 import * as ls from './cache'
-import { estimateTDROPPrice } from './tdropPrice'
-import { estimateVoltPrice } from './voltPrice'
+
+import { abi as IUniswapV2Pair } from '../sdk/IUniswapV2Pair.json'
 
 const MS_PER_SEC = 1000
 
@@ -96,4 +97,42 @@ export const getCurrentPrice = async (symbol: string): Promise<number> => {
     console.error(e)
     return coin.price || 0
   }
+}
+
+export const estimateVoltPrice = async () => {
+  const tfuelPrice = await getCurrentPrice('TFUEL')
+
+  const tfuelVoltPair = new Contract(
+    '0x904a21bbce765c4771f7e139e19487b618c0da4d',
+    IUniswapV2Pair,
+    new ethers.providers.JsonRpcProvider('https://eth-rpc-api.thetatoken.org/rpc ', {
+      name: 'theta mainnet',
+      chainId: 361,
+    }),
+  )
+  const { reserve0, reserve1 } = await tfuelVoltPair.getReserves()
+
+  const price = new BigNumber(tfuelPrice).times(reserve0.toString()).div(reserve1.toString()).toNumber()
+
+  console.log('est. VOLT price: ', price)
+  return price
+}
+
+export const estimateTDROPPrice = async () => {
+  const tfuelPrice = await getCurrentPrice('TFUEL')
+
+  const tfuelTDROPPair = new Contract(
+    '0xf5f0bd8ad98fd38306ec16608aa9f4e6bcff5a93',
+    IUniswapV2Pair,
+    new ethers.providers.JsonRpcProvider('https://eth-rpc-api.thetatoken.org/rpc ', {
+      name: 'theta mainnet',
+      chainId: 361,
+    }),
+  )
+  const { reserve0, reserve1 } = await tfuelTDROPPair.getReserves()
+
+  const price = new BigNumber(tfuelPrice).times(reserve0.toString()).div(reserve1.toString()).toNumber()
+
+  console.log('est. TDROP price: ', price)
+  return price
 }
