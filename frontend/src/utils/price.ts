@@ -1,6 +1,8 @@
 import CGApi from 'coingecko-api'
 
 import * as ls from './cache'
+import { estimateTDROPPrice } from './tdropPrice'
+import { estimateVoltPrice } from './voltPrice'
 
 const MS_PER_SEC = 1000
 
@@ -41,8 +43,9 @@ const symbolMap: { [key: string]: Coin } = {
   MOVR: { id: 'moonriver', price: 312.97 },
 
   // pending
-  VOLT: { id: 'meter', price: 50 },
+  VOLT: { id: 'meter', price: 1 },
   AMPL: { id: 'ampleforth', price: 1 },
+  TDROP: { id: '', price: 1 },
 
   WTFUEL: { id: 'theta-fuel', price: 0.3204 },
 
@@ -54,7 +57,7 @@ const symbolMap: { [key: string]: Coin } = {
   COMP: { id: 'compound-governance-token', price: 1 },
 }
 
-export const getCurrentPrice = async (symbol: string) => {
+export const getCurrentPrice = async (symbol: string): Promise<number> => {
   const cacheKey = `geyser|${symbol}|spot`
 
   const coin = symbolMap[symbol]
@@ -66,6 +69,12 @@ export const getCurrentPrice = async (symbol: string) => {
     const query = coin.id
     return await ls.computeAndCache<number>(
       async () => {
+        if (symbol === 'VOLT' || symbol === 'VOLT_AIR') {
+          return (await estimateVoltPrice()) as number
+        }
+        if (symbol === 'TDROP') {
+          return (await estimateTDROPPrice()) as number
+        }
         const client = new CGApi()
         const reqTimeoutSec = 10
         const p: any = await Promise.race([

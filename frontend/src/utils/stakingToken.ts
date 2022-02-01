@@ -80,11 +80,7 @@ const getTokenCompositions = async (
       getTokenComposition(token, stakingTokenAddress, signerOrProvider, weights[index]),
     ),
   )
-  const voltTokens = compositions.filter((c) => c.symbol === 'VOLT' || c.symbol === 'VOLT_AIR')
-  if (voltTokens.length > 0) {
-    const voltPrice = await estimateVoltPrice()
-    voltTokens[0].value = voltPrice * voltTokens[0].balance
-  }
+
   return compositions
 }
 
