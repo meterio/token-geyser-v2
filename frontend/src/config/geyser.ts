@@ -70,13 +70,13 @@ const mockGeyserConfigs: GeyserConfig[] = [
     rewardToken: RewardToken.MOCK,
   },
   {
-    name: 'TFUEL-TDROP : Earning TDROP',
+    name: 'TDROP-TFUEL: Earning TDROP',
     address: '0x6ae05Db50e1D9343188b0758885c4dB4896aF4B2',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,
   },
   {
-    name: 'TFUEL-TDROP : Earning VOLT',
+    name: 'TDROP-TFUEL: Earning VOLT',
     address: '0xF8dCEA3c9bBf8c61d5a67B8BCD5787f0A99c3B03',
     stakingToken: StakingToken.MOCK,
     rewardToken: RewardToken.MOCK,

@@ -202,10 +202,12 @@ export const GeyserContextProvider: React.FC = ({ children }) => {
     const [splitQueryString] = queryString.split('=')
     if (splitQueryString && splitQueryString === 'farm') {
       ;[, queryGeyserName] = queryString.split('=')
+      queryGeyserName = decodeURI(queryGeyserName)
     }
   }
 
   if (queryGeyserName && geysers.length) {
+    console.log('query geyser name: ', queryGeyserName)
     queryGeyserId = getGeyserAddress(queryGeyserName)
     const revString = queryGeyserName.split('-').reverse().join('-')
     let queryGeyserIdReverse = ''
