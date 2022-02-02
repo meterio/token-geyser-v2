@@ -44,7 +44,8 @@ const symbolMap: { [key: string]: Coin } = {
   MOVR: { id: 'moonriver', price: 312.97 },
 
   // pending
-  VOLT: { id: 'meter', price: 1 },
+  VOLT: { id: 'voltswap', price: 0.2},
+  VOLT_AIR:{id: 'voltswap', price:0.2},
   AMPL: { id: 'ampleforth', price: 1 },
   TDROP: { id: 'thetadrop', price: 1 },
 
@@ -60,22 +61,17 @@ const symbolMap: { [key: string]: Coin } = {
 
 export const getCurrentPrice = async (symbol: string): Promise<number> => {
   const cacheKey = `geyser|${symbol}|spot`
-
+ 
   const coin = symbolMap[symbol]
   if (!coin) {
     throw new Error(`Can't fetch price for ${symbol}`)
+    
   }
-
+ 
   try {
     const query = coin.id
     return await ls.computeAndCache<number>(
-      async () => {
-        if (symbol === 'VOLT' || symbol === 'VOLT_AIR') {
-          return (await estimateVoltPrice()) as number
-        }
-        if (symbol === 'TDROP') {
-          return (await estimateTDROPPrice()) as number
-        }
+      async () => { 
         const client = new CGApi()
         const reqTimeoutSec = 10
         const p: any = await Promise.race([
@@ -88,6 +84,7 @@ export const getCurrentPrice = async (symbol: string): Promise<number> => {
 
         console.log('query:', query, ', data: ', p.data)
         const price = p.data[query].usd
+        
         return price as number
       },
       cacheKey,

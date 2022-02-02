@@ -8,7 +8,7 @@ import { BALANCER_BPOOL_V1_ABI } from './abis/BalancerBPoolV1'
 import { BALANCER_CRP_V1_ABI } from './abis/BalancerCRPV1'
 import { MOONISWAP_V1_PAIR_ABI } from './abis/MooniswapV1Pair'
 import { UNISWAP_V2_PAIR_ABI } from './abis/UniswapV2Pair'
-import { getCurrentPrice, estimateVoltPrice } from './price'
+import { getCurrentPrice } from './price'
 import { defaultTokenInfo, getTokenInfo } from './token'
 
 export const defaultStakingTokenInfo = (): StakingTokenInfo => ({
@@ -255,7 +255,7 @@ const getBalancerSmartPoolV1 = async (
 //   }
 // }
 const getVOLTToken = async (tokenAddress: string): Promise<StakingTokenInfo> => {
-  const price = await estimateVoltPrice()
+  const price = await getCurrentPrice('VOLT')
 
   return {
     address: toChecksumAddress(tokenAddress),
