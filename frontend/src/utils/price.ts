@@ -46,7 +46,7 @@ const symbolMap: { [key: string]: Coin } = {
   // pending
   VOLT: { id: 'meter', price: 1 },
   AMPL: { id: 'ampleforth', price: 1 },
-  TDROP: { id: '', price: 1 },
+  TDROP: { id: 'thetadrop', price: 1 },
 
   WTFUEL: { id: 'theta-fuel', price: 0.3204 },
 
