@@ -31,10 +31,13 @@ export const MyStats = () => {
   } = useContext(GeyserContext)
 
   let maxMultiplier = 1
-  
+ 
+  let geyserDuration = calcPeriodInDays
   if(selectedGeyser){
 
     maxMultiplier = parseInt(selectedGeyser?.scalingCeiling, 10) / parseInt(selectedGeyser?.scalingFloor, 10)
+    geyserDuration = Number(selectedGeyser.scalingTime) / 86400
+  
   }
 
   const getTooltipMessages = useCallback(
@@ -44,12 +47,12 @@ export const MyStats = () => {
         body:
           currentStake > 0
             ? GET_APY_STAKE_MSG()
-            : GET_APY_NO_STAKE_MSG({ days: safeNumeral(calcPeriodInDays || 70, '0.0') }),
+            : GET_APY_NO_STAKE_MSG({ days: safeNumeral(geyserDuration || 70, '0.0') }),
       },
       {
         title: 'Reward Multiplier',
         body: GET_REWARD_MULTIPLIER_MSG({
-          days: safeNumeral(calcPeriodInDays || 70, '0.0'),
+          days: safeNumeral(geyserDuration || 70, '0.0'),
           multiplier: safeNumeral(maxMultiplier || 3, '0.0'),
         }),
       },
