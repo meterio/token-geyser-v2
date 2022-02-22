@@ -310,6 +310,10 @@ export default {
       url: 'http://rpc.meter.io',
       accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
     },
+    moonbeam: {
+      url: 'https://rpc.api.moonbeam.network',
+      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+    },
   },
   solidity: {
     compilers: [
