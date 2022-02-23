@@ -15,11 +15,27 @@ const mockGeyserConfigs: GeyserConfig[] = [
     rewardToken: RewardToken.MOCK,
   },
   {
+    name: 'VOLT: Earning AMPL',
+    address: '0x55126153332d7b0d50D89572D73B7C3c9C7f0291',
+    stakingToken: StakingToken.VOLT,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
     name: 'MTR-USDC.eth',
     address: '0xacb3687D8c184D7C61223Df304163fD493351796',
     stakingToken: StakingToken.UNISWAP_V2,
     rewardToken: RewardToken.MOCK,
   },
+
+  {
+    name: 'AMPL-MTRG',
+    address: '0x0c96bFA1B1Cf1195F3EB7BEE88B636416bec810E',
+    stakingToken: StakingToken.UNISWAP_V2,
+    rewardToken: RewardToken.MOCK,
+  },
+ 
+
+
   {
     name: 'MTRG-BNB.bsc',
     address: '0xFaf03CD86f88d9aA3254Af4A057570C53cbDd576',
