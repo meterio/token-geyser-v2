@@ -20,6 +20,14 @@ const mockGeyserConfigs: GeyserConfig[] = [
     stakingToken: StakingToken.VOLT,
     rewardToken: RewardToken.MOCK,
   },
+
+  {
+    name: 'MTRG-FTB',
+    address: '0x5fa46be49ba496c7e9632c65075eaced062a30f0',
+    stakingToken: StakingToken.UNISWAP_V2,
+    rewardToken: RewardToken.MOCK,
+  },
+ 
   {
     name: 'MTR-USDC.eth',
     address: '0xacb3687D8c184D7C61223Df304163fD493351796',

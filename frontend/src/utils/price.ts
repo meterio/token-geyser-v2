@@ -1,6 +1,10 @@
 import CGApi from 'coingecko-api'
-
+import { Contract } from 'ethers'
+import BigNumber from 'bignumber.js'
+import {getDefaultProvider} from './eth';
+import { abi as IUniswapV2Pair } from '../sdk/IUniswapV2Pair.json'
 import * as ls from './cache'
+
 
 const MS_PER_SEC = 1000
 
@@ -52,6 +56,19 @@ const symbolMap: { [key: string]: Coin } = {
 }
 
 export const getCurrentPrice = async (symbol: string) => {
+ 
+
+  if (symbol === "FTB"){
+
+    let price = 0
+    const mtrgPrice = await getCurrentPrice('MTRG')
+    const mtrgftbPair = new Contract('0x931bb8c7fb6cd099678fae36a5370577cee18ade', IUniswapV2Pair, getDefaultProvider())
+    const { reserve0, reserve1 } = await mtrgftbPair.getReserves()
+    price = new BigNumber(mtrgPrice).times(reserve0.toString()).div(reserve1.toString()).toNumber()
+    console.log('est. FTB price: ', price)
+    return price
+  }
+
   const cacheKey = `geyser|${symbol}|spot`
 
   const coin = symbolMap[symbol]
