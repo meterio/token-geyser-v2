@@ -68,7 +68,7 @@ export enum RewardToken {
 
 // subgraph endpoint
 
-export const GEYSER_SUBGRAPH_ENDPOINT = `https://geyser-graph-on-moonbeam.voltswap.finance/subgraphs/name/moonbeam/token-geyser-v2`
+export const GEYSER_SUBGRAPH_ENDPOINT = `https://graph-moonbeam.voltswap.finance/subgraphs/name/moonbeam/token-geyser-v2`
 
 // ufragments deploy block number
 export const UFRG_INIT_BLOCK = 7947823
