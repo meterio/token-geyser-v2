@@ -16,6 +16,12 @@ const mockGeyserConfigs: GeyserConfig[] = [
 
   // active farms
   {
+    name: 'VOLT',
+    address: '0xDb84a42f23F2fcc91531DF06a48da5e3a970F1cf',
+    stakingToken: StakingToken.VOLT,
+    rewardToken: RewardToken.MOCK,
+  },
+  {
     name: 'GLMR-VOLT',
     address: '0x5EFE36Df7235E9BB49a52D147fdaFAe6298520A0',
     stakingToken: StakingToken.UNISWAP_V2,
