@@ -4,7 +4,8 @@ orbs:
   node: circleci/node@4.7.0
   slack: circleci/slack@4.4.4
 jobs:
-  build_and_deploy_mainnet:
+  build_and_deploy_theta:
+    resource_class: large
     docker:
       - image: 'cimg/node:16.7'
     steps:
@@ -15,9 +16,15 @@ jobs:
       - run:
           name: install awscli v2
           command: sudo ./aws/install
+      - restore_cache:
+          key: geyser-theta-deps-{{ checksum "package.json" }}
       - run:
           name: install yarn dependencies
           command: cd frontend && yarn
+      - save_cache:
+          key: geyser-theta-deps-{{ checksum "package.json" }}
+          paths:
+            - frontend/node_modules
       - run:
           name: production build
           command: cd frontend && CI=false NODE_ENV=production SKIP_PREFLIGHT_CHECK=true ESLINT_NO_DEV_ERRORS=true yarn build
@@ -25,10 +32,10 @@ jobs:
             NODE_OPTIONS: --max_old_space_size=6144
       - run:
           name: s3 sync
-          command: aws s3 sync ./frontend/build/ s3://farm.voltswap.finance/ --delete --acl public-read
+          command: aws s3 sync ./frontend/build/ s3://thefarm.voltswap.finance/ --delete --acl public-read
       - run:
           name: invalidation
-          command: aws cloudfront create-invalidation --distribution-id E2CWEJFAUKH330 --paths "/*"
+          command: aws cloudfront create-invalidation --distribution-id E398P49FM4URA6 --paths "/*"
       - slack/notify:
           event: fail
           template: basic_fail_1
@@ -38,7 +45,7 @@ jobs:
 workflows:
   fresh_deploy:
     jobs:
-      - build_and_deploy_mainnet:
+      - build_and_deploy_theta:
           context:
             - new-aws-s3
             - slack-secrets
@@ -46,4 +53,4 @@ workflows:
             tags:
               only: /^v.*/
             branches:
-              ignore: /.*/
+              only: thetatestnet
