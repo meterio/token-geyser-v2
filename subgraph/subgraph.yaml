@@ -8,6 +8,7 @@ dataSources:
     source:
       address: '0xEB5D1AF3957ECE90bD9345DC746a2DEB03108c17'
       abi: InstanceRegistry
+      startBlock: 15186445
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -27,6 +28,7 @@ dataSources:
     source:
       address: '0xc3a1cF832A77fcAe51cEa2E1B03EF85492F531Ac'
       abi: InstanceRegistry
+      startBlock: 15186445
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -48,6 +50,7 @@ dataSources:
     source:
       address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: InstanceRegistry
+      startBlock: 15186445
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -69,6 +72,7 @@ dataSources:
     source:
       address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: ERC721
+      startBlock: 15186445
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -90,6 +94,7 @@ dataSources:
     source:
       address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: ERC721
+      startBlock: 15186445
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
