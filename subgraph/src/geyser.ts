@@ -44,7 +44,9 @@ function _updateGeyser(geyser: Geyser, geyserContract: GeyserContract, timestamp
 
   geyser.totalStake = geyserData.totalStake
   geyser.totalStakeUnits = geyserContract.getCurrentTotalStakeUnits()
-  geyser.unlockedReward = geyserContract.getCurrentUnlockedRewards()
+  if (Number(geyserData.rewardSharesOutstanding) > 0) {
+    geyser.unlockedReward = geyserContract.getCurrentUnlockedRewards()
+  }
   geyser.lastUpdate = timestamp
 
   let bonusTokens = geyser.bonusTokens
