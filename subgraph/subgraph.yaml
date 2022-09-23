@@ -4,10 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: GeyserRegistry
-    network: meter
+    network: moonbeam
     source:
-      address: '0xEB5D1AF3957ECE90bD9345DC746a2DEB03108c17'
+      address: '0x0C649ED10cfC1b1586F851099ed8080Ff6991D59'
       abi: InstanceRegistry
+      startBlock: 195552
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -23,10 +24,11 @@ dataSources:
           handler: handleNewGeyser
   - kind: ethereum/contract
     name: VaultFactory
-    network: meter
+    network: moonbeam
     source:
-      address: '0xc3a1cF832A77fcAe51cEa2E1B03EF85492F531Ac'
+      address: '0x310d0b9Bbe19c54bF00E55a7804098476997B81f'
       abi: InstanceRegistry
+      startBlock: 195550
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -44,7 +46,7 @@ dataSources:
           handler: handleNewVault
   - kind: ethereum/contract
     name: CrucibleFactory
-    network: meter
+    network: moonbeam
     source:
       address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: InstanceRegistry
@@ -65,7 +67,7 @@ dataSources:
           handler: handleNewVault
   - kind: ethereum/contract
     name: CrucibleNFT
-    network: meter
+    network: moonbeam
     source:
       address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
       abi: ERC721
@@ -86,10 +88,11 @@ dataSources:
           handler: handleTransfer
   - kind: ethereum/contract
     name: UniversalVaultNFT
-    network: meter
+    network: moonbeam
     source:
-      address: '0x574fAe9d84b987079a6b55691c390A13732E806D'
+      address: '0x202ECc1eFEb3fD40Bb26aE64c1707485735227d1'
       abi: ERC721
+      startBlock: 195548
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -108,7 +111,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: GeyserTemplate
-    network: meter
+    network: moonbeam
     source:
       abi: GeyserContract
     mapping:
@@ -138,7 +141,7 @@ templates:
           handler: handleRewardClaimed
   - kind: ethereum/contract
     name: PowerSwitchTemplate
-    network: meter
+    network: moonbeam
     source:
       abi: PowerSwitchContract
     mapping:
@@ -160,7 +163,7 @@ templates:
           handler: handleEmergencyShutdown
   - kind: ethereum/contract
     name: VaultTemplate
-    network: meter
+    network: moonbeam
     source:
       abi: VaultContract
     mapping:
