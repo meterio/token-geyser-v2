@@ -32,10 +32,10 @@ jobs:
             NODE_OPTIONS: --max_old_space_size=6144
       - run:
           name: s3 sync
-          command: aws s3 sync ./frontend/build/ s3://moonfarm.voltswap.finance/ --delete --acl public-read
+          command: aws s3 sync ./frontend/build/ s3://moonfarm.voltswap/ --delete --acl public-read
       - run:
           name: invalidation
-          command: aws cloudfront create-invalidation --distribution-id EAJZ7T6F7KM1R --paths "/*"
+          command: aws cloudfront create-invalidation --distribution-id E3FH7I2CZYRK33 --paths "/*"
       - slack/notify:
           event: fail
           template: basic_fail_1
