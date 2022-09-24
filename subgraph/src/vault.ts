@@ -1,5 +1,11 @@
 // assembly script imports
+
+
 import { Address, BigInt } from '@graphprotocol/graph-ts'
+
+
+
+
 
 // template creation imports
 import { InstanceAdded } from '../generated/VaultFactory/InstanceRegistry'
@@ -20,6 +26,7 @@ function updateVault(vaultAddress: Address): void {
 
   let owner = vaultContract.owner()
   let user = new User(owner.toHex())
+  let x = 2
 
   vault.owner = owner.toHex()
   vault.nonce = vaultContract.getNonce()

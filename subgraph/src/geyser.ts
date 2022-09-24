@@ -1,3 +1,5 @@
+
+
 // assembly script imports
 import { Address, BigInt } from '@graphprotocol/graph-ts'
 
@@ -18,8 +20,15 @@ import {
 import { EmergencyShutdown, PowerOff, PowerOn } from '../generated/templates/PowerSwitchTemplate/PowerSwitchContract'
 import { ERC20 } from '../generated/templates/GeyserTemplate/ERC20'
 
+
+
+
+
+
+
 // entity imports
 import { ClaimedReward, Geyser, Lock, RewardPoolBalance, RewardSchedule, PowerSwitch } from '../generated/schema'
+
 
 // template instantiation
 export function handleNewGeyser(event: InstanceAdded): void {
@@ -127,7 +136,7 @@ function updateVaultStake(geyserAddress: Address, vaultAddress: Address, timesta
   )
   lock.geyser = geyserAddress.toHex()
   lock.vault = vaultAddress.toHex()
-  lock.stakeUnits = geyserContract.getCurrentVaultStakeUnits(vaultAddress)
+  lock.stakeUnits = new BigInt(0) //geyserContract.getCurrentVaultStakeUnits(vaultAddress)
   lock.amount = geyserContract.getVaultData(vaultAddress).totalStake
   lock.lastUpdate = timestamp
   lock.token = geyserContract.getGeyserData().stakingToken
@@ -137,12 +146,26 @@ function updateVaultStake(geyserAddress: Address, vaultAddress: Address, timesta
   lock.save()
 }
 
+
+
 export function handleStaked(event: Staked): void {
-  updateVaultStake(event.address, event.params.vault, event.block.timestamp)
+ 
+updateVaultStake(event.address, event.params.vault, event.block.timestamp)
+  
+  
+  
 }
 
+
+
 export function handleUnstaked(event: Unstaked): void {
+
+  
+
+  
   updateVaultStake(event.address, event.params.vault, event.block.timestamp)
+  
+  
 }
 
 export function handleRewardClaimed(event: RewardClaimed): void {
