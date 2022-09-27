@@ -7,14 +7,12 @@
   "main": "dist/index.js",
   "scripts": {
     "compile": "yarn hardhat compile",
- 
     "profile": "REPORT_GAS=true yarn hardhat test",
     "coverage": "yarn hardhat coverage",
     "format": "yarn prettier --config .prettierrc --write '**/*.ts' 'contracts/**/*.sol'",
     "lint": "yarn solhint 'contracts/**/*.sol'",
     "build": "yarn tsc --project tsconfig.build.json"
   },
-
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-etherscan": "^2.1.1",
@@ -29,7 +27,7 @@
     "chai": "^4.2.0",
     "ethereum-waffle": "^3.2.1",
     "ethers": "5.0.31",
-    "hardhat": "^2.0.10",
+    "hardhat": "^2.2.0",
     "hardhat-gas-reporter": "^1.0.4",
     "pre-commit": "^1.2.2",
     "prettier": "^2.1.2",

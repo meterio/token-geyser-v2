@@ -318,23 +318,23 @@ export default {
     },
     metertest: {
       url: 'https://rpctest.meter.io',
-      accounts: [process.env.TESTNET_CONTRACT_ADMIN_PRIVKEY],
+      accounts: [process.env.CONTRACT_ADMIN_PRIVKEY],
     },
     metermain: {
       url: 'https://rpc.meter.io',
-      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+      accounts: [process.env.CONTRACT_ADMIN_PRIVKEY],
     },
     thetatest: {
       url: 'http://54.177.202.208:18888/rpc', //'https://eth-rpc-api-testnet.thetatoken.org/rpc',
-      accounts: [process.env.TESTNET_CONTRACT_ADMIN_PRIVKEY],
+      accounts: [process.env.CONTRACT_ADMIN_PRIVKEY],
     },
     thetamain: {
       url: 'http://54.169.171.97:18888/rpc',
-      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+      accounts: [process.env.CONTRACT_ADMIN_PRIVKEY],
     },
     moonbeam: {
       url: 'https://moonrpc.meter.io',
-      accounts: [process.env.MAINNET_CONTRACT_ADMIN_PRIVKEY],
+      accounts: [process.env.CONTRACT_ADMIN_PRIVKEY],
     },
   },
   solidity: {
