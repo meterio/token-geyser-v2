@@ -83,7 +83,7 @@ const Web3Provider: React.FC = ({ children }) => {
     const onboardAPI = initOnboard({
       address: setAddress,
       wallet: (w: Wallet) => {
-        if (w?.provider?.selectedAddress) {
+        if (w?.provider) {
           updateWallet(w)
         } else {
           setProvider(null)
