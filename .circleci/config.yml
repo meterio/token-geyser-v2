@@ -1,21 +1,27 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@4.7.0
+  node: circleci/node@7.0.0
   slack: circleci/slack@4.4.4
 jobs:
   build_and_deploy_theta:
     resource_class: large
     docker:
-      - image: 'cimg/node:16.7'
+      - image: 'cimg/node:16.17.0'
+    environment:
+      DEPLOY_HOST: 34.53.102.108
+      DEPLOY_FOLDER: thetafarm-voltswap-finance
+      SSH_OPTIONS: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:48o4O3yWCP1MbjxhyGvDL+NNUsYcRJVodZjzg7nV0C4"
+      - run:
+          name: install rsync
+          command: |
+            sudo apt-get update 
+            sudo apt-get install -y rsync
       - checkout
-      - run:
-          name: download & unzip awscli v2
-          command: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip
-      - run:
-          name: install awscli v2
-          command: sudo ./aws/install
       - restore_cache:
           key: geyser-theta-deps-{{ checksum "package.json" }}
       - run:
@@ -31,23 +37,22 @@ jobs:
           environment:
             NODE_OPTIONS: --max_old_space_size=6144
       - run:
-          name: s3 sync
-          command: aws s3 sync ./frontend/build/ s3://thetafarm-voltswap-finance/ --delete
-      - run:
-          name: invalidation
-          command: aws cloudfront create-invalidation --distribution-id E3GWM0DXFGJRAI --paths "/*"
+          name: deploy
+          command: |
+            rsync -e "ssh $SSH_OPTIONS" -rzvh --delete ./frontend/build/ root@$DEPLOY_HOST:/var/www/$DEPLOY_FOLDER/
+            ssh $SSH_OPTIONS root@$DEPLOY_HOST "service nginx restart"
       - slack/notify:
           event: fail
           template: basic_fail_1
       - slack/notify:
           event: pass
           template: basic_success_1
+
 workflows:
   fresh_deploy:
     jobs:
       - build_and_deploy_theta:
           context:
-            - aws-2023
             - slack-secrets
           filters:
             tags:
