@@ -7,7 +7,7 @@ jobs:
   build_and_deploy_meter:
     resource_class: large
     docker:
-      - image: 'cimg/node:20.19'
+      - image: 'cimg/node:16.17.0'
     environment:
       DEPLOY_HOST: 34.53.102.108
       DEPLOY_FOLDER: farm-voltswap-finance
